@@ -1,25 +1,31 @@
 <div class="login-container">
     <h2>Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label>Username</label>
-            <input type="Username" formControlName="username" />
-            <div *ngIf="submitted && loginForm.controls['username'].errors">
-                <small *ngIf="loginForm.controls['username'].errors['required']">Username is required.</small>
-                <small *ngIf="loginForm.controls['username'].errors['username']">Invalid username format.</small>
-            </div>
-        </div>
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput type="Username" formControlName="username" />
+            @if (loginForm.controls['username'].errors && loginForm.controls['username'].errors['required']) {
+            <mat-error>Username is required.</mat-error>
+            }
+            @if (loginForm.controls['username'].errors && loginForm.controls['username'].errors['username']) {
+            <mat-error>Invalid username format.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+            @if (loginForm.controls['password'].errors && loginForm.controls['password'].errors['required']) {
+            <mat-error>Password is required.</mat-error>
+            }
+        </mat-form-field>
 
         <div>
-            <label>Password</label>
-            <input type="password" formControlName="password" />
-            <div *ngIf="submitted && loginForm.controls['password'].errors">
-                <small *ngIf="loginForm.controls['password'].errors['required']">Password is required.</small>
-            </div>
+            <button mat-flat-button type="submit" [disabled]="loginForm.invalid">Login</button>
+            @if (loginError) {
+            <mat-error>{{ loginError }}</mat-error>
+            }
         </div>
-
-        <button type="submit">Login</button>
-        <p *ngIf="loginError" class="error">{{ loginError }}</p>
     </form>
     <p class="auth-links">
         <a routerLink="/signup">Don't have an account? Sign up</a>

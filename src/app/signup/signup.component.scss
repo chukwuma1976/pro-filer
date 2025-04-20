@@ -13,6 +13,6 @@ input {
 }
 
 .error {
-    color: red;
+    color: var(--mat-error-color, red);
     margin-top: 1rem;
 }

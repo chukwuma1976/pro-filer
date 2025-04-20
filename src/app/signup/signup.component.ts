@@ -3,12 +3,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  imports: [ReactiveFormsModule, NgIf]
+  imports: [ReactiveFormsModule, NgIf, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule]
 })
 export class SignupComponent {
   signupForm: FormGroup;

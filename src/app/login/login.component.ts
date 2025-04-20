@@ -3,12 +3,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule, NgIf, RouterLink]
+  imports: [ReactiveFormsModule, NgIf, RouterLink, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule]
 })
 export class LoginComponent {
   loginForm: FormGroup;

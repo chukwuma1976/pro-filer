@@ -1,35 +1,42 @@
 <div class="signup-container">
     <h2>Sign Up</h2>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label>Your email</label>
-            <input type="email" formControlName="email" />
-            <div *ngIf="submitted && signupForm.controls['email'].errors">
-                <small *ngIf="signupForm.controls['email'].errors['required']">Email is required.</small>
-            </div>
-        </div>
+        <mat-form-field>
+            <mat-label>Your email</mat-label>
+            <input matInput type="email" formControlName="email" />
+            @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['required']) {
+            <mat-error>Email is required.</mat-error>
+            }
+            @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['email']) {
+            <mat-error>Invalid email format.</mat-error>
+            }
+        </mat-form-field>
 
-        <div>
-            <label>Username</label>
-            <input type="username" formControlName="username" />
-            <div *ngIf="submitted && signupForm.controls['username'].errors">
-                <small *ngIf="signupForm.controls['username'].errors['required']">Username is required.</small>
-                <small *ngIf="signupForm.controls['username'].errors['username']">Invalid username format.</small>
-            </div>
-        </div>
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput type="username" formControlName="username" />
+            @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['required']) {
+            <mat-error>Username is required.</mat-error>
+            }
+            @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['username']) {
+            <mat-error>Invalid username format.</mat-error>
+            }
+        </mat-form-field>
 
-        <div>
-            <label>Password</label>
-            <input type="password" formControlName="password" />
-            <div *ngIf="submitted && signupForm.controls['password'].errors">
-                <small *ngIf="signupForm.controls['password'].errors['required']">Password is required.</small>
-                <small *ngIf="signupForm.controls['password'].errors['minlength']">
-                    Password must be at least 6 characters.
-                </small>
-            </div>
-        </div>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+            @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['required']) {
+            <mat-error>Password is required.</mat-error>
+            }
+            @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['minlength']) {
+            <mat-error>Password must be at least 6 characters.</mat-error>
+            }
+        </mat-form-field>
 
-        <button type="submit">Sign Up</button>
-        <p *ngIf="signupError" class="error">{{ signupError }}</p>
+        <button mat-flat-button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+        @if(signupError) {
+        <mat-error>{{ signupError }}</mat-error>
+        }
     </form>
 </div>
