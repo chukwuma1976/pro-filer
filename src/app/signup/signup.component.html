@@ -1,7 +1,7 @@
 <div class="signup-container">
     <h2>Sign Up</h2>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Your email</mat-label>
             <input matInput type="email" formControlName="email" />
             @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['required']) {
@@ -12,7 +12,7 @@
             }
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
             <input matInput type="username" formControlName="username" />
             @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['required']) {
@@ -23,7 +23,7 @@
             }
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput type="password" formControlName="password" />
             @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['required']) {

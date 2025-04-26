@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  imports: [ReactiveFormsModule, NgIf, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule]
+  imports: [ReactiveFormsModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule]
 })
 export class SignupComponent {
   signupForm: FormGroup;
@@ -25,7 +24,7 @@ export class SignupComponent {
     private router: Router
   ) {
     this.signupForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
