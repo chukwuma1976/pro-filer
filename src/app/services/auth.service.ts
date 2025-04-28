@@ -7,15 +7,16 @@ import { Observable, of, throwError } from 'rxjs';
 export class AuthService {
   login(username: string, password: string): Observable<boolean> {
     // Dummy credentials check
-    if (username === 'username' && password === 'password') {
+    if ((username === 'username' && password === 'password') || (username === 'manofsteel' && password === 'password123')) {
       return of(true);
     }
     return throwError(() => new Error('Invalid credentials'));
   }
 
-  signup(fullName: string, username: string, password: string): Observable<boolean> {
+  signup(email: string, username: string, password: string): Observable<boolean> {
     // Dummy signup check
-    if (username === 'username') {
+    if (username === 'username' || username === 'manofsteel') {
+      // Simulate a username that is already taken
       return throwError(() => new Error('Username is already taken'));
     }
     return of(true); // Simulate successful signup
