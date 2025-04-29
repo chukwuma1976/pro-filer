@@ -2,8 +2,10 @@
     <h4>{{resumeData?.firstName?.toUpperCase()}} {{resumeData?.lastName?.toUpperCase()}}</h4>
     <p>{{resumeData?.email}} | {{resumeData?.phoneNumber}} | {{resumeData?.linkedIn}} | {{resumeData?.website}}</p>
     <h5>SUMMARY</h5>
+    <hr />
     <p>{{resumeData?.summary}}</p>
     <h5>EXPERIENCE</h5>
+    <hr />
     <div *ngFor="let job of resumeData?.experience">
         <p>{{job.title}} at {{job.employer}}</p>
         <p>{{job.city}}, {{job.state}} | {{job.startDate}} - {{job.endDate}}</p>
@@ -12,6 +14,7 @@
         </ul>
     </div>
     <h5>EDUCATION</h5>
+    <hr />
     <div *ngFor="let edu of resumeData?.education">
         <p>{{edu.degree}} in {{edu.fieldOfStudy}}</p>
         <p>{{edu.institution}}, {{edu.city}}, {{edu.state}} | Graduated: {{edu.graduationDate}}</p>
@@ -21,6 +24,7 @@
         </ul>
     </div>
     <h5>SKILLS</h5>
+    <hr />
     <ul>
         <li *ngFor="let skill of resumeData?.skills">{{skill}}</li>
     </ul>
