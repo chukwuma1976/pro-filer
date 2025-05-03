@@ -54,6 +54,55 @@ const resumeData: Resume[] = [
             }
         ],
         skills: ['Investigative Journalism', 'Writing', 'Editing', 'Public Speaking'],
+    },
+    {
+        id: '2',
+        firstName: 'Bruce',
+        lastName: 'Wayne',
+        phoneNumber: '987-654-3210',
+        email: 'BruceWayne@WayneEnterprises.com',
+        linkedIn: 'https://www.linkedin.com/in/brucewayne',
+        website: 'https://www.wayneenterprises.com',
+        summary: 'CEO of Wayne Enterprises with a strong background in business management and philanthropy.',
+        experience: [
+            {
+                employer: 'Wayne Enterprises',
+                title: 'CEO',
+                city: 'Gotham',
+                state: 'NJ',
+                startDate: '2010-01-01',
+                endDate: 'Present',
+                description: [
+                    'Oversee all operations and strategic direction of the company.',
+                    'Lead philanthropic efforts to improve Gotham City.'
+                ]
+            },
+            {
+                employer: 'Wayne Foundation',
+                title: 'Philanthropist',
+                city: 'Gotham',
+                state: 'NJ',
+                startDate: '2005-01-01',
+                endDate: '2009-12-31',
+                description: [
+                    'Focused on charitable initiatives in education and healthcare.'
+                ]
+
+            }
+        ],
+        education: [
+            {
+                institution: 'Gotham University',
+                city: 'Gotham',
+                state: 'NJ',
+                degree: 'Master of Business Administration',
+                fieldOfStudy: 'Business Management',
+                graduationDate: '2004-05-15',
+                description: 'Graduated with distinction.',
+                awards: ['Top of Class']
+            }
+        ],
+        skills: ['Business Management', 'Leadership', 'Philanthropy'],
     }
 ];
 

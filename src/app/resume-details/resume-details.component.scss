@@ -7,3 +7,20 @@ p {
     margin-top: 0;
     margin-bottom: 0;
 }
+
+.degree {
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.resume-details-container {
+    padding: 5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}

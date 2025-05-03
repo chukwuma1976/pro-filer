@@ -1,4 +1,4 @@
-<div>
+<div class="resume-details-container">
     <h4>{{resumeData?.firstName?.toUpperCase()}} {{resumeData?.lastName?.toUpperCase()}}</h4>
     <p>{{resumeData?.email}} | {{resumeData?.phoneNumber}} | {{resumeData?.linkedIn}} | {{resumeData?.website}}</p>
     <h5>SUMMARY</h5>
@@ -7,8 +7,11 @@
     <h5>EXPERIENCE</h5>
     <hr />
     <div *ngFor="let job of resumeData?.experience">
-        <p>{{job.title}} at {{job.employer}}</p>
-        <p>{{job.city}}, {{job.state}} | {{job.startDate}} - {{job.endDate}}</p>
+        <p>{{job.employer}}, {{job.city}}, {{job.state}}</p>
+        <div class="job-title">
+            <p>{{job.title}}</p>
+            <p>{{job.startDate}} - {{job.endDate}}</p>
+        </div>
         <ul>
             <li *ngFor="let desc of job.description">{{desc}}</li>
         </ul>
@@ -16,8 +19,11 @@
     <h5>EDUCATION</h5>
     <hr />
     <div *ngFor="let edu of resumeData?.education">
-        <p>{{edu.degree}} in {{edu.fieldOfStudy}}</p>
-        <p>{{edu.institution}}, {{edu.city}}, {{edu.state}} | Graduated: {{edu.graduationDate}}</p>
+        <p>{{edu.institution}}, {{edu.city}}, {{edu.state}}</p>
+        <div class="degree">
+            <p>{{edu.degree}} in {{edu.fieldOfStudy}}</p>
+            <p>Graduated: {{edu.graduationDate}}</p>
+        </div>
         <p>{{edu.description}}</p>
         <ul>
             <li *ngFor="let award of edu.awards">{{award}}</li>
