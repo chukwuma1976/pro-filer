@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ResumeService } from '../services/resume.service';
 import { Resume } from '../shared/models/resume'; // Import the Resume type
 import { NgFor } from '@angular/common';
@@ -11,11 +11,8 @@ import { NgFor } from '@angular/common';
   styleUrl: './resume-details.component.scss'
 })
 export class ResumeDetailsComponent {
-  resumeData: Resume | null = null; // Initialize resumeData to null
+  @Input() resumeData: Resume | null = null; // Input property to receive the resume ID
 
-  constructor(private resumeService: ResumeService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.resumeData = this.resumeService.getResumeData(); // Fetch the resume data from the service
-  }
 }

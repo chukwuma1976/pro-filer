@@ -1,0 +1,9 @@
+<div>
+    <h1>All Resumes</h1>
+    <div *ngIf="resumes.length === 0">
+        <p>No resumes found. Please create a new resume.</p>
+    </div>
+    <div *ngFor="let resume of resumes" class="resume-card">
+        <app-resume-details [resumeData]="resume"></app-resume-details>
+    </div>
+</div>

@@ -106,10 +106,21 @@ const resumeData: Resume[] = [
     }
 ];
 
-export const mockUserData: User = {
+const clarkKent: User = {
     id: '1',
     username: 'manofsteel',
     email: 'clark.kent@dailyplanet.com',
     password: 'password123',
-    resumes: resumeData // Assign the mock resume data to the user
+    resumes: [resumeData[0]] // Assign the first resume to the user
+}
+
+const bruceWayne: User = {
+    id: '2',
+    username: 'darkknight',
+    email: 'BruceWayne@WayneEnterprises.com',
+    password: 'password456',
+    resumes: [resumeData[1]] // Assign the second resume to the user
 };
+
+export const users: User[] = [clarkKent, bruceWayne]; // Export the users array for use in the application
+export const allResumes: Resume[] = resumeData; // Export all resumes for use in the application
