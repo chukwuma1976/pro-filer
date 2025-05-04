@@ -8,6 +8,7 @@ import { NavContainerComponent } from './nav-container/nav-container.component';
 import { UserResumesComponent } from './user-resumes/user-resumes.component';
 import { AllResumesComponent } from './all-resumes/all-resumes.component';
 import { ResumeFormComponent } from './resume-form/resume-form.component';
+import { loginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,7 +16,10 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     {
-        path: 'pro-filer', component: NavContainerComponent, children: [
+        path: 'pro-filer',
+        component: NavContainerComponent,
+        // canActivate: [loginGuard],
+        children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomePageComponent },
             { path: 'resume-details', component: UserResumesComponent },

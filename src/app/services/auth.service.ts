@@ -5,14 +5,14 @@ import { Observable, of, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = false; // Track login status
-  private user: { username: string, email: string } | null = null; // Track logged-in user
+  isLoggedIn: boolean = false; // Track login status
+
   login(username: string, password: string): Observable<boolean> {
     // Dummy credentials check
     if ((username === 'username' && password === 'password')
       || (username === 'manofsteel' && password === 'password123')
       || (username === 'darkknight' && password === 'password456')) {
-      this.loggedIn = true; // Set login status to true
+      this.isLoggedIn = true; // Set login status to true
       return of(true);
     }
     return throwError(() => new Error('Invalid credentials'));
