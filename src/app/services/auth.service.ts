@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
+import { User } from '../shared/models/user';
+import { users } from '../shared/mock-data/resumeData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn: boolean = false; // Track login status
+  userInfo!: User; // Store user information
 
   login(username: string, password: string): Observable<boolean> {
     // Dummy credentials check
-    if ((username === 'username' && password === 'password')
-      || (username === 'manofsteel' && password === 'password123')
+    if ((username === 'manofsteel' && password === 'password123')
       || (username === 'darkknight' && password === 'password456')) {
       this.isLoggedIn = true; // Set login status to true
+      const foundUser = users.find(user => user.username === username && user.password === password);
+      if (!foundUser) {
+        throw new Error('User not found');
+      }
+      this.userInfo = foundUser; // Store user information
+      console.log('User info:', this.userInfo); // Log user information
       return of(true);
     }
     return throwError(() => new Error('Invalid credentials'));
