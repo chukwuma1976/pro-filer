@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Resume } from '../shared/models/resume';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-resume-form',
@@ -31,8 +32,10 @@ import { Resume } from '../shared/models/resume';
 })
 export class ResumeFormComponent {
 
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   resumeForm: FormGroup;
   newResume!: Resume;
+  private _snackBar = inject(MatSnackBar);
 
   constructor(private fb: FormBuilder) {
     this.resumeForm = this.fb.group({
@@ -51,10 +54,17 @@ export class ResumeFormComponent {
   }
 
   onSubmit() {
-    console.log(this.resumeForm.value);
     this.newResume = this.resumeForm.value as Resume;
     console.log(this.newResume);
     this.resumeForm.reset();
+    this.formGroupDirective.resetForm();
+    this.openSnackBar('Resume submitted successfully!', 'Close');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
   }
 
   get experiences(): FormArray {
@@ -85,7 +95,7 @@ export class ResumeFormComponent {
       state: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: [new Date(), Validators.required],
-      description: this.fb.array([this.fb.group({ bulletPoint: ['', Validators.required] })]),
+      description: this.fb.array([this.newDescriptionControl()]),
     })
   }
 
@@ -106,7 +116,7 @@ export class ResumeFormComponent {
       fieldOfStudy: ['', Validators.required],
       graduationDate: ['', Validators.required],
       description: [''],
-      awards: this.fb.array([this.fb.group({ award: [''] })]),
+      awards: this.fb.array([this.newAwardControl()]),
     })
   }
 
@@ -129,17 +139,24 @@ export class ResumeFormComponent {
     this.skills.removeAt(index);
   }
 
+  newDescriptionControl(): FormGroup {
+    return this.fb.group({ bulletPoint: ['', Validators.required] });
+  }
+
   addDescription(experienceIndex: number) {
-    const descriptionControl = this.fb.group({ bulletPoint: ['', Validators.required] });
-    this.getDescription(experienceIndex).push(descriptionControl);
+    this.getDescription(experienceIndex).push(this.newDescriptionControl());
   }
 
   removeDescription(experienceIndex: number, descriptionIndex: number) {
     this.getDescription(experienceIndex).removeAt(descriptionIndex);
   }
+
+  newAwardControl(): FormGroup {
+    return this.fb.group({ award: [''] });
+  }
+
   addAward(educationIndex: number) {
-    const awardControl = this.fb.group({ award: [''] });
-    this.getAwards(educationIndex).push(awardControl);
+    this.getAwards(educationIndex).push(this.newAwardControl());
   }
   removeAward(educationIndex: number, awardIndex: number) {
     this.getAwards(educationIndex).removeAt(awardIndex);

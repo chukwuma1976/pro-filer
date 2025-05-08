@@ -101,23 +101,32 @@
                             required</mat-error>
                     </mat-form-field>
                     <br>
-                    <div formArrayName="description"
-                        *ngFor="let description of getDescription(i).controls; let j = index">
-                        <div [formGroupName]="j" class="description-form">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Job Description</mat-label>
-                                <input matInput [formControlName]="'bulletPoint'">
-                                <mat-error *ngIf="description?.hasError('required')">Description is required</mat-error>
-                            </mat-form-field>
-                            <br>
-                            <button mat-flat-button type="button" (click)="removeDescription(i, j)">Remove
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title> Job Description</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div formArrayName="description"
+                            *ngFor="let description of getDescription(i).controls; let j = index">
+                            <div [formGroupName]="j" class="description-form">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Job Description</mat-label>
+                                    <input matInput [formControlName]="'bulletPoint'">
+                                    <mat-error *ngIf="description.get('bulletPoint')?.hasError('required')">
+                                        Description is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <br>
+                                <button *ngIf="j>0" mat-flat-button type="button"
+                                    (click)="removeDescription(i, j)">Remove
+                                    Description</button>
+                                <br>
+                            </div>
+                            <button mat-flat-button type="button" (click)="addDescription(i)">Add Another Job
                                 Description</button>
-                            <br>
                         </div>
-                        <button mat-flat-button type="button" (click)="addDescription(i)">Add Description</button>
-                    </div>
-                    <br>
-                    <button mat-flat-button type="button" (click)="removeExperience(i)">Remove Experience</button>
+                    </mat-expansion-panel>
+                    <button *ngIf="i>0" mat-flat-button type="button" (click)="removeExperience(i)">Remove
+                        Experience</button>
                     <br>
                 </div>
                 <button mat-flat-button type="button" (click)="addExperience()">Add Experience</button>
@@ -139,20 +148,20 @@
                     <br>
                     <mat-form-field appearance="fill">
                         <mat-label>Degree</mat-label>
+                        <input type="text" matInput [formControlName]="'degree'">
+                        <mat-error *ngIf="education.get('degree')?.hasError('required')">Degree is required</mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill">
+                        <mat-label>City</mat-label>
                         <input type="text" matInput [formControlName]="'city'">
                         <mat-error *ngIf="education.get('city')?.hasError('required')">City is required</mat-error>
                     </mat-form-field>
                     <br>
                     <mat-form-field appearance="fill">
-                        <mat-label>City</mat-label>
+                        <mat-label>State</mat-label>
                         <input type="text" matInput [formControlName]="'state'">
                         <mat-error *ngIf="education.get('state')?.hasError('required')">State is required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field appearance="fill">
-                        <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'degree'">
-                        <mat-error *ngIf="education.get('degree')?.hasError('required')">Degree is required</mat-error>
                     </mat-form-field>
                     <br>
                     <mat-form-field appearance="fill">
@@ -172,18 +181,26 @@
                             required</mat-error>
                     </mat-form-field>
                     <br>
-                    <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
-                        <div [formGroupName]="j" class="award-form">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Award</mat-label>
-                                <input matInput [formControlName]="'award'">
-                            </mat-form-field>
-                            <br>
-                            <button mat-flat-button type="button" (click)="removeAward(i, j)">Remove Award</button>
-                            <br>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title> Add Any Awards Here </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
+                            <div [formGroupName]="j" class="award-form">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Award</mat-label>
+                                    <input matInput [formControlName]="'award'">
+                                </mat-form-field>
+                                <br>
+                                <button mat-flat-button type="button" (click)="removeAward(i, j)">Remove Award</button>
+                                <br>
+                            </div>
+                            <button mat-flat-button type="button" (click)="addAward(i)">Add Award</button>
                         </div>
-                        <button mat-flat-button type="button" (click)="addAward(i)">Add Award</button>
-                    </div>
+                    </mat-expansion-panel>
+                    <button *ngIf="i>0" mat-flat-button type="button" (click)="removeEducation(i)">Remove
+                        Education</button>
+                    <br>
                 </div>
             </div>
             <button mat-flat-button type="button" (click)="addEducation()">Add Education</button>
@@ -197,14 +214,15 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Skill</mat-label>
                         <input matInput [formControlName]="'skill'">
-                        <mat-error *ngIf="skill?.hasError('required')">Skill is required</mat-error>
+                        <mat-error *ngIf="skill.get('skill')?.hasError('required')">Skill is required</mat-error>
                     </mat-form-field>
                     <br>
-                    <button mat-flat-button type="button" (click)="removeSkill(i)">Remove Skill</button>
+                    <button *ngIf="i>0" mat-flat-button type="button" (click)="removeSkill(i)">Remove Skill</button>
                     <br>
                 </div>
-                <button mat-flat-button type="button" (click)="addSkill()">Add Skill</button>
             </div>
+            <button mat-flat-button type="button" (click)="addSkill()">Add Skill</button>
+            <br>
             <mat-divider></mat-divider>
             <mat-form-field appearance="fill">
                 <mat-label>Additional Information</mat-label>
