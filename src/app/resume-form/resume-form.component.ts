@@ -1,6 +1,6 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +11,8 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Resume } from '../shared/models/resume';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-resume-form',
@@ -24,7 +26,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     MatDatepickerModule,
     MatDatepicker,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
@@ -36,6 +40,8 @@ export class ResumeFormComponent {
   resumeForm: FormGroup;
   newResume!: Resume;
   private _snackBar = inject(MatSnackBar);
+  positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
+  position = new FormControl(this.positionOptions[2]);
 
   constructor(private fb: FormBuilder) {
     this.resumeForm = this.fb.group({

@@ -82,7 +82,7 @@
                         <mat-error *ngIf="experience.get('state')?.hasError('required')">State is required</mat-error>
                     </mat-form-field>
                     <br>
-                    <mat-form-field class="date-range" appearance="fill">
+                    <mat-form-field class="start-date" appearance="fill">
                         <mat-label>Start Date</mat-label>
                         <input matInput [formControlName]="'startDate'" [matDatepicker]="picker">
                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -91,7 +91,7 @@
                         <mat-error *ngIf="experience.get('startDate')?.hasError('required')">Start date is
                             required</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="date-range" appearance="fill">
+                    <mat-form-field class="end-date" appearance="fill">
                         <mat-label>End Date</mat-label>
                         <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2">
                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -103,34 +103,34 @@
                     <br>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
-                            <mat-panel-title> Job Description</mat-panel-title>
+                            <mat-panel-title> Job Description (Required)</mat-panel-title>
                         </mat-expansion-panel-header>
                         <div formArrayName="description"
                             *ngFor="let description of getDescription(i).controls; let j = index">
                             <div [formGroupName]="j" class="description-form">
-                                <mat-form-field appearance="fill">
+                                <mat-form-field appearance="fill" class="deeply-nested">
                                     <mat-label>Job Description</mat-label>
                                     <input matInput [formControlName]="'bulletPoint'">
                                     <mat-error *ngIf="description.get('bulletPoint')?.hasError('required')">
                                         Description is required
                                     </mat-error>
                                 </mat-form-field>
-                                <br>
-                                <button *ngIf="j>0" mat-flat-button type="button"
-                                    (click)="removeDescription(i, j)">Remove
-                                    Description</button>
+                                <button mat-fab type="button" class="deeply-nested" [disabled]="j== 0"
+                                    matTooltip="Delete Job Description" [matTooltipPosition]="position.value!"
+                                    (click)="removeDescription(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
-                            <button mat-flat-button type="button" (click)="addDescription(i)">Add Another Job
-                                Description</button>
                         </div>
+                        <button mat-flat-button type="button" (click)="addDescription(i)">Add Another Job
+                            Description</button>
                     </mat-expansion-panel>
-                    <button *ngIf="i>0" mat-flat-button type="button" (click)="removeExperience(i)">Remove
+                    <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
+                        (click)="removeExperience(i)">Remove
                         Experience</button>
                     <br>
                 </div>
-                <button mat-flat-button type="button" (click)="addExperience()">Add Experience</button>
             </div>
+            <button mat-flat-button type="button" (click)="addExperience()">Add Experience</button>
         </mat-expansion-panel>
         <mat-divider></mat-divider>
         <mat-expansion-panel>
@@ -187,18 +187,20 @@
                         </mat-expansion-panel-header>
                         <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
                             <div [formGroupName]="j" class="award-form">
-                                <mat-form-field appearance="fill">
+                                <mat-form-field appearance="fill" class="deeply-nested">
                                     <mat-label>Award</mat-label>
                                     <input matInput [formControlName]="'award'">
                                 </mat-form-field>
-                                <br>
-                                <button mat-flat-button type="button" (click)="removeAward(i, j)">Remove Award</button>
+                                <button mat-fab type="button" class="deeply-nested" [disabled]="j== 0"
+                                    matTooltip="Delete Award" [matTooltipPosition]="position.value!"
+                                    (click)="removeAward(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
-                            <button mat-flat-button type="button" (click)="addAward(i)">Add Award</button>
                         </div>
+                        <button mat-flat-button type="button" (click)="addAward(i)">Add Award</button>
                     </mat-expansion-panel>
-                    <button *ngIf="i>0" mat-flat-button type="button" (click)="removeEducation(i)">Remove
+                    <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
+                        (click)="removeEducation(i)">Remove
                         Education</button>
                     <br>
                 </div>
@@ -211,13 +213,14 @@
             </mat-expansion-panel-header>
             <div formArrayName="skills" *ngFor="let skill of skills.controls; let i = index">
                 <div [formGroupName]="i" class="skill-form">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" class="deeply-nested">
                         <mat-label>Skill</mat-label>
                         <input matInput [formControlName]="'skill'">
                         <mat-error *ngIf="skill.get('skill')?.hasError('required')">Skill is required</mat-error>
                     </mat-form-field>
-                    <br>
-                    <button *ngIf="i>0" mat-flat-button type="button" (click)="removeSkill(i)">Remove Skill</button>
+                    <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0" matTooltip="Delete Skill"
+                        [matTooltipPosition]="position.value!"
+                        (click)="removeSkill(i)"><mat-icon>delete</mat-icon></button>
                     <br>
                 </div>
             </div>

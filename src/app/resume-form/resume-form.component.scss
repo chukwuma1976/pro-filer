@@ -16,6 +16,29 @@ mat-form-field {
     width: 100%;
 }
 
-.date-range {
-    width: 50%;
+.start-date,
+.end-date {
+    width: 49%;
+}
+
+.start-date {
+    margin-right: 2%;
+}
+
+.nested-delete {
+    float: right;
+}
+
+mat-form-field.deeply-nested {
+    width: 90%;
+}
+
+button.deeply-nested {
+    margin-left: 2%
+}
+
+.description-form,
+.award-form,
+.skill-form {
+    display: flex;
 }
