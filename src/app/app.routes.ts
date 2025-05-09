@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { NavContainerComponent } from './nav-container/nav-container.component';
-import { UserResumesComponent } from './user-resumes/user-resumes.component';
-import { AllResumesComponent } from './all-resumes/all-resumes.component';
-import { ResumeFormComponent } from './resume-form/resume-form.component';
+import { LoginComponent } from './component/login/login.component';
+import { SignupComponent } from './component/signup/signup.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
+import { NavContainerComponent } from './component/nav-container/nav-container.component';
+import { UserResumesComponent } from './component/user-resumes/user-resumes.component';
+import { AllResumesComponent } from './component/all-resumes/all-resumes.component';
+import { ResumeFormComponent } from './component/resume-form/resume-form.component';
 import { loginGuard } from './guards/login.guard';
+import { ResumeEditFormComponent } from './component/resume-edit-form/resume-edit-form.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,7 +25,8 @@ export const routes: Routes = [
             { path: 'home', component: HomePageComponent },
             { path: 'resume-details', component: UserResumesComponent },
             { path: 'all-resumes', component: AllResumesComponent },
-            { path: 'resume-form', component: ResumeFormComponent }
+            { path: 'resume-form', component: ResumeFormComponent },
+            { path: 'edit-resume/:id', component: ResumeEditFormComponent }
         ]
     }
 ];

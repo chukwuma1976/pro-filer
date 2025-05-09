@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Resume } from '../shared/models/resume';
-import { ResumeService } from '../services/resume.service'; // Import the ResumeService
+import { Resume } from '../../shared/models/resume';
+import { ResumeService } from '../../services/resume.service';
 import { NgFor, NgIf } from '@angular/common';
-import { ResumeDetailsComponent } from "../resume-details/resume-details.component"; // Import NgFor for ngFor directive
+import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
+import { ResumeToolHeaderComponent } from "../resume-tool-header/resume-tool-header.component";
 
 @Component({
   selector: 'app-user-resumes',
-  imports: [NgFor, NgIf, ResumeDetailsComponent], // Import NgFor and NgIf for template directives
+  imports: [NgFor, NgIf, ResumeDetailsComponent, ResumeToolHeaderComponent],
   templateUrl: './user-resumes.component.html',
   styleUrl: './user-resumes.component.scss'
 })

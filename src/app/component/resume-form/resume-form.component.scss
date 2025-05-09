@@ -1,0 +1,44 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.resume-form {
+    width: 95%;
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.start-date,
+.end-date {
+    width: 49%;
+}
+
+.start-date {
+    margin-right: 2%;
+}
+
+.nested-delete {
+    float: right;
+}
+
+mat-form-field.deeply-nested {
+    width: 90%;
+}
+
+button.deeply-nested {
+    margin-left: 2%
+}
+
+.description-form,
+.award-form,
+.skill-form {
+    display: flex;
+}

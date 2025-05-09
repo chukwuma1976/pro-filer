@@ -23,7 +23,20 @@ export class ResumeService {
     }
   }
 
+  getResumeById(resumeId: string): Resume | undefined {
+    return allResumes?.find(resume => resume.id === resumeId); // Provide an empty array as fallback if resumes is undefined
+  }
+
+
   getAllResumes(): Resume[] {
     return allResumes ?? []; // Provide an empty array as fallback if resumes is undefined
+  }
+
+  addResume(resume: Resume): void {
+    console.log('adding resume', resume);
+  }
+
+  editResume(resume: Resume): void {
+    console.log('editing resume', resume);
   }
 }

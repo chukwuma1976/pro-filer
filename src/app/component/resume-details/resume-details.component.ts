@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResumeService } from '../services/resume.service';
-import { Resume } from '../shared/models/resume'; // Import the Resume type
+import { Resume } from '../../shared/models/resume'; // Import the Resume type
 import { NgFor } from '@angular/common';
 
 @Component({

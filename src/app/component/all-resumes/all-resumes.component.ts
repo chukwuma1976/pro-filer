@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ResumeService } from '../services/resume.service';
-import { Resume } from '../shared/models/resume';
+import { ResumeService } from '../../services/resume.service';
+import { Resume } from '../../shared/models/resume';
 import { NgFor, NgIf } from '@angular/common';
-import { ResumeDetailsComponent } from "../resume-details/resume-details.component"; // Import NgFor for ngFor directive
+import { ResumeDetailsComponent } from "../../component/resume-details/resume-details.component"; // Corrected path to ResumeDetailsComponent
 
 @Component({
   selector: 'app-all-resumes',

@@ -9,10 +9,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { Resume } from '../shared/models/resume';
+import { Resume } from '../../shared/models/resume';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
+import { ResumeService } from '../../services/resume.service';
 
 @Component({
   selector: 'app-resume-form',
@@ -39,11 +40,11 @@ export class ResumeFormComponent {
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   resumeForm: FormGroup;
   newResume!: Resume;
-  private _snackBar = inject(MatSnackBar);
+  protected _snackBar = inject(MatSnackBar);
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
 
-  constructor(private fb: FormBuilder) {
+  constructor(protected fb: FormBuilder, protected resumeService: ResumeService) {
     this.resumeForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -61,7 +62,7 @@ export class ResumeFormComponent {
 
   onSubmit() {
     this.newResume = this.resumeForm.value as Resume;
-    console.log(this.newResume);
+    this.resumeService.addResume(this.newResume);
     this.resumeForm.reset();
     this.formGroupDirective.resetForm();
     this.openSnackBar('Resume submitted successfully!', 'Close');
