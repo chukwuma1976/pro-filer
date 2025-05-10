@@ -1,6 +1,6 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,13 +10,11 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Resume } from '../../shared/models/resume';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ResumeService } from '../../services/resume.service';
 import { ResumeFormComponent } from '../resume-form/resume-form.component';
-import e from 'express';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -40,6 +38,7 @@ import e from 'express';
 })
 export class ResumeEditFormComponent extends ResumeFormComponent {
 
+  initialResume: Resume | null = null; // Input property to receive the resume ID
   updatedResume!: Resume;
 
   constructor(fb: FormBuilder, resumeService: ResumeService, private router: Router, private route: ActivatedRoute) {
@@ -62,7 +61,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
   ngOnInit() {
     const resumeId = this.route.snapshot.paramMap.get('id'); console.log('Resume ID:', resumeId);
     const resume = resumeId ? this.resumeService.getResumeById(resumeId) : undefined;
-    console.log('Resume:', resume);
     if (resume) {
       this.populateUpdateForm(resume);
     }
@@ -86,6 +84,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       const newSkill: any = this.fb.group({ skill: [skill] });
       this.skills.controls.push(newSkill);
     });
+
   }
 
   newUserExperienceControl(experience: any): FormGroup {
@@ -139,12 +138,21 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.router.navigate(['/pro-filer/resume-details']);
   }
 
+  deepEqual(obj1: any, obj2: any): boolean {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  }
+
   onEdit() {
     if (this.resumeForm.valid) {
-      this.updatedResume = this.resumeForm.value;
-      this.resumeService.editResume(this.updatedResume);
-      this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });
-      this.router.navigate(['/pro-filer/resume-details']);
+      if (this.resumeForm.dirty || !this.deepEqual(this.resumeForm.value, this.initialResume)) {
+        this.updatedResume = this.resumeForm.value;
+        this.resumeService.editResume(this.updatedResume);
+        this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });
+        this.router.navigate(['/pro-filer/resume-details']);
+      }
+      else {
+        this._snackBar.open('No changes made to the resume.', 'Close', { duration: 5000 });
+      }
     } else {
       this._snackBar.open('Please fill in all required fields.', 'Close', { duration: 5000 });
     }
