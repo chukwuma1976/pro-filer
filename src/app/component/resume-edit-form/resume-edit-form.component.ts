@@ -38,11 +38,10 @@ import { ResumeFormComponent } from '../resume-form/resume-form.component';
 })
 export class ResumeEditFormComponent extends ResumeFormComponent {
 
-  initialResume: Resume | null = null; // Input property to receive the resume ID
   updatedResume!: Resume;
 
-  constructor(fb: FormBuilder, resumeService: ResumeService, private router: Router, private route: ActivatedRoute) {
-    super(fb, resumeService);
+  constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute) {
+    super(fb, resumeService, router);
     this.resumeForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -81,7 +80,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     });
 
     resume.skills.forEach((skill: any) => {
-      const newSkill: any = this.fb.group({ skill: [skill] });
+      const newSkill: any = this.fb.control(skill, Validators.required);
       this.skills.controls.push(newSkill);
     });
 
@@ -99,7 +98,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     });
 
     experience.description.forEach((desc: any) => {
-      const descriptionGroup = this.fb.group({ bulletPoint: [desc, Validators.required] });
+      const descriptionGroup = this.fb.control(desc, Validators.required);
       (addedExperience.get('description') as FormArray).push(descriptionGroup);
     });
 
@@ -123,7 +122,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     })
 
     education.awards.forEach((award: any) => {
-      const awardGroup = this.fb.group({ award: [award] });
+      const awardGroup = this.fb.control(award);
       (addedEducation.get('awards') as FormArray).push(awardGroup);
     });
 
@@ -138,13 +137,9 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.router.navigate(['/pro-filer/resume-details']);
   }
 
-  deepEqual(obj1: any, obj2: any): boolean {
-    return JSON.stringify(obj1) === JSON.stringify(obj2);
-  }
-
   onEdit() {
     if (this.resumeForm.valid) {
-      if (this.resumeForm.dirty || !this.deepEqual(this.resumeForm.value, this.initialResume)) {
+      if (this.resumeForm.dirty || this.resumeForm.touched) {
         this.updatedResume = this.resumeForm.value;
         this.resumeService.editResume(this.updatedResume);
         this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });

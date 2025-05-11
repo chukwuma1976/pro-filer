@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { ResumeService } from '../../services/resume.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-resume-form',
@@ -44,7 +45,7 @@ export class ResumeFormComponent {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
 
-  constructor(protected fb: FormBuilder, protected resumeService: ResumeService) {
+  constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -55,7 +56,7 @@ export class ResumeFormComponent {
       summary: ['', Validators.required],
       experience: this.fb.array([this.newExperienceControl()]),
       education: this.fb.array([this.newEducationControl()]),
-      skills: this.fb.array([this.newSkillControl()]),
+      skills: this.fb.array([this.fb.control('', Validators.required)]),
       additionalInfo: ['']
     });
   }
@@ -66,6 +67,7 @@ export class ResumeFormComponent {
     this.resumeForm.reset();
     this.formGroupDirective.resetForm();
     this.openSnackBar('Resume submitted successfully!', 'Close');
+    this.router.navigate(['/pro-filer/resume-details']);
   }
 
   openSnackBar(message: string, action: string) {
@@ -102,7 +104,7 @@ export class ResumeFormComponent {
       state: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: [new Date(), Validators.required],
-      description: this.fb.array([this.newDescriptionControl()]),
+      description: this.fb.array([this.fb.control('', Validators.required)]),
     })
   }
 
@@ -123,7 +125,7 @@ export class ResumeFormComponent {
       fieldOfStudy: ['', Validators.required],
       graduationDate: ['', Validators.required],
       description: [''],
-      awards: this.fb.array([this.newAwardControl()]),
+      awards: this.fb.array([this.fb.control('')]),
     })
   }
 
@@ -135,35 +137,23 @@ export class ResumeFormComponent {
     this.educations.removeAt(index);
   }
 
-  newSkillControl(): FormGroup {
-    return this.fb.group({ skill: ['', Validators.required] });
-  }
-
   addSkill() {
-    this.skills.controls.push(this.newSkillControl());
+    this.skills.controls.push(this.fb.control('', Validators.required));
   }
   removeSkill(index: number) {
     this.skills.removeAt(index);
   }
 
-  newDescriptionControl(): FormGroup {
-    return this.fb.group({ bulletPoint: ['', Validators.required] });
-  }
-
   addDescription(experienceIndex: number) {
-    this.getDescription(experienceIndex).push(this.newDescriptionControl());
+    this.getDescription(experienceIndex).push(this.fb.control('', Validators.required));
   }
 
   removeDescription(experienceIndex: number, descriptionIndex: number) {
     this.getDescription(experienceIndex).removeAt(descriptionIndex);
   }
 
-  newAwardControl(): FormGroup {
-    return this.fb.group({ award: [''] });
-  }
-
   addAward(educationIndex: number) {
-    this.getAwards(educationIndex).push(this.newAwardControl());
+    this.getAwards(educationIndex).push(this.fb.control(''));
   }
   removeAward(educationIndex: number, awardIndex: number) {
     this.getAwards(educationIndex).removeAt(awardIndex);

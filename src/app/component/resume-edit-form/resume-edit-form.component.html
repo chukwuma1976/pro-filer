@@ -109,11 +109,11 @@
                         </mat-expansion-panel-header>
                         <div formArrayName="description"
                             *ngFor="let description of getDescription(i).controls; let j = index">
-                            <div [formGroupName]="j" class="description-form">
+                            <div class="description-form">
                                 <mat-form-field appearance="fill" class="deeply-nested">
                                     <mat-label>Job Description</mat-label>
-                                    <input matInput [formControlName]="'bulletPoint'">
-                                    <mat-error *ngIf="description.get('bulletPoint')?.hasError('required')">
+                                    <input matInput [formControlName]="j">
+                                    <mat-error *ngIf="description.hasError('required')">
                                         Description is required
                                     </mat-error>
                                 </mat-form-field>
@@ -188,12 +188,12 @@
                             <mat-panel-title> Add Any Awards Here </mat-panel-title>
                         </mat-expansion-panel-header>
                         <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
-                            <div [formGroupName]="j" class="award-form">
+                            <div class="award-form">
                                 <mat-form-field appearance="fill" class="deeply-nested">
                                     <mat-label>Award</mat-label>
-                                    <input matInput [formControlName]="'award'">
+                                    <input matInput [formControlName]="j">
                                 </mat-form-field>
-                                <button mat-fab type="button" class="deeply-nested" [disabled]="j== 0"
+                                <button mat-fab type="button" class="deeply-nested" [disabled]="j===0"
                                     matTooltip="Delete Award" [matTooltipPosition]="position.value!"
                                     (click)="removeAward(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
@@ -214,11 +214,11 @@
                 <mat-panel-title> Skills and Additional Information </mat-panel-title>
             </mat-expansion-panel-header>
             <div formArrayName="skills" *ngFor="let skill of skills.controls; let i = index">
-                <div [formGroupName]="i" class="skill-form">
+                <div class="skill-form">
                     <mat-form-field appearance="fill" class="deeply-nested">
                         <mat-label>Skill</mat-label>
-                        <input matInput [formControlName]="'skill'">
-                        <mat-error *ngIf="skill.get('skill')?.hasError('required')">Skill is required</mat-error>
+                        <input matInput [formControlName]="i">
+                        <mat-error *ngIf="skill.hasError('required')">Skill is required</mat-error>
                     </mat-form-field>
                     <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0" matTooltip="Delete Skill"
                         [matTooltipPosition]="position.value!"

@@ -5,7 +5,7 @@ export interface Resume {
     id: string;
     firstName: string;
     lastName: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     email: string;
     linkedIn?: string;
     website?: string;
