@@ -1,7 +1,5 @@
 <div>
     <button mat-button [routerLink]="['/pro-filer/edit-resume', resume?.id]">Edit Resume</button>
-    <!-- <button mat-button (click)="resume && resume.id ? deleteResume(resume.id) : null">Delete Resume</button> -->
-    <button mat-button (click)="openDialog()">Delete Resume</button>
-    <button mat-button (click)="getPDF()">Download PDF</button>
-    <button mat-button (click)="printResume()">Print Resume</button>
+    <button mat-button (click)="openDeleteDialog()">Delete Resume</button>
+    <button mat-button (click)="generatePDF()">Generate PDF</button>
 </div>

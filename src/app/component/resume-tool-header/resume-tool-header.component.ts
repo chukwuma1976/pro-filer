@@ -5,7 +5,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { ResumeService } from '../../services/resume.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { PopUpComponent } from '../pop-up/pop-up.component';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-resume-tool-header',
@@ -16,28 +18,26 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
 export class ResumeToolHeaderComponent {
 
   @Input() resume: Resume | null = null; // Input property to receive the resume ID
+  pdf!: jsPDF;
 
   constructor(private resumeService: ResumeService, private dialog: MatDialog) { } // Inject the ResumeService
 
-  getPDF() {
-    // Logic to generate PDF from the resume data
-    console.log('Generating PDF for resume:', this.resume);
+  generatePDF() {
+    console.log('generate pdf');
+    const resumeToPrint: any = document.getElementById(this.resume!.id);
+    html2canvas(resumeToPrint, { scale: 2 }).then((canvas) => {
+      this.pdf = new jsPDF();
+      this.pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+      this.pdf.setProperties({
+        title: 'Resume PDF',
+        author: `${this.resume?.firstName} ${this.resume?.lastName}`
+      });
+      this.pdf.setFontSize(10);
+      this.pdf.save(`Resume${this.resume?.id}.pdf`);
+    });
   }
 
-  deleteResume(resumeId: string) {
-    // Logic to delete the resume
-    console.log('Deleting resume:', resumeId);
-    // You can call a service method to delete the resume from the backend or local storage
-  }
-
-  printResume() {
-    // Logic to print the resume
-    console.log('Printing resume:', this.resume);
-    // You can use window.print() or any other method to print the resume
-    window.print();
-  }
-
-  openDialog() {
+  openDeleteDialog() {
     this.dialog.open(PopUpComponent, {
       data: {
         id: this.resume?.id,
