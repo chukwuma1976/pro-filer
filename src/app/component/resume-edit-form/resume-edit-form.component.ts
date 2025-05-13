@@ -38,6 +38,7 @@ import { ResumeFormComponent } from '../resume-form/resume-form.component';
 })
 export class ResumeEditFormComponent extends ResumeFormComponent {
 
+  initialState!: Resume;
   updatedResume!: Resume;
 
   constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute) {
@@ -63,7 +64,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     if (resume) {
       this.populateUpdateForm(resume);
     }
-
+    this.detectValueChanges();
   }
 
   populateUpdateForm(resume: Resume | any) {
@@ -80,25 +81,25 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     });
 
     resume.skills.forEach((skill: any) => {
-      const newSkill: any = this.fb.control(skill, Validators.required);
+      const newSkill: any = this.fb.control(skill);
       this.skills.controls.push(newSkill);
     });
-
+    this.initialState = this.resumeForm.value as Resume;
   }
 
   newUserExperienceControl(experience: any): FormGroup {
     const addedExperience = this.fb.group({
-      employer: [experience.employer, Validators.required],
-      title: [experience.title, Validators.required],
-      city: [experience.city, Validators.required],
-      state: [experience.state, Validators.required],
-      startDate: [experience.startDate, Validators.required],
-      endDate: [experience.endDate, Validators.required],
+      employer: [experience.employer],
+      title: [experience.title],
+      city: [experience.city],
+      state: [experience.state],
+      startDate: [experience.startDate],
+      endDate: [experience.endDate],
       description: this.fb.array([]),
     });
 
     experience.description.forEach((desc: any) => {
-      const descriptionGroup = this.fb.control(desc, Validators.required);
+      const descriptionGroup = this.fb.control(desc);
       (addedExperience.get('description') as FormArray).push(descriptionGroup);
     });
 
@@ -111,12 +112,12 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   newUserEducationControl(education: any): FormGroup {
     const addedEducation = this.fb.group({
-      institution: [education.institution, Validators.required],
-      city: [education.city, Validators.required],
-      state: [education.state, Validators.required],
-      degree: [education.degree, Validators.required],
-      fieldOfStudy: [education.fieldOfStudy, Validators.required],
-      graduationDate: [education.graduationDate, Validators.required],
+      institution: [education.institution],
+      city: [education.city],
+      state: [education.state],
+      degree: [education.degree],
+      fieldOfStudy: [education.fieldOfStudy],
+      graduationDate: [education.graduationDate],
       description: [education.description],
       awards: this.fb.array([]),
     })
@@ -137,9 +138,35 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.router.navigate(['/pro-filer/resume-details']);
   }
 
+  deepEqual(obj1: any, obj2: any) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  }
+
+  detectValueChanges() {
+    //iterate through nested controls to detect changes and mark form as dirty
+    this.experiences.controls.forEach((control) => {
+      control.valueChanges.subscribe(change => {
+        console.log(change);
+        Object.keys(change).includes('employer') && this.resumeForm.markAsDirty();
+      })
+    })
+    this.educations.controls.forEach((control) => {
+      control.valueChanges.subscribe(change => {
+        console.log(change);
+        Object.keys(change).includes('institution') && this.resumeForm.markAsDirty();
+      })
+    })
+    this.skills.controls.forEach((control) => {
+      control.valueChanges.subscribe(change => {
+        console.log(change);
+        change !== "" && this.resumeForm.markAsDirty();
+      })
+    })
+  }
+
   onEdit() {
     if (this.resumeForm.valid) {
-      if (this.resumeForm.dirty || this.resumeForm.touched) {
+      if (this.resumeForm.dirty) {
         this.updatedResume = this.resumeForm.value;
         this.resumeService.editResume(this.updatedResume);
         this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });

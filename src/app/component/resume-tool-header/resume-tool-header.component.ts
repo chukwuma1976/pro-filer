@@ -4,6 +4,8 @@ import { Resume } from '../../shared/models/resume';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { ResumeService } from '../../services/resume.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-resume-tool-header',
@@ -15,7 +17,7 @@ export class ResumeToolHeaderComponent {
 
   @Input() resume: Resume | null = null; // Input property to receive the resume ID
 
-  constructor(private resumeService: ResumeService) { } // Inject the ResumeService
+  constructor(private resumeService: ResumeService, private dialog: MatDialog) { } // Inject the ResumeService
 
   getPDF() {
     // Logic to generate PDF from the resume data
@@ -33,6 +35,14 @@ export class ResumeToolHeaderComponent {
     console.log('Printing resume:', this.resume);
     // You can use window.print() or any other method to print the resume
     window.print();
+  }
+
+  openDialog() {
+    this.dialog.open(PopUpComponent, {
+      data: {
+        id: this.resume?.id,
+      }
+    });
   }
 
 }

@@ -56,7 +56,7 @@ export class ResumeFormComponent {
       summary: ['', Validators.required],
       experience: this.fb.array([this.newExperienceControl()]),
       education: this.fb.array([this.newEducationControl()]),
-      skills: this.fb.array([this.fb.control('', Validators.required)]),
+      skills: this.fb.array([this.fb.control('')]),
       additionalInfo: ['']
     });
   }
@@ -98,13 +98,13 @@ export class ResumeFormComponent {
 
   newExperienceControl() {
     return this.fb.group({
-      employer: ['', Validators.required],
-      title: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: [new Date(), Validators.required],
-      description: this.fb.array([this.fb.control('', Validators.required)]),
+      employer: [''],
+      title: [''],
+      city: [''],
+      state: [''],
+      startDate: [''],
+      endDate: [new Date()],
+      description: this.fb.array([this.fb.control('')]),
     })
   }
 
@@ -118,12 +118,12 @@ export class ResumeFormComponent {
 
   newEducationControl(): FormGroup {
     return this.fb.group({
-      institution: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      degree: ['', Validators.required],
-      fieldOfStudy: ['', Validators.required],
-      graduationDate: ['', Validators.required],
+      institution: [''],
+      city: [''],
+      state: [''],
+      degree: [''],
+      fieldOfStudy: [''],
+      graduationDate: [''],
       description: [''],
       awards: this.fb.array([this.fb.control('')]),
     })
@@ -138,14 +138,14 @@ export class ResumeFormComponent {
   }
 
   addSkill() {
-    this.skills.controls.push(this.fb.control('', Validators.required));
+    this.skills.controls.push(this.fb.control(''));
   }
   removeSkill(index: number) {
     this.skills.removeAt(index);
   }
 
   addDescription(experienceIndex: number) {
-    this.getDescription(experienceIndex).push(this.fb.control('', Validators.required));
+    this.getDescription(experienceIndex).push(this.fb.control(''));
   }
 
   removeDescription(experienceIndex: number, descriptionIndex: number) {
