@@ -1,5 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
+
+// @include mat.core();
 
 html {
     color-scheme: light;
@@ -12,23 +13,16 @@ body.dark-mode {
     color-scheme: dark;
 }
 
-// html {
-//     color-scheme: light;
-// }
-
-// body.dark-mode {
-//     color-scheme: dark; 
-//     background-color: #121212; 
-//     color: #ffffff; 
-//     font-family: 'Roboto', sans-serif;
-// }
-
-html,
-body {
-    height: 100%;
+body.light-mode {
+    color-scheme: light;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+// html,
+// body {
+//     height: 100%;
+// }
+
+// body {
+//     margin: 0;
+//     font-family: Roboto, "Helvetica Neue", sans-serif;
+// }
