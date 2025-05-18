@@ -17,7 +17,7 @@ export class UserResumesComponent {
   constructor(private resumeService: ResumeService) { }
 
   ngOnInit() {
-    this.resumes = this.resumeService.getResumesByUserId('1'); // Fetch all resumes from the service
+    this.resumes = this.resumeService.getResumesByUserId('3'); // Fetch all resumes from the service
   }
 
 }

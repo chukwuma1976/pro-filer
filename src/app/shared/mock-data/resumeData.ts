@@ -107,6 +107,90 @@ const resumeData: Resume[] = [
         skills: ['Business Management', 'Leadership', 'Philanthropy'],
         shareWithOthers: false,
         additionalInfo: 'Passionate about technology and innovation. Active in various charitable organizations.'
+    },
+    {
+        id: "3",
+        firstName: "Chukwuma",
+        lastName: "Anyadike",
+        phoneNumber: "123456789",
+        email: "chukwuma.anyadike@gmail.com",
+        linkedIn: "www.linkedin.com/in/chukwumaanyadike/",
+        website: "https://github.com/chukwuma1976",
+        summary: "Software engineer with a surgical approach to software development. I build dynamic and immersive full stack applications using JavaScript, React, Angular, Ruby, Rails, Java, and Spring Boot.",
+        experience: [
+            {
+                employer: "FDM",
+                title: "Contractor",
+                city: "Hayes",
+                state: "Virginia",
+                startDate: "2023-11-13T06:00:00.000Z",
+                endDate: "2025-05-18T05:56:53.826Z",
+                description: [
+                    "Automation testing",
+                    "UI coding"
+                ]
+            },
+            {
+                employer: "Norfolk State University",
+                title: "Adjunct Professor",
+                city: "Norfolk",
+                state: "Virginia",
+                startDate: "2019-09-3T06:00:00.000Z",
+                endDate: "2025-05-18T05:59:10.717Z",
+                description: [
+                    "Taught Anatomy and Physiology to undergraduate students",
+                    "Developed and implemented course materials and assessments",
+                ]
+            }
+        ],
+        education: [
+            {
+                institution: "Flatiron School",
+                city: "Hayes",
+                state: "Virginia",
+                degree: "Certificate in Software Engineering",
+                fieldOfStudy: "Software Engineering",
+                graduationDate: "2023-06-12T05:00:00.000Z",
+                description: "",
+                awards: [
+                ]
+            },
+            {
+                institution: "UVA",
+                city: "Charlottesville",
+                state: "Virginia",
+                degree: "MD",
+                fieldOfStudy: "Medicine",
+                graduationDate: "2001-05-20T05:00:00.000Z",
+                description: "",
+                "awards": [
+                ]
+            },
+            {
+                institution: "Virginia Commonwealth University",
+                city: "Richmond",
+                state: "Virginia",
+                degree: "BS",
+                fieldOfStudy: "Biology",
+                graduationDate: "1997-05-20T05:00:00.000Z",
+                description: "",
+                "awards": [
+                    "Summa Cum Laude",
+                    "Dean's List",
+                    "Graduated with Honors"
+                ]
+            }
+        ],
+        skills: [
+            "JavaScript",
+            "React",
+            "Angular",
+            "TypeScript",
+            "Java",
+            "Spring Boot",
+        ],
+        additionalInfo: "I am a career changer",
+        shareWithOthers: false
     }
 ];
 
@@ -126,5 +210,13 @@ const bruceWayne: User = {
     resumes: [resumeData[1]] // Assign the second resume to the user
 };
 
-export const users: User[] = [clarkKent, bruceWayne]; // Export the users array for use in the application
+const admin: User = {
+    id: '3',
+    username: 'casmooth',
+    email: 'noneof@yourbusiness.com',
+    password: 'password789',
+    resumes: [resumeData[2]] // Assign the second resume to the user
+};
+
+export const users: User[] = [clarkKent, bruceWayne, admin]; // Export the users array for use in the application
 export const allResumes: Resume[] = resumeData; // Export all resumes for use in the application

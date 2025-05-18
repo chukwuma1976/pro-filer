@@ -131,7 +131,7 @@ export class ResumeFormComponent {
       fieldOfStudy: [''],
       graduationDate: [''],
       description: [''],
-      awards: this.fb.array([this.fb.control('')]),
+      awards: this.fb.array([]),
     })
   }
 
