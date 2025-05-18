@@ -5,6 +5,6 @@ export interface Education {
     degree: string;
     fieldOfStudy: string;
     graduationDate: string;
-    description?: string;
+    descriptionEdu?: string;
     awards?: string[];
 }

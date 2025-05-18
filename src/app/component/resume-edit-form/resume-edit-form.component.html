@@ -185,6 +185,12 @@
                             required</mat-error>
                     </mat-form-field>
                     <br>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Description of Education (Optional)</mat-label>
+                        <input type="text" matInput [formControlName]="'descriptionEdu'">
+                        <mat-error *ngIf="education.get('descriptionEdu')?.hasError('required')">Description is
+                            required</mat-error>
+                    </mat-form-field>
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title> Add Any Awards Here </mat-panel-title>

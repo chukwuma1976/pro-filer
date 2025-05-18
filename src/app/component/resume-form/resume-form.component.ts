@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { ResumeService } from '../../services/resume.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -104,18 +104,18 @@ export class ResumeFormComponent {
 
   newExperienceControl() {
     return this.fb.group({
-      employer: [''],
-      title: [''],
-      city: [''],
-      state: [''],
-      startDate: [''],
-      endDate: [new Date()],
+      employer: ['', Validators.required],
+      title: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: [new Date(), Validators.required],
       description: this.fb.array([this.fb.control('')]),
     })
   }
 
   addExperience() {
-    this.experiences.controls.push(this.newExperienceControl());
+    this.experiences.push(this.newExperienceControl());
   }
 
   removeExperience(index: number) {
@@ -124,19 +124,19 @@ export class ResumeFormComponent {
 
   newEducationControl(): FormGroup {
     return this.fb.group({
-      institution: [''],
-      city: [''],
-      state: [''],
-      degree: [''],
-      fieldOfStudy: [''],
-      graduationDate: [''],
-      description: [''],
+      institution: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      degree: ['', Validators.required],
+      fieldOfStudy: ['', Validators.required],
+      graduationDate: ['', Validators.required],
+      descriptionEdu: [''],
       awards: this.fb.array([]),
     })
   }
 
   addEducation() {
-    this.educations.controls.push(this.newEducationControl());
+    this.educations.push(this.newEducationControl());
   }
 
   removeEducation(index: number) {
@@ -144,14 +144,14 @@ export class ResumeFormComponent {
   }
 
   addSkill() {
-    this.skills.controls.push(this.fb.control(''));
+    this.skills.push(this.fb.control('', Validators.required));
   }
   removeSkill(index: number) {
     this.skills.removeAt(index);
   }
 
   addDescription(experienceIndex: number) {
-    this.getDescription(experienceIndex).push(this.fb.control(''));
+    this.getDescription(experienceIndex).push(this.fb.control('', Validators.required));
   }
 
   removeDescription(experienceIndex: number, descriptionIndex: number) {
@@ -159,7 +159,7 @@ export class ResumeFormComponent {
   }
 
   addAward(educationIndex: number) {
-    this.getAwards(educationIndex).push(this.fb.control(''));
+    this.getAwards(educationIndex).push(this.fb.control('', Validators.required));
   }
   removeAward(educationIndex: number, awardIndex: number) {
     this.getAwards(educationIndex).removeAt(awardIndex);

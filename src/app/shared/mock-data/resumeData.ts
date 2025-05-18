@@ -49,7 +49,7 @@ const resumeData: Resume[] = [
                 degree: 'Bachelor of Arts',
                 fieldOfStudy: 'Journalism',
                 graduationDate: '2009-05-15',
-                description: 'Graduated with honors.',
+                descriptionEdu: 'Graduated with honors.',
                 awards: ['Dean\'s List', 'Best Student Journalist']
             }
         ],
@@ -100,7 +100,7 @@ const resumeData: Resume[] = [
                 degree: 'Master of Business Administration',
                 fieldOfStudy: 'Business Management',
                 graduationDate: '2004-05-15',
-                description: 'Graduated with distinction.',
+                descriptionEdu: 'Graduated with distinction.',
                 awards: ['Top of Class']
             }
         ],
@@ -151,7 +151,7 @@ const resumeData: Resume[] = [
                 degree: "Certificate in Software Engineering",
                 fieldOfStudy: "Software Engineering",
                 graduationDate: "2023-06-12T05:00:00.000Z",
-                description: "",
+                descriptionEdu: "Built cool projects using JavaScript, React, Angular, Ruby, Rails, Java, and Spring Boot.",
                 awards: [
                 ]
             },
@@ -162,7 +162,7 @@ const resumeData: Resume[] = [
                 degree: "MD",
                 fieldOfStudy: "Medicine",
                 graduationDate: "2001-05-20T05:00:00.000Z",
-                description: "",
+                descriptionEdu: "",
                 "awards": [
                 ]
             },
@@ -173,7 +173,7 @@ const resumeData: Resume[] = [
                 degree: "BS",
                 fieldOfStudy: "Biology",
                 graduationDate: "1997-05-20T05:00:00.000Z",
-                description: "",
+                descriptionEdu: "",
                 "awards": [
                     "Summa Cum Laude",
                     "Dean's List",
