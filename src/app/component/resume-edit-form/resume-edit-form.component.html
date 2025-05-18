@@ -236,6 +236,11 @@
                 <textarea matInput formControlName="additionalInfo" rows="3"></textarea>
             </mat-form-field>
             <br>
+            <mat-checkbox formControlName="shareWithOthers" [matTooltip]="shareResumeMessage"
+                [matTooltipPosition]="position.value!">
+                <mat-label>Share resume with other users</mat-label>
+            </mat-checkbox>
+            <br>
         </mat-expansion-panel>
         <button mat-raised-button color="primary" type="submit" [disabled]="resumeForm.invalid">Submit</button>
     </mat-accordion>

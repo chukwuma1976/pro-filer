@@ -54,6 +54,8 @@ const resumeData: Resume[] = [
             }
         ],
         skills: ['Investigative Journalism', 'Writing', 'Editing', 'Public Speaking'],
+        shareWithOthers: true,
+        additionalInfo: 'Fluent in English and Spanish. Passionate about social justice and community service.'
     },
     {
         id: '2',
@@ -103,6 +105,8 @@ const resumeData: Resume[] = [
             }
         ],
         skills: ['Business Management', 'Leadership', 'Philanthropy'],
+        shareWithOthers: false,
+        additionalInfo: 'Passionate about technology and innovation. Active in various charitable organizations.'
     }
 ];
 

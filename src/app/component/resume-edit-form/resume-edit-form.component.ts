@@ -15,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ResumeService } from '../../services/resume.service';
 import { ResumeFormComponent } from '../resume-form/resume-form.component';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -30,7 +31,9 @@ import { ResumeFormComponent } from '../resume-form/resume-form.component';
     MatDatepicker,
     MatExpansionModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCheckbox,
+    MatSelectModule
   ],
   templateUrl: './resume-edit-form.component.html',
   styleUrl: './resume-edit-form.component.scss',
@@ -54,7 +57,8 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       experience: this.fb.array([]),
       education: this.fb.array([]),
       skills: this.fb.array([]),
-      additionalInfo: ['']
+      additionalInfo: [''],
+      shareWithOthers: [false],
     });
   }
 
@@ -69,6 +73,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   populateUpdateForm(resume: Resume | any) {
     this.resumeForm.patchValue(resume);
+    console.log('Resume:', this.resumeForm.value);
 
     resume.experience.forEach((exp: any) => {
       const newExperience: any = this.newUserExperienceControl(exp);
