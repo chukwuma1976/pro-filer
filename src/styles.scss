@@ -1,10 +1,8 @@
 @use '@angular/material' as mat;
 
-// @include mat.core();
-
 html {
     color-scheme: light;
-    @include mat.theme((color: mat.$violet-palette,
+    @include mat.theme((color: mat.$azure-palette,
             typography: Roboto,
             density: 0));
 }
@@ -17,12 +15,20 @@ body.light-mode {
     color-scheme: light;
 }
 
-// html,
-// body {
-//     height: 100%;
-// }
+html,
+body {
+    height: 100%;
+}
 
-// body {
-//     margin: 0;
-//     font-family: Roboto, "Helvetica Neue", sans-serif;
-// }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.resume-form-header {
+    margin-left: 2em;
+}
+
+.resume-header {
+    margin-left: 1em;
+}

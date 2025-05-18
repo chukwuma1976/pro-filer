@@ -14,4 +14,5 @@ export interface Resume {
     education: Education[];
     skills: string[];
     additionalInfo?: string;
+    shareWithOthers?: boolean;
 }

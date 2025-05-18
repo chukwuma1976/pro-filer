@@ -1,9 +1,15 @@
+@use '@angular/material' as mat;
+
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
   width: 200px;
+  border-radius: 0;
+
+  @include mat.sidenav-overrides((container-background-color: var(--mat-sys-primary),
+      container-text-color: var(--mat-sys-on-primary)));
 }
 
 .sidenav .mat-toolbar {
@@ -14,6 +20,9 @@
   position: sticky;
   top: 0;
   z-index: 1;
+
+  @include mat.toolbar-overrides((container-background-color: var(--mat-sys-primary),
+      container-text-color: var(--mat-sys-on-primary)));
 }
 
 .header {
@@ -23,5 +32,5 @@
 }
 
 .mat-toolbar {
-  justify-content: space-between
+  justify-content: space-between;
 }

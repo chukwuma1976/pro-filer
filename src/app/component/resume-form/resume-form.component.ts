@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { ResumeService } from '../../services/resume.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-resume-form',
@@ -30,7 +32,9 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatDatepicker,
     MatExpansionModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
@@ -44,6 +48,7 @@ export class ResumeFormComponent {
   protected _snackBar = inject(MatSnackBar);
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
+  shareResumeMessage = 'Share your resume with other members of the Pro-Filer community.';
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
@@ -57,7 +62,8 @@ export class ResumeFormComponent {
       experience: this.fb.array([this.newExperienceControl()]),
       education: this.fb.array([this.newEducationControl()]),
       skills: this.fb.array([this.fb.control('')]),
-      additionalInfo: ['']
+      additionalInfo: [''],
+      shareWithOthers: [false],
     });
   }
 

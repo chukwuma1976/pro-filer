@@ -1,5 +1,7 @@
-<h1>Resume Form</h1>
-<p>Please fill out the form below to create a new resume.</p>
+<div class="resume-form-header">
+    <h1>Resume Form</h1>
+    <p>Please fill out the form below to create a new resume.</p>
+</div>
 <form [formGroup]="resumeForm" (submit)="onSubmit()" class="resume-form">
     <mat-accordion multi>
         <mat-expansion-panel>
@@ -231,6 +233,11 @@
                 <mat-label>Additional Information</mat-label>
                 <textarea matInput formControlName="additionalInfo" rows="3"></textarea>
             </mat-form-field>
+            <br>
+            <mat-checkbox formControlName="shareWithOthers" [matTooltip]="shareResumeMessage"
+                [matTooltipPosition]="position.value!">
+                <mat-label>Share resume with other users</mat-label>
+            </mat-checkbox>
             <br>
         </mat-expansion-panel>
         <button mat-raised-button color="primary" type="submit" [disabled]="resumeForm.invalid">Submit</button>

@@ -11,7 +11,6 @@ import { map, shareReplay } from 'rxjs/operators';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-nav-container',
@@ -43,8 +42,7 @@ export class NavContainerComponent {
   @HostBinding('class') className = '';
   darkClass = 'dark-mode';
   lightClass = 'light-mode';
-
-  constructor(private overlay: OverlayContainer) { }
+  themeState = 'In Light Mode';
 
   ngOnInit() {
     this.switchTheme.valueChanges.subscribe((isDarkMode) => {
@@ -53,8 +51,10 @@ export class NavContainerComponent {
       const bodyClass = document.body.classList;
       if (isDarkMode) {
         bodyClass.add(this.darkClass);
+        this.themeState = 'In Dark Mode';
       } else {
         bodyClass.remove(this.darkClass);
+        this.themeState = 'In Light Mode';
       }
     });
   }

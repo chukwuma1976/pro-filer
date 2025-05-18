@@ -1,7 +1,9 @@
-<h1>Edit Resume Form</h1>
-<p>Please fill out the form below to edit your resume.</p>
-<button mat-flat-button color="primary" (click)="goBack()">Back</button>
-<br>
+<div class="resume-form-header">
+    <h1>Edit Resume Form</h1>
+    <p>Please fill out the form below to edit your resume.</p>
+    <button mat-flat-button color="primary" (click)="goBack()">Back</button>
+    <br>
+</div>
 <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form">
     <mat-accordion multi>
         <mat-expansion-panel>
