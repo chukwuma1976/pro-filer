@@ -198,6 +198,7 @@
                                 <mat-form-field appearance="fill" class="deeply-nested">
                                     <mat-label>Award</mat-label>
                                     <input matInput [formControlName]="j">
+                                    <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
                                 </mat-form-field>
                                 <button mat-fab type="button" class="deeply-nested" matTooltip="Delete Award"
                                     [matTooltipPosition]="position.value!"

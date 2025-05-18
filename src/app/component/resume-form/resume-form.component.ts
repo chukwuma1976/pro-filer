@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { ResumeService } from '../../services/resume.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
@@ -61,7 +61,7 @@ export class ResumeFormComponent {
       summary: ['', Validators.required],
       experience: this.fb.array([this.newExperienceControl()]),
       education: this.fb.array([this.newEducationControl()]),
-      skills: this.fb.array([this.fb.control('')]),
+      skills: this.fb.array([this.fb.control('', Validators.required)]),
       additionalInfo: [''],
       shareWithOthers: [false],
     });
@@ -110,7 +110,7 @@ export class ResumeFormComponent {
       state: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: [new Date(), Validators.required],
-      description: this.fb.array([this.fb.control('')]),
+      description: this.fb.array([this.fb.control('', Validators.required)]),
     })
   }
 

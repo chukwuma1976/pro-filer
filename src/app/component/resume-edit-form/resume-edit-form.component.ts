@@ -68,7 +68,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     if (resume) {
       this.populateUpdateForm(resume);
     }
-    this.detectValueChanges();
   }
 
   populateUpdateForm(resume: Resume | any) {
@@ -141,32 +140,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   goBack() {
     this.router.navigate(['/pro-filer/resume-details']);
-  }
-
-  deepEqual(obj1: any, obj2: any) {
-    return JSON.stringify(obj1) === JSON.stringify(obj2);
-  }
-
-  detectValueChanges() {
-    //iterate through nested controls to detect changes and mark form as dirty
-    this.experiences.controls.forEach((control) => {
-      control.valueChanges.subscribe(change => {
-        console.log(change);
-        Object.keys(change).includes('employer') && this.resumeForm.markAsDirty();
-      })
-    })
-    this.educations.controls.forEach((control) => {
-      control.valueChanges.subscribe(change => {
-        console.log(change);
-        Object.keys(change).includes('institution') && this.resumeForm.markAsDirty();
-      })
-    })
-    this.skills.controls.forEach((control) => {
-      control.valueChanges.subscribe(change => {
-        console.log(change);
-        change !== "" && this.resumeForm.markAsDirty();
-      })
-    })
   }
 
   onEdit() {
