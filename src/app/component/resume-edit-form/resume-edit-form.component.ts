@@ -97,8 +97,8 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       title: [experience.title, Validators.required],
       city: [experience.city, Validators.required],
       state: [experience.state, Validators.required],
-      startDate: [experience.startDate, Validators.required],
-      endDate: [experience.endDate, Validators.required],
+      startDate: [new Date(experience.startDate), Validators.required],
+      endDate: [new Date(experience.endDate), Validators.required],
       description: this.fb.array([]),
     });
 
@@ -121,7 +121,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       state: [education.state, Validators.required],
       degree: [education.degree, Validators.required],
       fieldOfStudy: [education.fieldOfStudy, Validators.required],
-      graduationDate: [education.graduationDate, Validators.required],
+      graduationDate: [new Date(education.graduationDate), Validators.required],
       descriptionEdu: [education.descriptionEdu],
       awards: this.fb.array([]),
     })

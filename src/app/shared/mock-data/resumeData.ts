@@ -135,7 +135,7 @@ const resumeData: Resume[] = [
                 title: "Adjunct Professor",
                 city: "Norfolk",
                 state: "Virginia",
-                startDate: "2019-09-3T06:00:00.000Z",
+                startDate: "2019-05-18T05:59:10.717Z",
                 endDate: "2025-05-18T05:59:10.717Z",
                 description: [
                     "Taught Anatomy and Physiology to undergraduate students",
