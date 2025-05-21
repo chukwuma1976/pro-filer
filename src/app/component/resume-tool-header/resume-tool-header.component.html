@@ -1,5 +1,14 @@
 <div class="resume-form-header">
-    <button mat-button [routerLink]="['/pro-filer/edit-resume', resume?.id]">Edit Resume</button>
-    <button mat-button (click)="openDeleteDialog()">Delete Resume</button>
-    <button mat-button (click)="generatePDF()">Generate PDF</button>
+    <button mat-button [routerLink]="['/pro-filer/edit-resume', resume?.id]">
+        <mat-icon>edit</mat-icon>
+        Edit Resume
+    </button>
+    <button mat-button (click)="openDeleteDialog()">
+        <mat-icon>delete</mat-icon>
+        Delete Resume
+    </button>
+    <button mat-button (click)="generatePDF()">
+        <mat-icon>picture_as_pdf</mat-icon>
+        Generate PDF
+    </button>
 </div>

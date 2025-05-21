@@ -63,7 +63,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
   }
 
   ngOnInit() {
-    const resumeId = this.route.snapshot.paramMap.get('id'); console.log('Resume ID:', resumeId);
+    const resumeId = this.route.snapshot.paramMap.get('id');
     const resume = resumeId ? this.resumeService.getResumeById(resumeId) : undefined;
     if (resume) {
       this.populateUpdateForm(resume);
@@ -72,7 +72,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   populateUpdateForm(resume: Resume | any) {
     this.resumeForm.patchValue(resume);
-    console.log('Resume:', this.resumeForm.value);
 
     resume.experience.forEach((exp: any) => {
       const newExperience: any = this.newUserExperienceControl(exp);

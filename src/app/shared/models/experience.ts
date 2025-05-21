@@ -3,7 +3,7 @@ export interface Experience {
     title: string;
     city: string;
     state: string;
-    startDate: string;
-    endDate?: string;
+    startDate: string | Date;
+    endDate?: string | Date;
     description: string[];
 }

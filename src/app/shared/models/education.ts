@@ -4,7 +4,7 @@ export interface Education {
     state: string;
     degree: string;
     fieldOfStudy: string;
-    graduationDate: string;
+    graduationDate: string | Date;
     descriptionEdu?: string;
     awards?: string[];
 }

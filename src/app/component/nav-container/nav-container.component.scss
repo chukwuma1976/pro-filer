@@ -8,8 +8,8 @@
   width: 200px;
   border-radius: 0;
 
-  @include mat.sidenav-overrides((container-background-color: var(--mat-sys-primary),
-      container-text-color: var(--mat-sys-on-primary)));
+  @include mat.sidenav-overrides((container-background-color: var(--mat-sys-primary-container),
+      container-text-color: var(--mat-sys-on-primary-container), ));
 }
 
 .sidenav .mat-toolbar {
@@ -21,8 +21,8 @@
   top: 0;
   z-index: 1;
 
-  @include mat.toolbar-overrides((container-background-color: var(--mat-sys-primary),
-      container-text-color: var(--mat-sys-on-primary)));
+  @include mat.toolbar-overrides((container-background-color: var(--mat-sys-primary-container),
+      container-text-color: var(--mat-sys-on-primary-container), ));
 }
 
 .header {

@@ -5,13 +5,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { ResumeService } from '../../services/resume.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-resume-tool-header',
-  imports: [RouterLink, MatDividerModule, MatButtonModule],
+  imports: [RouterLink, MatDividerModule, MatButtonModule, MatIcon],
   templateUrl: './resume-tool-header.component.html',
   styleUrl: './resume-tool-header.component.scss'
 })
