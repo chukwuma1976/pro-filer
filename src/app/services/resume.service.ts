@@ -39,4 +39,8 @@ export class ResumeService {
   editResume(resume: Resume): void {
     console.log('editing resume', resume);
   }
+
+  deleteResume(resumeId: string): void {
+    console.log('deleting resume', resumeId);
+  }
 }

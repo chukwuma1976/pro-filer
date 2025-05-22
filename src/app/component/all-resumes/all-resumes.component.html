@@ -4,6 +4,18 @@
         <p>No resumes found.</p>
     </div>
     <div *ngFor="let resume of resumes" class="resume-card">
-        <app-resume-details [resumeData]="resume"></app-resume-details>
+        <mat-accordion multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{resume.firstName}} {{resume.lastName}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{resume.firstName[0]}}{{resume.lastName[0]}}{{resume.id}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-resume-details [resumeData]="resume"></app-resume-details>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
 </div>
