@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Resume } from '../../shared/models/resume'; // Import the Resume type
 import { NgFor } from '@angular/common';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-resume-details',
@@ -12,6 +13,9 @@ import { NgFor } from '@angular/common';
 export class ResumeDetailsComponent {
   @Input() resumeData: Resume | null = null; // Input property to receive the resume ID
 
-  constructor() { }
+  constructor(private utilityService: UtilityService) { }
 
+  formatDate(date: Date | string | undefined): string {
+    return this.utilityService.formatDate(date);
+  }
 }

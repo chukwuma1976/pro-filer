@@ -16,6 +16,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ResumeService } from '../../services/resume.service';
 import { ResumeFormComponent } from '../resume-form/resume-form.component';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { UtilityService } from '../../services/utility.service';
+import { merge } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import { customDateValidator } from '../../custom-validators/custom-date-validator';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -44,7 +48,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
   initialState!: Resume;
   updatedResume!: Resume;
 
-  constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute) {
+  constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute, private utilityService: UtilityService) {
     super(fb, resumeService, router);
     this.resumeForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -68,6 +72,33 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     if (resume) {
       this.populateUpdateForm(resume);
     }
+    this.processValueChanges();  //to caprture changes in FormArray form controls
+  }
+
+  processDate(date: Date): Date {
+    return this.utilityService.returnDate(date);
+  }
+
+  processValueChanges() {
+    merge(...this.experiences.controls.map((control, index) => control.valueChanges.pipe(
+      map((value) => ({ index, value })),
+      debounceTime(1000) // Debounce to reduce the number of updates  
+    ))).subscribe((changes) => {
+      console.log('Form changes:', changes);
+      this.experiences.removeAt(changes.index);
+      this.experiences.insert(changes.index, this.newUserExperienceControl(changes.value));
+      this.resumeForm.markAsDirty();
+    });
+
+    merge(...this.educations.controls.map((control, index) => control.valueChanges.pipe(
+      map((value) => ({ index, value })),
+      debounceTime(1000) // Debounce to reduce the number of updates  
+    ))).subscribe((changes) => {
+      console.log('Form changes:', changes);
+      this.educations.removeAt(changes.index);
+      this.educations.insert(changes.index, this.newUserEducationControl(changes.value));
+      this.resumeForm.markAsDirty();
+    });
   }
 
   populateUpdateForm(resume: Resume | any) {
@@ -96,8 +127,8 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       title: [experience.title, Validators.required],
       city: [experience.city, Validators.required],
       state: [experience.state, Validators.required],
-      startDate: [new Date(experience.startDate), Validators.required],
-      endDate: [new Date(experience.endDate), Validators.required],
+      startDate: [new Date(experience.startDate), [Validators.required, customDateValidator()]],
+      endDate: [this.processDate(experience.endDate), [Validators.required, customDateValidator()]],
       description: this.fb.array([]),
     });
 
@@ -145,6 +176,9 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     if (this.resumeForm.valid) {
       if (this.resumeForm.dirty) {
         this.updatedResume = this.resumeForm.value;
+        this.updatedResume.experience.map((exp: any) => {         // any experience end date is set to 'present' if it is the current date
+          exp.endDate = this.processPresentAsEndDate(exp.endDate);
+        });
         this.resumeService.editResume(this.updatedResume);
         this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });
         this.router.navigate(['/pro-filer/resume-details']);

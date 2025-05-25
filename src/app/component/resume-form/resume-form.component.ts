@@ -14,9 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { ResumeService } from '../../services/resume.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { customDateValidator } from '../../custom-validators/custom-date-validator';
 
 @Component({
   selector: 'app-resume-form',
@@ -69,6 +70,9 @@ export class ResumeFormComponent {
 
   onSubmit() {
     this.newResume = this.resumeForm.value as Resume;
+    this.newResume.experience.map((exp: any) => {         // any experience end date is set to 'present' if it is the current date
+      exp.endDate = this.processPresentAsEndDate(exp.endDate);
+    });
     this.resumeService.addResume(this.newResume);
     this.resumeForm.reset();
     this.formGroupDirective.resetForm();
@@ -108,8 +112,8 @@ export class ResumeFormComponent {
       title: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: [new Date(), Validators.required],
+      startDate: ['', [Validators.required, customDateValidator()]],
+      endDate: [new Date(), [Validators.required, customDateValidator()]],
       description: this.fb.array([this.fb.control('', Validators.required)]),
     })
   }
@@ -120,6 +124,7 @@ export class ResumeFormComponent {
 
   removeExperience(index: number) {
     this.experiences.removeAt(index);
+    this.resumeForm.markAsDirty();
   }
 
   newEducationControl(): FormGroup {
@@ -141,6 +146,7 @@ export class ResumeFormComponent {
 
   removeEducation(index: number) {
     this.educations.removeAt(index);
+    this.resumeForm.markAsDirty();
   }
 
   addSkill() {
@@ -148,6 +154,7 @@ export class ResumeFormComponent {
   }
   removeSkill(index: number) {
     this.skills.removeAt(index);
+    this.resumeForm.markAsDirty();
   }
 
   addDescription(experienceIndex: number) {
@@ -156,6 +163,7 @@ export class ResumeFormComponent {
 
   removeDescription(experienceIndex: number, descriptionIndex: number) {
     this.getDescription(experienceIndex).removeAt(descriptionIndex);
+    this.resumeForm.markAsDirty();
   }
 
   addAward(educationIndex: number) {
@@ -163,6 +171,16 @@ export class ResumeFormComponent {
   }
   removeAward(educationIndex: number, awardIndex: number) {
     this.getAwards(educationIndex).removeAt(awardIndex);
+    this.resumeForm.markAsDirty();
+  }
+
+  processPresentAsEndDate(endDate: Date): string | Date {
+    const currentDate = new Date();
+    const yearIsEqual = endDate.getFullYear() === currentDate.getFullYear();
+    const monthIsEqual = endDate.getMonth() === currentDate.getMonth();
+    const dayIsEqual = endDate.getDate() === currentDate.getDate();
+    if (yearIsEqual && monthIsEqual && dayIsEqual) return 'present';
+    return endDate;
   }
 
 }

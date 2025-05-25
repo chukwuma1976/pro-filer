@@ -124,7 +124,7 @@ const resumeData: Resume[] = [
                 city: "Hayes",
                 state: "Virginia",
                 startDate: "2023-11-13T06:00:00.000Z",
-                endDate: "2025-05-18T05:56:53.826Z",
+                endDate: "Present",
                 description: [
                     "Automation testing",
                     "UI coding"
@@ -191,6 +191,78 @@ const resumeData: Resume[] = [
         ],
         additionalInfo: "I am a career changer",
         shareWithOthers: false
+    },
+    {
+        id: "4",
+        firstName: "Chukwuma",
+        lastName: "Anyadike",
+        phoneNumber: "123456789",
+        email: "chukwuma.anyadike@gmail.com",
+        linkedIn: "www.linkedin.com/in/chukwumaanyadike/",
+        website: "",
+        summary: "Colorectal surgeon adept in laparoscopic and robotic techniques as well as traditional open surgery. I have a strong background in patient care, surgical procedures, and medical education.",
+        experience: [
+            {
+                employer: "Maryland Colorectal Surgery",
+                title: "Colorectal Surgeon",
+                city: "Baltimore",
+                state: "Maryland",
+                startDate: "2010-11-13T06:00:00.000Z",
+                endDate: "2017-05-18T05:56:53.826Z",
+                description: [
+                    "Laparoscopic and robotic colorectal surgeries",
+                    "Training and mentoring surgical residents",
+                    "Conducting research in colorectal surgery techniques"
+                ]
+            },
+            {
+                employer: "University of Maryland Medical Center",
+                title: "Surgical Resident",
+                city: "Baltimore",
+                state: "Maryland",
+                startDate: "2001-05-18T05:59:10.717Z",
+                endDate: "2009-05-18T05:59:10.717Z",
+                description: [
+                    "Care of surgical patients",
+                    "Assisted in various surgical procedures",
+                    "Developed and implemented course materials and assessments for medical students",
+                ]
+            }
+        ],
+        education: [
+            {
+                institution: "University of Virginia School of Medicine",
+                city: "Charlottesville",
+                state: "Virginia",
+                degree: "MD",
+                fieldOfStudy: "Medicine",
+                graduationDate: "2001-05-20T05:00:00.000Z",
+                descriptionEdu: "",
+                "awards": [
+                ]
+            },
+            {
+                institution: "Virginia Commonwealth University",
+                city: "Richmond",
+                state: "Virginia",
+                degree: "BS",
+                fieldOfStudy: "Biology",
+                graduationDate: "1997-05-20T05:00:00.000Z",
+                descriptionEdu: "",
+                "awards": [
+                    "Summa Cum Laude",
+                    "Dean's List",
+                    "Graduated with Honors"
+                ]
+            }
+        ],
+        skills: [
+            "Laparoscopic Surgery",
+            "Robotic Surgery",
+            "Advanced Anorectal Surgery",
+        ],
+        additionalInfo: "I am a fellow of the American College of Surgeons and a member of the Society of American Gastrointestinal and Endoscopic Surgeons.",
+        shareWithOthers: false
     }
 ];
 
@@ -199,7 +271,7 @@ const clarkKent: User = {
     username: 'manofsteel',
     email: 'clark.kent@dailyplanet.com',
     password: 'password123',
-    resumes: [resumeData[0]] // Assign the first resume to the user
+    resumes: [resumeData[0]]
 }
 
 const bruceWayne: User = {
@@ -207,7 +279,7 @@ const bruceWayne: User = {
     username: 'darkknight',
     email: 'BruceWayne@WayneEnterprises.com',
     password: 'password456',
-    resumes: [resumeData[1]] // Assign the second resume to the user
+    resumes: [resumeData[1]]
 };
 
 const admin: User = {
@@ -215,7 +287,7 @@ const admin: User = {
     username: 'casmooth',
     email: 'noneof@yourbusiness.com',
     password: 'password789',
-    resumes: [resumeData[2]] // Assign the second resume to the user
+    resumes: [resumeData[2], resumeData[3]]
 };
 
 export const users: User[] = [clarkKent, bruceWayne, admin]; // Export the users array for use in the application

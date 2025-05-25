@@ -87,6 +87,8 @@
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-error *ngIf="experience.get('startDate')?.hasError('required')">Start date is
                             required</mat-error>
+                        <mat-error *ngIf="experience.get('startDate')?.hasError('invalidDate')">Start date cannot be in
+                            the future</mat-error>
                     </mat-form-field>
                     <mat-form-field class="end-date" appearance="fill">
                         <mat-label>End Date</mat-label>
@@ -96,6 +98,8 @@
                         <mat-datepicker #picker2></mat-datepicker>
                         <mat-error *ngIf="experience.get('endDate')?.hasError('required')">End date is
                             required</mat-error>
+                        <mat-error *ngIf="experience.get('endDate')?.hasError('invalidDate')">End date cannot be in the
+                            future</mat-error>
                     </mat-form-field>
                     <br>
                     <mat-expansion-panel>
@@ -226,8 +230,7 @@
                 </div>
             </div>
             <button mat-flat-button type="button" (click)="addSkill()">Add Skill</button>
-            <br>
-            <mat-divider></mat-divider>
+            <br><br>
             <mat-form-field appearance="fill">
                 <mat-label>Additional Information</mat-label>
                 <textarea matInput formControlName="additionalInfo" rows="3"></textarea>
@@ -239,6 +242,7 @@
             </mat-checkbox>
             <br>
         </mat-expansion-panel>
+        <br>
         <button mat-raised-button color="primary" type="submit" [disabled]="resumeForm.invalid">Submit</button>
     </mat-accordion>
 </form>

@@ -10,7 +10,7 @@
         <p>{{job.employer}}, {{job.city}}, {{job.state}}</p>
         <div class="job-title">
             <p>{{job.title}}</p>
-            <p>{{job.startDate}} - {{job.endDate}}</p>
+            <p>{{formatDate(job.startDate)}} - {{formatDate(job.endDate)}}</p>
         </div>
         <ul>
             <li *ngFor="let desc of job.description">{{desc}}</li>
@@ -22,7 +22,7 @@
         <p>{{edu.institution}}, {{edu.city}}, {{edu.state}}</p>
         <div class="degree">
             <p>{{edu.degree}} in {{edu.fieldOfStudy}}</p>
-            <p>Graduated: {{edu.graduationDate}}</p>
+            <p>Graduated: {{formatDate(edu.graduationDate)}}</p>
         </div>
         <p>{{edu.descriptionEdu}}</p>
         <ul>
