@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
+import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 
 @Component({
   selector: 'app-resume-form',
@@ -49,9 +50,8 @@ export class ResumeFormComponent {
   protected _snackBar = inject(MatSnackBar);
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
-  shareResumeMessage = 'Share your resume with other members of the Pro-Filer community.';
-  ifCurrentlyEmployedMessage =
-    'If you are currently employed, set the end date of your last job to today\'s date.  It will show as "present" in your resume.';
+  shareResumeMessage = TOOL_TIP_MESSAGES.shareResume;
+  ifCurrentlyEmployedMessage = TOOL_TIP_MESSAGES.ifCurrentlyEmployed;
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
