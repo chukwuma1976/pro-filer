@@ -121,8 +121,8 @@ const resumeData: Resume[] = [
             {
                 employer: "FDM",
                 title: "Contractor",
-                city: "Hayes",
-                state: "Virginia",
+                city: "Dallas",
+                state: "Texas",
                 startDate: "2023-11-13T06:00:00.000Z",
                 endDate: "Present",
                 description: [
@@ -263,6 +263,70 @@ const resumeData: Resume[] = [
         ],
         additionalInfo: "I am a fellow of the American College of Surgeons and a member of the Society of American Gastrointestinal and Endoscopic Surgeons.",
         shareWithOthers: false
+    },
+    {
+        id: '5',
+        firstName: 'Clark',
+        lastName: 'Kent',
+        phoneNumber: '123-456-7890',
+        email: 'clark.kent@dailyplanet.com',
+        linkedIn: 'https://www.linkedin.com/in/clarkkent',
+        website: 'https://www.clarkkent.com',
+        summary: 'Experienced journalist with a passion for uncovering the truth and a knack for storytelling.  Also fight crime as a vigilante in my spare time.',
+        experience: [
+            {
+                employer: 'Daily Planet',
+                title: 'Senior Reporter',
+                city: 'Metropolis',
+                state: 'NY',
+                startDate: '2015-01-01',
+                endDate: '2023-01-01',
+                description: [
+                    'Investigated and reported on various local and national news stories.',
+                    'Collaborated with photographers and editors to produce high-quality articles.',
+                    'Conducted interviews with key figures in politics, business, and entertainment.'
+                ]
+            },
+            {
+                employer: 'Metropolis Gazette',
+                title: 'Staff Writer',
+                city: 'Metropolis',
+                state: 'NY',
+                startDate: '2010-01-01',
+                endDate: '2014-12-31',
+                description: [
+                    'Wrote articles covering local events, sports, and community issues.',
+                    'Assisted in the layout and design of the newspaper.'
+                ]
+            },
+            {
+                employer: 'Justice League',
+                title: 'Superhero',
+                city: 'Various',
+                state: 'N/A',
+                startDate: '2010-01-01',
+                endDate: 'Present',
+                description: [
+                    'Fought crime and protected the world from various threats.',
+                    'Collaborated with other superheroes to maintain peace and justice.'
+                ]
+            }
+        ],
+        education: [
+            {
+                institution: 'Metropolis University',
+                city: 'Metropolis',
+                state: 'NY',
+                degree: 'Bachelor of Arts',
+                fieldOfStudy: 'Journalism',
+                graduationDate: '2009-05-15',
+                descriptionEdu: 'Graduated with honors.',
+                awards: ['Dean\'s List', 'Best Student Journalist']
+            }
+        ],
+        skills: ['Investigative Journalism', 'Writing', 'Editing', 'Public Speaking', 'Flying', 'Heat Vision', 'Super Strength'],
+        shareWithOthers: true,
+        additionalInfo: 'Fluent in English and Spanish. Passionate about social justice and community service.'
     }
 ];
 
@@ -271,7 +335,7 @@ const clarkKent: User = {
     username: 'manofsteel',
     email: 'clark.kent@dailyplanet.com',
     password: 'password123',
-    resumes: [resumeData[0]]
+    resumes: [resumeData[0], resumeData[4]]
 }
 
 const bruceWayne: User = {

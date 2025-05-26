@@ -50,6 +50,8 @@ export class ResumeFormComponent {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
   shareResumeMessage = 'Share your resume with other members of the Pro-Filer community.';
+  ifCurrentlyEmployedMessage =
+    'If you are currently employed, set the end date of your last job to today\'s date.  It will show as "present" in your resume.';
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({

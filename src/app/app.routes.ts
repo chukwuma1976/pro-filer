@@ -10,6 +10,7 @@ import { AllResumesComponent } from './component/all-resumes/all-resumes.compone
 import { ResumeFormComponent } from './component/resume-form/resume-form.component';
 import { loginGuard } from './guards/login.guard';
 import { ResumeEditFormComponent } from './component/resume-edit-form/resume-edit-form.component';
+import { ViewResumeComponent } from './view-resume/view-resume.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -26,7 +27,8 @@ export const routes: Routes = [
             { path: 'resume-details', component: UserResumesComponent },
             { path: 'all-resumes', component: AllResumesComponent },
             { path: 'resume-form', component: ResumeFormComponent },
-            { path: 'edit-resume/:id', component: ResumeEditFormComponent }
+            { path: 'edit-resume/:id', component: ResumeEditFormComponent },
+            { path: 'view-resume/:id', component: ViewResumeComponent }
         ]
     }
 ];

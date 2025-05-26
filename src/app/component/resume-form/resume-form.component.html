@@ -90,7 +90,8 @@
                     </mat-form-field>
                     <mat-form-field class="end-date" appearance="fill">
                         <mat-label>End Date</mat-label>
-                        <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2">
+                        <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2"
+                            [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
