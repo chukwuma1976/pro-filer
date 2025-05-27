@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-all-resumes',
@@ -22,7 +24,9 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
     MatButtonModule,
     MatIconModule,
     RouterLink,
-    MatSortModule
+    MatSortModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   templateUrl: './all-resumes.component.html',
   styleUrl: './all-resumes.component.scss'
@@ -64,5 +68,10 @@ export class AllResumesComponent {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -327,6 +327,158 @@ const resumeData: Resume[] = [
         skills: ['Investigative Journalism', 'Writing', 'Editing', 'Public Speaking', 'Flying', 'Heat Vision', 'Super Strength'],
         shareWithOthers: true,
         additionalInfo: 'Fluent in English and Spanish. Passionate about social justice and community service.'
+    },
+    {
+        id: '6',
+        firstName: 'Diana',
+        lastName: 'Prince',
+        phoneNumber: '321-654-0987',
+        email: 'Diana.Prince@gmail.com',
+        linkedIn: 'https://www.linkedin.com/in/dianaprince',
+        website: 'https://www.wonderwoman.com',
+        summary: 'Amazonian warrior princess with extensive combat training and a strong sense of justice. Skilled in diplomacy and conflict resolution.',
+        experience: [
+            {
+                employer: 'Justice League',
+                title: 'Superhero',
+                city: 'Various',
+                state: 'N/A',
+                startDate: '2010-01-01',
+                endDate: 'Present',
+                description: [
+                    'Fought crime and protected the world from various threats.',
+                    'Collaborated with other superheroes to maintain peace and justice.'
+                ]
+            },
+            {
+                employer: 'Themyscira',
+                title: 'Amazonian Warrior',
+                city: 'Themyscira',
+                state: 'N/A',
+                startDate: '2000-01-01',
+                endDate: '2009-12-31',
+                description: [
+                    'Trained in various forms of combat and diplomacy.',
+                    'Led missions to protect Themyscira and its people.'
+                ]
+            }
+        ],
+        education: [
+            {
+                institution: 'Themyscira Academy',
+                city: 'Themyscira',
+                state: 'N/A',
+                degree: 'Warrior Training',
+                fieldOfStudy: 'Combat and Diplomacy',
+                graduationDate: '2000-05-15',
+                descriptionEdu: 'Graduated with honors in combat and diplomacy.',
+                awards: ['Best Warrior', 'Diplomacy Excellence']
+            }
+        ],
+        skills: ['Combat', 'Diplomacy', 'Leadership', 'Super Strength', 'Flight', 'Lasso of Truth'],
+        shareWithOthers: true,
+        additionalInfo: 'Fluent in multiple languages. Passionate about equality and justice for all.'
+    },
+    {
+        id: '7',
+        firstName: 'Barry',
+        lastName: 'Allen',
+        phoneNumber: '456-789-1230',
+        email: 'Barry.Allen@centralcitypd.com',
+        linkedIn: 'https://www.linkedin.com/in/barryallen',
+        website: 'https://www.flash.com',
+        summary: 'Forensic scientist with super-speed abilities. Dedicated to solving crimes and protecting Central City.',
+        experience: [
+            {
+                employer: 'Central City Police Department',
+                title: 'Forensic Scientist',
+                city: 'Central City',
+                state: 'CA',
+                startDate: '2015-01-01',
+                endDate: 'Present',
+                description: [
+                    'Analyzed crime scenes and collected evidence.',
+                    'Collaborated with law enforcement to solve cases.'
+                ]
+            },
+            {
+                employer: 'Star Labs',
+                title: 'Research Scientist',
+                city: 'Central City',
+                state: 'CA',
+                startDate: '2010-01-01',
+                endDate: '2014-12-31',
+                description: [
+                    'Conducted research on particle physics and its applications.',
+                    'Assisted in the development of advanced technology.'
+                ]
+            }
+        ],
+        education: [
+            {
+                institution: 'Central City University',
+                city: 'Central City',
+                state: 'CA',
+                degree: 'Bachelor of Science',
+                fieldOfStudy: 'Forensic Science',
+                graduationDate: '2009-05-15',
+                descriptionEdu: 'Graduated with honors in forensic science.',
+                awards: ['Top of Class', 'Best Forensic Project']
+            }
+        ],
+        skills: ['Forensic Science', 'Crime Scene Investigation', 'Super Speed', 'Problem Solving'],
+        shareWithOthers: true,
+        additionalInfo: 'Fluent in English and Spanish. Passionate about using science to solve crimes and help others.'
+    },
+    {
+        id: '8',
+        firstName: 'Peter',
+        lastName: 'Parker',
+        phoneNumber: '555-123-4567',
+        email: 'Peter.Parker@ParkerIndustries.com',
+        linkedIn: 'https://www.linkedin.com/in/peterparker',
+        website: 'https://www.spiderman.com',
+        summary: 'Freelance photographer and superhero with spider-like abilities. Skilled in web-slinging and crime-fighting.',
+        experience: [
+            {
+                employer: 'Freelance',
+                title: 'Photographer',
+                city: 'New York',
+                state: 'NY',
+                startDate: '2010-01-01',
+                endDate: 'Present',
+                description: [
+                    'Captured high-quality images for various publications.',
+                    'Specialized in action shots and candid photography.'
+                ]
+            },
+            {
+                employer: 'Daily Bugle',
+                title: 'Staff Photographer',
+                city: 'New York',
+                state: 'NY',
+                startDate: '2005-01-01',
+                endDate: '2009-12-31',
+                description: [
+                    'Provided photographic coverage of local events and news stories.',
+                    'Collaborated with reporters to enhance articles with visual content.'
+                ]
+            }
+        ],
+        education: [
+            {
+                institution: 'Empire State University',
+                city: 'New York',
+                state: 'NY',
+                degree: 'Bachelor of Arts',
+                fieldOfStudy: 'Photography',
+                graduationDate: '2004-05-15',
+                descriptionEdu: 'Graduated with honors in photography.',
+                awards: ['Best Photography Portfolio', 'Top of Class']
+            }
+        ],
+        skills: ['Photography', 'Web-Slinging', 'Crime Fighting', 'Agility', 'Spider-Sense'],
+        shareWithOthers: true,
     }
 ];
 
@@ -354,5 +506,29 @@ const admin: User = {
     resumes: [resumeData[2], resumeData[3]]
 };
 
-export const users: User[] = [clarkKent, bruceWayne, admin]; // Export the users array for use in the application
+const dianaPrince: User = {
+    id: '4',
+    username: 'wonderwoman',
+    email: 'diana.prince@gmail.com',
+    password: 'password101112',
+    resumes: [resumeData[5]]
+};
+
+const barryAllen: User = {
+    id: '5',
+    username: 'theflash',
+    email: 'Barry.Allen@centralcitypd.com',
+    password: 'password131415',
+    resumes: [resumeData[6]]
+};
+
+const peterParker: User = {
+    id: '6',
+    username: 'spiderman',
+    email: 'Peter.Parker@ParkerIndustries.com',
+    password: 'password161718',
+    resumes: [resumeData[7]]
+};
+
+export const users: User[] = [clarkKent, bruceWayne, admin, dianaPrince, barryAllen, peterParker]; // Export the users array for use in the application
 export const allResumes: Resume[] = resumeData; // Export all resumes for use in the application
