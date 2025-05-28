@@ -24,7 +24,7 @@
         <ng-container matColumnDef="summary">
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by summary"> Summary </th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.summary"
-                [matTooltipPosition]="position.value!"> {{element.summary.slice(0,70)}}... </td>
+                [matTooltipPosition]="position.value!"> {{element.summary}} </td>
         </ng-container>
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>

@@ -11,6 +11,8 @@ import { map, shareReplay } from 'rxjs/operators';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { PopUpComponent } from '../pop-up/pop-up.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-nav-container',
@@ -26,9 +28,11 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
     RouterOutlet,
     RouterLink,
     MatSlideToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ]
 })
+
 export class NavContainerComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
@@ -44,6 +48,8 @@ export class NavContainerComponent {
   lightClass = 'light-mode';
   themeState = 'In Light Mode';
 
+  constructor(private dialog: MatDialog) { }
+
   ngOnInit() {
     this.switchTheme.valueChanges.subscribe((isDarkMode) => {
       this.className = isDarkMode ? this.darkClass : this.lightClass;
@@ -55,6 +61,16 @@ export class NavContainerComponent {
       } else {
         bodyClass.remove(this.darkClass);
         this.themeState = 'In Light Mode';
+      }
+    });
+  }
+
+  openLogOutDialog() {
+    this.dialog.open(PopUpComponent, {
+      data: {
+        message: 'Are you sure you want to logout.',
+        header: 'Logout Confirmation',
+        action: 'logout'
       }
     });
   }

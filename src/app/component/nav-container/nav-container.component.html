@@ -17,8 +17,16 @@
       </button>
       }
       <span class="header">ProFiler</span>
-      <span><mat-slide-toggle labelPosition="before"
-          [formControl]="switchTheme">{{themeState}}</mat-slide-toggle></span>
+      <div>
+        <button class="logout-btn" mat-button (click)="openLogOutDialog()"
+          class="mat-elevation-z4 mat-button mat-button-base mat-stroked-button">
+          <mat-icon>logout</mat-icon>
+          <span>Log Out</span>
+        </button>
+        <span>
+          <mat-slide-toggle labelPosition="before" [formControl]="switchTheme">{{themeState}}</mat-slide-toggle>
+        </span>
+      </div>
     </mat-toolbar>
     <div>
       <router-outlet></router-outlet>

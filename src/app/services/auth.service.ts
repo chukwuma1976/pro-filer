@@ -45,4 +45,10 @@ export class AuthService {
     return of(true); // Simulate successful password reset
   }
 
+  logout(): void {
+    this.isLoggedIn = false; // Set login status to false
+    this.userInfo = undefined!; // Clear user information
+    console.log('User logged out'); // Log logout action
+  }
+
 }

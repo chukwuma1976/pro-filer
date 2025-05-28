@@ -10,9 +10,21 @@ mat-paginator {
 }
 
 .resume-table-header {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
     margin-top: 1em;
     display: flex;
     justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.mat-column-summary {
+    overflow: hidden;
+    width: 50%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -43,7 +43,8 @@ export class ResumeToolHeaderComponent {
       data: {
         id: this.resume?.id,
         message: 'Are you sure you want to delete this resume? This action cannot be undone.',
-        heaer: 'Delete Resume'
+        header: 'Delete Resume',
+        action: 'delete'
       }
     });
   }
