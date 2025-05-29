@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8">
     <div class="resume-table-header">
-        <h1>All Resumes</h1>
+        <h1 [matBadge]="resumes.length" matBadgeOverlap="false">All Resumes</h1>
         <mat-form-field>
             <mat-label>Filter</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Type in a value to filter" #input>

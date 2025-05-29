@@ -22,9 +22,15 @@ table {
     table-layout: fixed;
 }
 
+td,
+th {
+    border: 1px solid currentColor;
+}
+
 .mat-column-summary {
     overflow: hidden;
     width: 50%;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-style: italic;
 }
