@@ -20,6 +20,7 @@ import { UtilityService } from '../../services/utility.service';
 import { merge } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -37,7 +38,8 @@ import { customDateValidator } from '../../custom-validators/custom-date-validat
     MatIconModule,
     MatTooltipModule,
     MatCheckbox,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
   ],
   templateUrl: './resume-edit-form.component.html',
   styleUrl: './resume-edit-form.component.scss',

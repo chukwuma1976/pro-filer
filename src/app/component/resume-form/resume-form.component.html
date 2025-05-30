@@ -101,10 +101,11 @@
                             the future</mat-error>
                     </mat-form-field>
                     <br>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title> Job Description (Required)</mat-panel-title>
-                        </mat-expansion-panel-header>
+                    <mat-card class="example-card" appearance="outlined">
+                        <mat-card-header>
+                            <mat-panel-title class="nested-add">Add one or more job descriptions
+                                (Required)</mat-panel-title>
+                        </mat-card-header>
                         <div formArrayName="description"
                             *ngFor="let description of getDescription(i).controls; let j = index">
                             <div class="description-form">
@@ -121,9 +122,10 @@
                                 <br>
                             </div>
                         </div>
-                        <button mat-flat-button type="button" (click)="addDescription(i)">Add Another Job
-                            Description</button>
-                    </mat-expansion-panel>
+                        <button mat-stroked-button class="nested-add" type="button" (click)="addDescription(i)">
+                            Add Another Job Description
+                        </button>
+                    </mat-card>
                     <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
                         (click)="removeExperience(i)">Remove
                         Experience</button>
@@ -184,10 +186,10 @@
                         <mat-error *ngIf="education.get('descriptionEdu')?.hasError('required')">Description is
                             required</mat-error>
                     </mat-form-field>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title> Add Any Awards Here </mat-panel-title>
-                        </mat-expansion-panel-header>
+                    <mat-card class="example-card" appearance="outlined">
+                        <mat-card-header>
+                            <mat-panel-title class="nested-add">Add one or more awards Here (Optional)</mat-panel-title>
+                        </mat-card-header>
                         <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
                             <div class="award-form">
                                 <mat-form-field appearance="fill" class="deeply-nested">
@@ -201,8 +203,9 @@
                                 <br>
                             </div>
                         </div>
-                        <button mat-flat-button type="button" (click)="addAward(i)">Add Award</button>
-                    </mat-expansion-panel>
+                        <button class="nested-add" mat-stroked-button type="button" (click)="addAward(i)">Add
+                            Award</button>
+                    </mat-card>
                     <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
                         (click)="removeEducation(i)">Remove
                         Education</button>
@@ -217,7 +220,7 @@
             </mat-expansion-panel-header>
             <div formArrayName="skills" *ngFor="let skill of skills.controls; let i = index">
                 <div class="skill-form">
-                    <mat-form-field appearance="fill" class="deeply-nested">
+                    <mat-form-field appearance="fill">
                         <mat-label>Skill</mat-label>
                         <input matInput [formControlName]="i">
                         <mat-error *ngIf="skill.hasError('required')">Skill is required</mat-error>

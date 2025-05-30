@@ -52,14 +52,29 @@ mat-form-field {
 
 mat-form-field.deeply-nested {
     width: 90%;
+    margin-left: 2%;
 }
 
 button.deeply-nested {
-    margin-left: 2%
+    margin-left: 2%;
+}
+
+button.nested-add {
+    width: fit-content;
+    margin-left: 2%;
+}
+
+mat-panel-title.nested-add {
+    margin-left: 1%;
 }
 
 .description-form,
 .award-form,
 .skill-form {
     display: flex;
+}
+
+.mat-mdc-card {
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface-container)
 }

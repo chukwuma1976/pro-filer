@@ -7,6 +7,7 @@ mat-paginator {
 
 .mat-mdc-row:nth-child(odd) {
     background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container)
 }
 
 .resume-table-header {
@@ -25,6 +26,11 @@ table {
 td,
 th {
     border: 1px solid currentColor;
+}
+
+.mat-mdc-header-row {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary)
 }
 
 .mat-column-summary {

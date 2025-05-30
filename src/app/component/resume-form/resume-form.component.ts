@@ -19,6 +19,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-resume-form',
@@ -36,7 +37,8 @@ import { TOOL_TIP_MESSAGES } from '../../shared/constants';
     MatIconModule,
     MatTooltipModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',

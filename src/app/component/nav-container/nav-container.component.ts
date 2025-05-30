@@ -46,7 +46,7 @@ export class NavContainerComponent {
   @HostBinding('class') className = '';
   darkClass = 'dark-mode';
   lightClass = 'light-mode';
-  themeState = 'In Light Mode';
+  themeState = 'Light Mode';
 
   constructor(private dialog: MatDialog) { }
 
@@ -57,10 +57,10 @@ export class NavContainerComponent {
       const bodyClass = document.body.classList;
       if (isDarkMode) {
         bodyClass.add(this.darkClass);
-        this.themeState = 'In Dark Mode';
+        this.themeState = 'Dark Mode';
       } else {
         bodyClass.remove(this.darkClass);
-        this.themeState = 'In Light Mode';
+        this.themeState = 'Light Mode';
       }
     });
   }
