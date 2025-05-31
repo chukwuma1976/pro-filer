@@ -21,6 +21,7 @@ import { merge } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
 import { MatCardModule } from '@angular/material/card';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -39,7 +40,8 @@ import { MatCardModule } from '@angular/material/card';
     MatTooltipModule,
     MatCheckbox,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule
   ],
   templateUrl: './resume-edit-form.component.html',
   styleUrl: './resume-edit-form.component.scss',
@@ -52,20 +54,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute, private utilityService: UtilityService) {
     super(fb, resumeService, router);
-    this.resumeForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      linkedIn: [''],
-      website: [''],
-      summary: ['', Validators.required],
-      experience: this.fb.array([]),
-      education: this.fb.array([]),
-      skills: this.fb.array([]),
-      additionalInfo: [''],
-      shareWithOthers: [false],
-    });
   }
 
   ngOnInit() {
@@ -74,7 +62,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     if (resume) {
       this.populateUpdateForm(resume);
     }
-    this.processValueChanges();  //to caprture changes in FormArray form controls
+    this.processValueChanges();  //to capture changes in FormArray form controls
   }
 
   processDate(date: Date): Date {
@@ -86,7 +74,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       map((value) => ({ index, value })),
       debounceTime(1000) // Debounce to reduce the number of updates  
     ))).subscribe((changes) => {
-      console.log('Form changes:', changes);
       this.experiences.removeAt(changes.index);
       this.experiences.insert(changes.index, this.newUserExperienceControl(changes.value));
       this.resumeForm.markAsDirty();
@@ -96,7 +83,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       map((value) => ({ index, value })),
       debounceTime(1000) // Debounce to reduce the number of updates  
     ))).subscribe((changes) => {
-      console.log('Form changes:', changes);
       this.educations.removeAt(changes.index);
       this.educations.insert(changes.index, this.newUserEducationControl(changes.value));
       this.resumeForm.markAsDirty();

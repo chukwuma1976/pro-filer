@@ -75,7 +75,13 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="state">
                         <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'state'">
+                        <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto"
+                            [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option [value]="state.value"
+                                *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
+                        </mat-autocomplete>
                         <mat-error *ngIf="experience.get('state')?.hasError('required')">State is required</mat-error>
                     </mat-form-field>
                     <br>
@@ -153,7 +159,12 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="degree">
                         <mat-label>Degree</mat-label>
-                        <input type="text" matInput [formControlName]="'degree'">
+                        <input type="text" matInput [formControlName]="'degree'" [matAutocomplete]="auto2">
+                        <mat-autocomplete #auto2="matAutocomplete">
+                            <mat-option [value]="degree.name"
+                                *ngFor="let degree of filteredDegreeOptions | async">{{degree.name}}
+                            </mat-option>
+                        </mat-autocomplete>
                         <mat-error *ngIf="education.get('degree')?.hasError('required')">Degree is required</mat-error>
                     </mat-form-field>
                     <br>
@@ -164,7 +175,13 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="state">
                         <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'state'">
+                        <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto3"
+                            [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip">
+                        <mat-autocomplete #auto3="matAutocomplete">
+                            <mat-option [value]="state.value"
+                                *ngFor="let state of filteredStateOptionsEdu | async">{{state.name}}</mat-option>
+                        </mat-autocomplete>
                         <mat-error *ngIf="education.get('state')?.hasError('required')">State is required</mat-error>
                     </mat-form-field>
                     <br>

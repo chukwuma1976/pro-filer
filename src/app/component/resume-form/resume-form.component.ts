@@ -1,6 +1,6 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl, AbstractControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +20,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 import { MatCardModule } from '@angular/material/card';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { STATES_DROPDOWN, DEGREE_OPTIONS } from '../../shared/constants';
+import { map, Observable, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-resume-form',
@@ -38,7 +41,8 @@ import { MatCardModule } from '@angular/material/card';
     MatTooltipModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
@@ -54,6 +58,13 @@ export class ResumeFormComponent {
   position = new FormControl(this.positionOptions[2]);
   shareResumeMessage = TOOL_TIP_MESSAGES.shareResume;
   ifCurrentlyEmployedMessage = TOOL_TIP_MESSAGES.ifCurrentlyEmployed;
+  stateWillBeAbbreviatedMessage = TOOL_TIP_MESSAGES.stateWillBeAbbreviated;
+
+  stateOptions = STATES_DROPDOWN
+  degreeOptions = DEGREE_OPTIONS
+  filteredStateOptionsExp!: Observable<any[]>;
+  filteredStateOptionsEdu!: Observable<any[]>;
+  filteredDegreeOptions!: Observable<any[]>;
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
@@ -70,6 +81,10 @@ export class ResumeFormComponent {
       additionalInfo: [''],
       shareWithOthers: [false],
     });
+
+    this.experiences.controls.forEach((control, index) => this.manageExperienceStateFilter(index));
+    this.educations.controls.forEach((control, index) => this.manageEducationStateFilter(index));
+    this.educations.controls.forEach((control, index) => this.manageEducationDegreeFilter(index));
   }
 
   onSubmit() {
@@ -88,6 +103,41 @@ export class ResumeFormComponent {
     this._snackBar.open(message, action, {
       duration: 5000
     });
+  }
+
+  manageExperienceStateFilter(i: number) {
+    const control = this.experiences.at(i).get('state');
+    if (control) {
+      this.filteredStateOptionsExp = control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '', this.stateOptions)),
+      );
+    }
+  }
+
+  manageEducationStateFilter(i: number) {
+    const control = this.educations.at(i).get('state');
+    if (control) {
+      this.filteredStateOptionsEdu = control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '', this.stateOptions)),
+      );
+    }
+  }
+
+  manageEducationDegreeFilter(i: number) {
+    const control = this.educations.at(i).get('degree');
+    if (control) {
+      this.filteredDegreeOptions = control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value.name || '', this.degreeOptions)),
+      );
+    }
+  }
+
+  protected _filter(value: string, options: any[]): any[] {
+    const filterValue = value.toLowerCase();
+    return options.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   get experiences(): FormArray {

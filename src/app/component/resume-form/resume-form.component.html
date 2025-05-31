@@ -73,7 +73,13 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="state">
                         <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'state'">
+                        <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto"
+                            [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option [value]="state.value"
+                                *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
+                        </mat-autocomplete>
                         <mat-error *ngIf="experience.get('state')?.hasError('required')">State is required</mat-error>
                     </mat-form-field>
                     <br>
@@ -91,7 +97,8 @@
                     <mat-form-field class="end-date" appearance="fill">
                         <mat-label>End Date</mat-label>
                         <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2"
-                            [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!">
+                            [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
@@ -118,6 +125,7 @@
                                 </mat-form-field>
                                 <button mat-fab type="button" class="deeply-nested" [disabled]="j== 0"
                                     matTooltip="Delete Job Description" [matTooltipPosition]="position.value!"
+                                    matTooltipClass="custom-tooltip"
                                     (click)="removeDescription(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
@@ -149,7 +157,12 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="degree">
                         <mat-label>Degree</mat-label>
-                        <input type="text" matInput [formControlName]="'degree'">
+                        <input type="text" matInput [formControlName]="'degree'" [matAutocomplete]="auto2">
+                        <mat-autocomplete #auto2="matAutocomplete">
+                            <mat-option [value]="degree.name"
+                                *ngFor="let degree of filteredDegreeOptions | async">{{degree.name}}
+                            </mat-option>
+                        </mat-autocomplete>
                         <mat-error *ngIf="education.get('degree')?.hasError('required')">Degree is required</mat-error>
                     </mat-form-field>
                     <br>
@@ -160,7 +173,13 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="state">
                         <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'state'">
+                        <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto3"
+                            [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip">
+                        <mat-autocomplete #auto3="matAutocomplete">
+                            <mat-option [value]="state.value"
+                                *ngFor="let state of filteredStateOptionsEdu | async">{{state.name}}</mat-option>
+                        </mat-autocomplete>
                         <mat-error *ngIf="education.get('state')?.hasError('required')">State is required</mat-error>
                     </mat-form-field>
                     <br>
@@ -198,7 +217,7 @@
                                     <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
                                 </mat-form-field>
                                 <button mat-fab type="button" class="deeply-nested" matTooltip="Delete Award"
-                                    [matTooltipPosition]="position.value!"
+                                    [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
                                     (click)="removeAward(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
@@ -226,7 +245,7 @@
                         <mat-error *ngIf="skill.hasError('required')">Skill is required</mat-error>
                     </mat-form-field>
                     <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0" matTooltip="Delete Skill"
-                        [matTooltipPosition]="position.value!"
+                        [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
                         (click)="removeSkill(i)"><mat-icon>delete</mat-icon></button>
                     <br>
                 </div>
@@ -239,7 +258,7 @@
             </mat-form-field>
             <br>
             <mat-checkbox formControlName="shareWithOthers" [matTooltip]="shareResumeMessage"
-                [matTooltipPosition]="position.value!">
+                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip">
                 <mat-label>Share resume with other users</mat-label>
             </mat-checkbox>
             <br>
