@@ -93,7 +93,8 @@
                     <mat-form-field class="end-date" appearance="fill">
                         <mat-label>End Date</mat-label>
                         <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2"
-                            [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!">
+                            [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
@@ -120,6 +121,7 @@
                                 </mat-form-field>
                                 <button mat-fab type="button" class="deeply-nested" [disabled]="j== 0"
                                     matTooltip="Delete Job Description" [matTooltipPosition]="position.value!"
+                                    matTooltipClass="custom-tooltip"
                                     (click)="removeDescription(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
@@ -200,7 +202,7 @@
                                     <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
                                 </mat-form-field>
                                 <button mat-fab type="button" class="deeply-nested" matTooltip="Delete Award"
-                                    [matTooltipPosition]="position.value!"
+                                    [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
                                     (click)="removeAward(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
@@ -228,7 +230,7 @@
                         <mat-error *ngIf="skill.hasError('required')">Skill is required</mat-error>
                     </mat-form-field>
                     <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0" matTooltip="Delete Skill"
-                        [matTooltipPosition]="position.value!"
+                        [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
                         (click)="removeSkill(i)"><mat-icon>delete</mat-icon></button>
                     <br>
                 </div>
@@ -241,7 +243,7 @@
             </mat-form-field>
             <br>
             <mat-checkbox formControlName="shareWithOthers" [matTooltip]="shareResumeMessage"
-                [matTooltipPosition]="position.value!">
+                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip">
                 <mat-label>Share resume with other users</mat-label>
             </mat-checkbox>
             <br>

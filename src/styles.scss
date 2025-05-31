@@ -32,3 +32,20 @@ body {
 .resume-header {
     margin-left: 1em;
 }
+
+.custom-tooltip {
+    overflow: visible !important;
+    /* Ensure the triangle is visible */
+}
+
+.custom-tooltip::after {
+    content: '';
+    position: absolute;
+    border: 5px solid transparent;
+    /* Position the arrow based on the tooltip position */
+    /* Example for bottom tooltip */
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: black;
+}
