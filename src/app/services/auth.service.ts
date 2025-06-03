@@ -27,6 +27,11 @@ export class AuthService {
     return this.http.post(this.domain + '/register', user, { responseType: 'text' });
   }
 
+  checkIsInSession(): Observable<string> {
+    console.log('checked called')
+    return this.http.get(this.domain + "/check", { responseType: 'text' })
+  }
+
   setIsLoggedIn() {
     this.isLoggedIn = true;
   }

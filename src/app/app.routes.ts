@@ -20,7 +20,7 @@ export const routes: Routes = [
     {
         path: 'pro-filer',
         component: NavContainerComponent,
-        // canActivate: [loginGuard],
+        canActivate: [loginGuard],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomePageComponent },

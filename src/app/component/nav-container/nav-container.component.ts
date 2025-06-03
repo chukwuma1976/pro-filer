@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nav-container',
@@ -48,7 +49,9 @@ export class NavContainerComponent {
   lightClass = 'light-mode';
   themeState = 'Light Mode';
 
-  constructor(private dialog: MatDialog) { }
+  username: string = '';
+
+  constructor(private dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
     this.switchTheme.valueChanges.subscribe((isDarkMode) => {
@@ -63,6 +66,11 @@ export class NavContainerComponent {
         this.themeState = 'Light Mode';
       }
     });
+
+    this.authService.checkIsInSession().subscribe((value: string) => {
+      const parts = value.split(': '); console.log(value);
+      this.username = parts.length > 1 ? parts[1] : '';
+    })
   }
 
   openLogOutDialog() {

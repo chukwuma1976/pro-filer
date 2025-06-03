@@ -36,7 +36,11 @@ export class SignupComponent {
       const { username, password, email } = this.signupForm.value;
       this.authService.signup(username, password, email).subscribe(
         value => {
-          if (value === "Login successful") this.router.navigate(['/login']);
+          if (value === "User registered") {
+            this.authService.login(username, password);
+            this.authService.setIsLoggedIn();
+            this.router.navigate(['/pro-filer/home'])
+          }
           else this.signupError = 'Signup failed. username may already be in use.';
         }
       );
