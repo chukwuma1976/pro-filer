@@ -30,7 +30,6 @@ export class PopUpComponent {
       this.resumeService.deleteResume(this.id);
     };
     if (this.action === 'logout') {
-      console.log('logout');
       this.authService.logout();
       this.router.navigate(['/login']);
     }

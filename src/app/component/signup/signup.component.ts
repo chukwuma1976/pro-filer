@@ -33,11 +33,13 @@ export class SignupComponent {
   onSubmit() {
     this.submitted = true;
     if (this.signupForm.valid) {
-      const { email, username, password } = this.signupForm.value;
-      this.authService.signup(email, username, password).subscribe({
-        next: () => this.router.navigate(['/login']),
-        error: () => this.signupError = 'Signup failed. username may already be in use.'
-      });
+      const { username, password, email } = this.signupForm.value;
+      this.authService.signup(username, password, email).subscribe(
+        value => {
+          if (value === "Login successful") this.router.navigate(['/login']);
+          else this.signupError = 'Signup failed. username may already be in use.';
+        }
+      );
     }
   }
 }

@@ -80,3 +80,9 @@ export const DEGREE_OPTIONS = [
     { name: 'Other', value: 'other' },
     { name: 'No Degree', value: 'noDegree' }
 ];
+
+export const URL = {
+    serverPort: "http://localhost:8080/",
+    Auth: "api/v1/profiler/users/auth",
+    Resume: "api/v1/profiler/resumes"
+}

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../shared/models/user';
 import { users } from '../shared/mock-data/resumeData';
+import { HttpClient } from '@angular/common/http';
+import { URL } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,30 +11,24 @@ import { users } from '../shared/mock-data/resumeData';
 export class AuthService {
   isLoggedIn: boolean = false; // Track login status
   userInfo!: User; // Store user information
+  domain: string = URL.serverPort + URL.Auth;
 
-  login(username: string, password: string): Observable<boolean> {
-    // Dummy credentials check
-    if ((username === 'manofsteel' && password === 'password123')
-      || (username === 'darkknight' && password === 'password456')) {
-      this.isLoggedIn = true; // Set login status to true
-      const foundUser = users.find(user => user.username === username && user.password === password);
-      if (!foundUser) {
-        throw new Error('User not found');
-      }
-      this.userInfo = foundUser; // Store user information
-      console.log('User info:', this.userInfo); // Log user information
-      return of(true);
-    }
-    return throwError(() => new Error('Invalid credentials'));
+  constructor(private http: HttpClient) {
+    this.http = http;
   }
 
-  signup(email: string, username: string, password: string): Observable<boolean> {
-    // Dummy signup check
-    if (username === 'username' || username === 'manofsteel') {
-      // Simulate a username that is already taken
-      return throwError(() => new Error('Username is already taken'));
-    }
-    return of(true); // Simulate successful signup
+  login(username: string, password: string): Observable<string> {
+    const user = { username, password };
+    return this.http.post(this.domain + '/login', user, { responseType: 'text' });
+  }
+
+  signup(username: string, password: string, email: string): Observable<string> {
+    const user = { username, password, email };
+    return this.http.post(this.domain + '/register', user, { responseType: 'text' });
+  }
+
+  setIsLoggedIn() {
+    this.isLoggedIn = true;
   }
 
   resetPassword(email: string): Observable<boolean> {
@@ -46,9 +42,8 @@ export class AuthService {
   }
 
   logout(): void {
-    this.isLoggedIn = false; // Set login status to false
-    this.userInfo = undefined!; // Clear user information
-    console.log('User logged out'); // Log logout action
+    this.http.get(this.domain + "/logout", { responseType: 'text' });
+    this.isLoggedIn = false;
   }
 
 }
