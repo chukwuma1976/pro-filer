@@ -83,6 +83,7 @@ export const DEGREE_OPTIONS = [
 
 export const URL = {
     serverPort: "http://localhost:8080/",
-    Auth: "api/v1/profiler/users/auth",
-    Resume: "api/v1/profiler/resumes"
+    Auth: "api/v1/profiler/auth",
+    Resume: "api/v1/profiler/resumes",
+    User: "api/v1/profiler/users"
 }

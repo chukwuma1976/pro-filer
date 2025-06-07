@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../shared/models/user';
-import { users } from '../shared/mock-data/resumeData';
 import { HttpClient } from '@angular/common/http';
 import { URL } from '../shared/constants';
 
@@ -10,7 +9,6 @@ import { URL } from '../shared/constants';
 })
 export class AuthService {
   isLoggedIn: boolean = false; // Track login status
-  userInfo!: User; // Store user information
   domain: string = URL.serverPort + URL.Auth;
 
   constructor(private http: HttpClient) {
