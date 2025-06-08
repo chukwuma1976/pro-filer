@@ -1,0 +1,32 @@
+[
+    {
+        "username": "manofsteel",
+        "email": "clark.kent@dailyplanet.com",
+        "password": "password123"
+    },
+    {
+        "username": "darkknight",
+        "email": "BruceWayne@WayneEnterprises.com",
+        "password": "password456"
+    },
+    {
+        "username": "casmooth",
+        "email": "noneof@yourbusiness.com",
+        "password": "password789"
+    },
+    {
+        "username": "wonderwoman",
+        "email": "diana.prince@gmail.com",
+        "password": "password101112"
+    },
+    {
+        "username": "theflash",
+        "email": "Barry.Allen@centralcitypd.com",
+        "password": "password131415"
+    },
+    {
+        "username": "spiderman",
+        "email": "Peter.Parker@ParkerIndustries.com",
+        "password": "password161718"
+    }
+]
