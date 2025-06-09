@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ export class LoginComponent {
           if (value.toLowerCase() === "login successful") {
             this.submitted = true;
             this.authService.setIsLoggedIn();
+            UserService.setUserName(username);
             this.router.navigate(['/pro-filer/home'])
           } else this.loginError = 'Invalid username or password.'
         }

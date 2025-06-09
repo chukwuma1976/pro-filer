@@ -26,7 +26,6 @@ export class AuthService {
   }
 
   checkIsInSession(): Observable<string> {
-    console.log('checked called')
     return this.http.get(this.domain + "/check", { responseType: 'text' })
   }
 

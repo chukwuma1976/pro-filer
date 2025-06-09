@@ -50,8 +50,10 @@ export class AllResumesComponent {
   constructor(private resumeService: ResumeService) { }
 
   ngOnInit() {
-    this.resumes = this.resumeService.getAllResumes(); // Fetch all resumes from the service
-    this.dataSource = new MatTableDataSource<Resume>(this.resumes);
+    this.resumeService.getAllResumes().subscribe(resumes => {
+      this.resumes = resumes
+      this.dataSource = new MatTableDataSource<Resume>(this.resumes);
+    }); // Fetch all resumes from the service
   }
 
   ngAfterViewInit() {

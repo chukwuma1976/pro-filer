@@ -18,8 +18,8 @@ export class ViewResumeComponent {
   constructor(private resumeService: ResumeService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    const resumeId = this.route.snapshot.paramMap.get('id');
-    this.resume = resumeId ? this.resumeService.getResumeById(resumeId) : undefined;
+    const resumeId = this.route.snapshot.paramMap.get('id') ?? '0';
+    this.resumeService.getResumeById(resumeId).subscribe(resume => this.resume = resume);
   }
 
   goBack() {
