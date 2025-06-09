@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { STATES_DROPDOWN, DEGREE_OPTIONS } from '../../shared/constants';
 import { map, Observable, startWith } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-resume-form',
@@ -92,7 +93,7 @@ export class ResumeFormComponent {
     this.newResume.experience.map((exp: any) => {         // any experience end date is set to 'present' if it is the current date
       exp.endDate = this.processPresentAsEndDate(exp.endDate);
     });
-    this.resumeService.addResume(this.newResume);
+    this.resumeService.addResume(this.newResume, UserService.userId);
     this.resumeForm.reset();
     this.formGroupDirective.resetForm();
     this.openSnackBar('Resume submitted successfully!', 'Close');

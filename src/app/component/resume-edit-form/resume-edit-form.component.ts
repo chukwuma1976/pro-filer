@@ -58,9 +58,14 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   ngOnInit() {
     const resumeId = this.route.snapshot.paramMap.get('id');
-    const resume = resumeId ? this.resumeService.getResumeById(resumeId) : undefined;
-    if (resume) {
-      this.populateUpdateForm(resume);
+    if (resumeId !== null) {
+      this.resumeService.getResumeById(resumeId).subscribe(resume => {
+        this.populateUpdateForm(resume);
+      });
+    } else {
+      // Handle the case where resumeId is null, e.g., show an error or redirect
+      this._snackBar.open('Invalid resume ID.', 'Close', { duration: 5000 });
+      this.router.navigate(['/pro-filer/resume-details']);
     }
     this.processValueChanges();  //to capture changes in FormArray form controls
   }

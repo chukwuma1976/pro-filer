@@ -12,6 +12,9 @@ export class UserService {
   userInfo!: User; // Store user information
   domain: string = URL.serverPort + URL.User
 
+  static userName: string;
+  static userId: number | string;
+
   constructor(private http: HttpClient) {
     this.http = http;
   }
@@ -30,5 +33,10 @@ export class UserService {
 
   deleteUser(id: string) {
     return this.http.delete(this.domain + id);
+  }
+
+  setUserInfo(username: string) {
+    UserService.userName = username;
+    this.http.get<User>(this.domain + '/username/' + username).subscribe(user => UserService.userId = user.id);
   }
 }

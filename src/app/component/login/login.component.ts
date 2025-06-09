@@ -22,7 +22,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -38,7 +39,7 @@ export class LoginComponent {
           if (value.toLowerCase() === "login successful") {
             this.submitted = true;
             this.authService.setIsLoggedIn();
-            UserService.setUserName(username);
+            this.userService.setUserInfo(username);
             this.router.navigate(['/pro-filer/home'])
           } else this.loginError = 'Invalid username or password.'
         }

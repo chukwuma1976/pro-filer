@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
 import { ResumeToolHeaderComponent } from "../resume-tool-header/resume-tool-header.component";
 import { MatExpansionModule } from '@angular/material/expansion';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-resumes',
@@ -18,7 +19,7 @@ export class UserResumesComponent {
   constructor(private resumeService: ResumeService) { }
 
   ngOnInit() {
-    this.resumes = this.resumeService.getResumesByUserId('1'); // Fetch all resumes from the service
+    this.resumeService.getResumesByUserId(UserService.userId).subscribe(resumes => this.resumes = resumes); // Fetch all resumes from the service
   }
 
 }

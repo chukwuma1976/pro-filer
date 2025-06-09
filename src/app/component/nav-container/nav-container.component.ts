@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-nav-container',
@@ -54,6 +55,7 @@ export class NavContainerComponent {
   constructor(private dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit() {
+    this.username = UserService.userName;
     this.switchTheme.valueChanges.subscribe((isDarkMode) => {
       this.className = isDarkMode ? this.darkClass : this.lightClass;
 
@@ -68,8 +70,7 @@ export class NavContainerComponent {
     });
 
     this.authService.checkIsInSession().subscribe((value: string) => {
-      const parts = value.split(': '); console.log(value);
-      this.username = parts.length > 1 ? parts[1] : '';
+      console.log(value);
     })
   }
 
