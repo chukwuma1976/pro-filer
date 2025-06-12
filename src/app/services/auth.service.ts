@@ -33,6 +33,10 @@ export class AuthService {
     this.isLoggedIn = true;
   }
 
+  setIsLoggedOut() {
+    this.isLoggedIn = false;
+  }
+
   resetPassword(email: string): Observable<boolean> {
     // Implement the logic to send a password reset email
     // For example, make an HTTP request to your backend API
@@ -43,9 +47,8 @@ export class AuthService {
     return of(true); // Simulate successful password reset
   }
 
-  logout(): void {
-    this.http.get(this.domain + "/logout", { responseType: 'text' });
-    this.isLoggedIn = false;
+  logout(): Observable<string> {
+    return this.http.get(this.domain + "/logout", { responseType: 'text' });
   }
 
 }

@@ -21,23 +21,15 @@ export class ResumeService {
 
   getResumesByUserId(userId: number | string): Observable<Resume[]> {
     return this.http.get<Resume[]>(this.domain + "/user/" + userId);
-    // const user = users.find(user => user.id === userId);
-    // if (user) {
-    //   return user.resumes ?? []; // Provide an empty array as fallback if resumes is undefined
-    // } else {
-    //   return []; // Return an empty array if user is not found
-    // }
   }
 
   getResumeById(resumeId: number | string): Observable<Resume> {
     return this.http.get<Resume>(this.domain + '/' + resumeId);
-    // return allResumes?.find(resume => resume.id === resumeId); // Provide an empty array as fallback if resumes is undefined
   }
 
 
   getAllResumes(): Observable<Resume[]> {
     return this.http.get<Resume[]>(this.domain);
-    // return allResumes ?? []; // Provide an empty array as fallback if resumes is undefined
   }
 
   addResume(resume: Resume, userId: number | string): Observable<Resume> {
@@ -50,8 +42,8 @@ export class ResumeService {
     // console.log('editing resume', resume);
   }
 
-  deleteResume(resumeId: string): void {
-    this.http.delete(this.domain + "/" + resumeId);
+  deleteResume(resumeId: string): Observable<any> {
+    return this.http.delete(this.domain + "/" + resumeId);
     // console.log('deleting resume', resumeId);
   }
 }

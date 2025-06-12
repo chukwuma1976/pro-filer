@@ -27,10 +27,13 @@ export class PopUpComponent {
 
   executeAction() {
     if (this.id && this.action === 'delete') {
-      this.resumeService.deleteResume(this.id);
+      this.resumeService.deleteResume(this.id).subscribe(() => console.log('Resume with id of ', this.id, ' deleted'));
     };
     if (this.action === 'logout') {
-      this.authService.logout();
+      this.authService.logout().subscribe(data => {
+        this.authService.setIsLoggedOut();
+        console.log(data);
+      });
       this.router.navigate(['/login']);
     }
   }
