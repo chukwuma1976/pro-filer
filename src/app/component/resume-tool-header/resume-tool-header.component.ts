@@ -25,7 +25,7 @@ export class ResumeToolHeaderComponent {
 
   generatePDF() {
     console.log('generate pdf');
-    const resumeToPrint: any = document.getElementById(this.resume!.id);
+    const resumeToPrint: any = document.getElementById(String(this.resume!.id));
     html2canvas(resumeToPrint, { scale: 2 }).then((canvas) => {
       this.pdf = new jsPDF();
       this.pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);

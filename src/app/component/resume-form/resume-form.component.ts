@@ -93,7 +93,7 @@ export class ResumeFormComponent {
     this.newResume.experience.map((exp: any) => {         // any experience end date is set to 'present' if it is the current date
       exp.endDate = this.processPresentAsEndDate(exp.endDate);
     });
-    this.resumeService.addResume(this.newResume, UserService.userId);
+    this.resumeService.addResume(this.newResume, UserService.userId).subscribe(data => console.log(data));
     this.resumeForm.reset();
     this.formGroupDirective.resetForm();
     this.openSnackBar('Resume submitted successfully!', 'Close');

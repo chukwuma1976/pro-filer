@@ -1,4 +1,5 @@
 export interface Experience {
+    id: string | number;
     employer: string;
     title: string;
     city: string;

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { users, allResumes } from '../shared/mock-data/resumeData';
 import { Resume } from '../shared/models/resume';
 import { HttpClient } from '@angular/common/http';
 import { URL } from '../shared/constants';
@@ -13,10 +12,6 @@ export class ResumeService {
 
   constructor(private http: HttpClient) {
     this.http = http
-  }
-
-  getResumeData(): Resume {
-    return (allResumes ?? [])[0];
   }
 
   getResumesByUserId(userId: number | string): Observable<Resume[]> {

@@ -51,15 +51,16 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   initialState!: Resume;
   updatedResume!: Resume;
+  resumeId!: number | string;
 
   constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute, private utilityService: UtilityService) {
     super(fb, resumeService, router);
   }
 
   ngOnInit() {
-    const resumeId = this.route.snapshot.paramMap.get('id');
-    if (resumeId !== null) {
-      this.resumeService.getResumeById(resumeId).subscribe(resume => {
+    this.resumeId = this.route.snapshot.paramMap.get('id') ?? '';
+    if (this.resumeId !== null) {
+      this.resumeService.getResumeById(this.resumeId).subscribe(resume => {
         this.populateUpdateForm(resume);
       });
     } else {
@@ -116,6 +117,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   newUserExperienceControl(experience: any): FormGroup {
     const addedExperience = this.fb.group({
+      id: [experience.id],
       employer: [experience.employer, Validators.required],
       title: [experience.title, Validators.required],
       city: [experience.city, Validators.required],
@@ -139,6 +141,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   newUserEducationControl(education: any): FormGroup {
     const addedEducation = this.fb.group({
+      id: [education.id],
       institution: [education.institution, Validators.required],
       city: [education.city, Validators.required],
       state: [education.state, Validators.required],
@@ -169,10 +172,11 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     if (this.resumeForm.valid) {
       if (this.resumeForm.dirty) {
         this.updatedResume = this.resumeForm.value;
+        this.updatedResume.id = this.resumeId;
         this.updatedResume.experience.map((exp: any) => {         // any experience end date is set to 'present' if it is the current date
           exp.endDate = this.processPresentAsEndDate(exp.endDate);
         });
-        this.resumeService.editResume(this.updatedResume);
+        this.resumeService.editResume(this.updatedResume).subscribe(data => console.log(data));
         this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });
         this.router.navigate(['/pro-filer/resume-details']);
       }

@@ -2,7 +2,7 @@ import { Education } from './education';
 import { Experience } from './experience';
 
 export interface Resume {
-    id: string;
+    id: string | number;
     firstName: string;
     lastName: string;
     phoneNumber?: string;
