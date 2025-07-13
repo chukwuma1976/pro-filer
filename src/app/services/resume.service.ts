@@ -29,16 +29,13 @@ export class ResumeService {
 
   addResume(resume: Resume, userId: number | string): Observable<Resume> {
     return this.http.post<Resume>(this.domain + "/" + userId, resume);
-    // console.log('adding resume', resume);
   }
 
   editResume(resume: Resume): Observable<Resume> {
     return this.http.put<Resume>(this.domain + "/" + resume.id, resume);
-    // console.log('editing resume', resume);
   }
 
   deleteResume(resumeId: string): Observable<any> {
     return this.http.delete(this.domain + "/" + resumeId);
-    // console.log('deleting resume', resumeId);
   }
 }
