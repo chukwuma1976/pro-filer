@@ -85,5 +85,7 @@ export const URL = {
     serverPort: "http://localhost:8080/",
     Auth: "api/v1/profiler/auth",
     Resume: "api/v1/profiler/resumes",
-    User: "api/v1/profiler/users"
+    User: "api/v1/profiler/users",
+    Experience: "api/v1/profiler/experiences",
+    Education: "api/v1/profiler/educations",
 }

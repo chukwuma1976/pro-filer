@@ -115,20 +115,21 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.initialState = this.resumeForm.value as Resume;
   }
 
+  //All experience controls are disabled by default, will update in separate form
   newUserExperienceControl(experience: any): FormGroup {
     const addedExperience = this.fb.group({
       id: [experience.id],
-      employer: [experience.employer, Validators.required],
-      title: [experience.title, Validators.required],
-      city: [experience.city, Validators.required],
-      state: [experience.state, Validators.required],
-      startDate: [new Date(experience.startDate), [Validators.required, customDateValidator()]],
-      endDate: [this.processDate(experience.endDate), [Validators.required, customDateValidator()]],
+      employer: [{ value: experience.employer, disabled: true }],
+      title: [{ value: experience.title, disabled: true }],
+      city: [{ value: experience.city, disabled: true }],
+      state: [{ value: experience.state, disabled: true }],
+      startDate: [{ value: new Date(experience.startDate), disabled: true }, customDateValidator()],
+      endDate: [{ value: this.processDate(experience.endDate), disabled: true }, customDateValidator()],
       description: this.fb.array([]),
     });
 
     experience.description.forEach((desc: any) => {
-      const descriptionGroup = this.fb.control(desc, Validators.required);
+      const descriptionGroup = this.fb.control({ value: desc, disabled: true });
       (addedExperience.get('description') as FormArray).push(descriptionGroup);
     });
 
@@ -139,21 +140,22 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.experiences.controls.push(addedExperience);
   }
 
+  //All education controls are disabled by default, will update in separate form
   newUserEducationControl(education: any): FormGroup {
     const addedEducation = this.fb.group({
       id: [education.id],
-      institution: [education.institution, Validators.required],
-      city: [education.city, Validators.required],
-      state: [education.state, Validators.required],
-      degree: [education.degree, Validators.required],
-      fieldOfStudy: [education.fieldOfStudy, Validators.required],
-      graduationDate: [new Date(education.graduationDate), Validators.required],
-      descriptionEdu: [education.descriptionEdu],
+      institution: [{ value: education.institution, disabled: true }],
+      city: [{ value: education.city, disabled: true }],
+      state: [{ value: education.state, disabled: true }],
+      degree: [{ value: education.degree, disabled: true }],
+      fieldOfStudy: [{ value: education.fieldOfStudy, disabled: true }],
+      graduationDate: [{ value: new Date(education.graduationDate), disabled: true }],
+      descriptionEdu: [{ value: education.descriptionEdu, disabled: true }],
       awards: this.fb.array([]),
     })
 
     education.awards.forEach((award: any) => {
-      const awardGroup = this.fb.control(award, Validators.required);
+      const awardGroup = this.fb.control({ value: award, disabled: true });
       (addedEducation.get('awards') as FormArray).push(awardGroup);
     });
 
