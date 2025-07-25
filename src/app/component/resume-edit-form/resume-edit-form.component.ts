@@ -170,6 +170,10 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.router.navigate(['/pro-filer/resume-details']);
   }
 
+  override addExperience(): void {
+    this.router.navigate([`/pro-filer/add-experience/${this.resumeId}`]); // Redirect to the experience form with the resumeId  
+  }
+
   onEdit() {
     if (this.resumeForm.valid) {
       if (this.resumeForm.dirty) {

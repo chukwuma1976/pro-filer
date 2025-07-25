@@ -11,6 +11,10 @@ import { ResumeFormComponent } from './component/resume-form/resume-form.compone
 import { loginGuard } from './guards/login.guard';
 import { ResumeEditFormComponent } from './component/resume-edit-form/resume-edit-form.component';
 import { ViewResumeComponent } from './view-resume/view-resume.component';
+import { ExperienceFormComponent } from './component/experience-form/experience-form.component';
+import { ExperienceEditFormComponent } from './component/experience-edit-form/experience-edit-form.component';
+import { EducationFormComponent } from './component/education-form/education-form.component';
+import { EducationEditFormComponent } from './component/education-edit-form/education-edit-form.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -28,7 +32,11 @@ export const routes: Routes = [
             { path: 'all-resumes', component: AllResumesComponent },
             { path: 'resume-form', component: ResumeFormComponent },
             { path: 'edit-resume/:id', component: ResumeEditFormComponent },
-            { path: 'view-resume/:id', component: ViewResumeComponent }
+            { path: 'view-resume/:id', component: ViewResumeComponent },
+            { path: 'add-experience/:resumeId', component: ExperienceFormComponent },
+            { path: 'edit-experience/:id', component: ExperienceEditFormComponent },
+            { path: 'add-education/:resumeId', component: EducationFormComponent },
+            { path: 'edit-education/:id', component: EducationEditFormComponent },
         ]
     }
 ];
