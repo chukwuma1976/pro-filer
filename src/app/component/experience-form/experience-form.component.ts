@@ -60,9 +60,9 @@ export class ExperienceFormComponent {
   stateWillBeAbbreviatedMessage = TOOL_TIP_MESSAGES.stateWillBeAbbreviated;
 
   stateOptions = STATES_DROPDOWN
-  filteredStateOptionsExp!: Observable<any[]>;
+  filteredStateOptions!: Observable<any[]>;
 
-  constructor(protected fb: FormBuilder, protected experienceService: ExperienceService, protected router: Router, private route: ActivatedRoute) {
+  constructor(protected fb: FormBuilder, protected experienceService: ExperienceService, protected router: Router, protected route: ActivatedRoute) {
     this.experienceForm = this.fb.group({
       employer: ['', Validators.required],
       title: ['', Validators.required],
@@ -72,7 +72,7 @@ export class ExperienceFormComponent {
       endDate: [new Date(), [Validators.required, customDateValidator()]],
       description: this.fb.array([this.fb.control('', Validators.required)]),
     });
-
+    this.manageExperienceStateFilter();
   }
 
   ngOnInit() {
@@ -98,11 +98,11 @@ export class ExperienceFormComponent {
     });
   }
 
-  manageExperienceStateFilter(i: number) {
-    const stateValue = this.newExperience.state;
+  manageExperienceStateFilter() {
+    const stateValue = this.experienceForm.get('state')?.value;
     if (stateValue !== undefined) {
       // If you want to filter based on the current state value:
-      this.filteredStateOptionsExp = new Observable<any[]>(observer => {
+      this.filteredStateOptions = new Observable<any[]>(observer => {
         observer.next(this._filter(stateValue || '', this.stateOptions));
       });
     }

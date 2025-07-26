@@ -55,6 +55,13 @@
             </mat-expansion-panel-header>
             <div formArrayName="experience" *ngFor="let experience of experiences.controls; let i = index">
                 <div [formGroupName]="i" class="experience-form">
+                    <button mat-button color="primary" type="button" (click)="editExperience(i)"
+                        [matTooltip]="editExperienceMessage" [matTooltipPosition]="position.value!"
+                        matTooltipClass="custom-tooltip">
+                        <mat-icon>edit</mat-icon>
+                        Edit Job Experience {{i+1}}
+                    </button>
+                    <br>
                     <mat-form-field appearance="fill" class="employer">
                         <mat-label>Employer</mat-label>
                         <input type="text" matInput [formControlName]="'employer'">
@@ -125,20 +132,12 @@
                                         Description is required
                                     </mat-error>
                                 </mat-form-field>
-                                <button mat-fab type="button" class="deeply-nested" [disabled]="j== 0"
-                                    matTooltip="Delete Job Description" [matTooltipPosition]="position.value!"
-                                    matTooltipClass="custom-tooltip"
-                                    (click)="removeDescription(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
                         </div>
-                        <button mat-stroked-button class="nested-add" type="button" (click)="addDescription(i)">
-                            Add Another Job Description
-                        </button>
                     </mat-card>
-                    <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
-                        (click)="removeExperience(i)">Remove
-                        Experience</button>
+                    <button *ngIf="experiences.controls.length > 1" mat-raised-button type="button"
+                        class="nested-delete" (click)="removeExperience(i)">Remove Experience</button>
                     <br><br>
                 </div>
             </div>
@@ -151,6 +150,13 @@
             </mat-expansion-panel-header>
             <div formArrayName="education" *ngFor="let education of educations.controls; let i = index">
                 <div [formGroupName]="i" class="education-form">
+                    <button mat-button color="primary" type="button" (click)="editEducation(i)"
+                        [matTooltip]="editEducationMessage" [matTooltipPosition]="position.value!"
+                        matTooltipClass="custom-tooltip">
+                        <mat-icon>edit</mat-icon>
+                        Edit Education {{i+1}}
+                    </button>
+                    <br>
                     <mat-form-field appearance="fill" class="institution">
                         <mat-label>School</mat-label>
                         <input type="text" matInput [formControlName]="'institution'">
@@ -218,18 +224,12 @@
                                     <input matInput [formControlName]="j">
                                     <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
                                 </mat-form-field>
-                                <button mat-fab type="button" class="deeply-nested" matTooltip="Delete Award"
-                                    [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
-                                    (click)="removeAward(i, j)"><mat-icon>delete</mat-icon></button>
                                 <br>
                             </div>
                         </div>
-                        <button class="nested-add" mat-stroked-button type="button" (click)="addAward(i)">Add
-                            Award</button>
                     </mat-card>
-                    <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
-                        (click)="removeEducation(i)">Remove
-                        Education</button>
+                    <button *ngIf="educations.controls.length > 1" mat-raised-button type="button" class="nested-delete"
+                        (click)="removeEducation(i)">Remove Education</button>
                     <br><br>
                 </div>
             </div>

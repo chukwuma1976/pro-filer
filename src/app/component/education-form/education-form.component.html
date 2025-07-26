@@ -1,1 +1,88 @@
-<p>education-form works!</p>
+<div class="resume-form-header">
+    <h1>Add Education</h1>
+    <p>Please fill out the form below to add education.</p>
+    <button mat-button color="primary" (click)="goBackToEditResume()"><mat-icon>arrow_back_ios</mat-icon>Back</button>
+    <br>
+</div>
+<form [formGroup]="educationForm" (submit)="onSubmit()" class="education-form">
+    <mat-accordion multi>
+        <mat-form-field appearance="fill" class="institution">
+            <mat-label>School</mat-label>
+            <input type="text" matInput [formControlName]="'institution'">
+            <mat-error *ngIf="educationForm.get('institution')?.hasError('required')">An institution is
+                required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="degree">
+            <mat-label>Degree</mat-label>
+            <input type="text" matInput [formControlName]="'degree'" [matAutocomplete]="auto2">
+            <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option [value]="degree.name" *ngFor="let degree of filteredDegreeOptions | async">{{degree.name}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="educationForm.get('degree')?.hasError('required')">Degree is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="city">
+            <mat-label>City</mat-label>
+            <input type="text" matInput [formControlName]="'city'">
+            <mat-error *ngIf="educationForm.get('city')?.hasError('required')">City is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="state">
+            <mat-label>State</mat-label>
+            <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto3"
+                [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                matTooltipClass="custom-tooltip">
+            <mat-autocomplete #auto3="matAutocomplete">
+                <mat-option [value]="state.value"
+                    *ngFor="let state of filteredStateOptions | async">{{state.name}}</mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="educationForm.get('state')?.hasError('required')">State is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="fieldOfStudy">
+            <mat-label>Field of Study</mat-label>
+            <input type="text" matInput [formControlName]="'fieldOfStudy'">
+            <mat-error *ngIf="educationForm.get('fieldOfStudy')?.hasError('required')">Field of study is
+                required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="graduationDate">
+            <mat-label>Graduation Date</mat-label>
+            <input matInput [formControlName]="'graduationDate'" [matDatepicker]="picker3">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+            <mat-error *ngIf="educationForm.get('graduationDate')?.hasError('required')">Graduation date is
+                required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Description of Education (Optional)</mat-label>
+            <input type="text" matInput [formControlName]="'descriptionEdu'">
+            <mat-error *ngIf="educationForm.get('descriptionEdu')?.hasError('required')">Description is
+                required</mat-error>
+        </mat-form-field>
+        <mat-card class="example-card" appearance="outlined">
+            <mat-card-header>
+                <mat-panel-title class="nested-add">Add one or more awards Here (Optional)</mat-panel-title>
+            </mat-card-header>
+            <div formArrayName="awards" *ngFor="let award of getAwards().controls; let i = index">
+                <div class="award-form">
+                    <mat-form-field appearance="fill" class="deeply-nested">
+                        <mat-label>Award</mat-label>
+                        <input matInput [formControlName]="i">
+                        <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
+                    </mat-form-field>
+                    <button mat-fab type="button" class="deeply-nested" matTooltip="Delete Award"
+                        [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
+                        (click)="removeAward(i)"><mat-icon>delete</mat-icon></button>
+                    <br>
+                </div>
+            </div>
+            <button class="nested-add" mat-stroked-button type="button" (click)="addAward()">Add
+                Award</button>
+        </mat-card>
+        <br>
+        <button mat-raised-button color="primary" type="submit" [disabled]="educationForm.invalid">Submit</button>
+        <br>
+    </mat-accordion>
+</form>

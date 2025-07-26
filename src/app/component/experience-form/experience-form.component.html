@@ -35,7 +35,7 @@
                     matTooltipClass="custom-tooltip">
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option [value]="state.value"
-                        *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
+                        *ngFor="let state of filteredStateOptions | async">{{state.name}}</mat-option>
                 </mat-autocomplete>
                 <mat-error *ngIf="experienceForm.get('state')?.hasError('required')">State is required</mat-error>
             </mat-form-field>

@@ -134,9 +134,8 @@
                             Add Another Job Description
                         </button>
                     </mat-card>
-                    <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
-                        (click)="removeExperience(i)">Remove
-                        Experience</button>
+                    <button *ngIf="experiences.controls.length > 1" mat-raised-button type="button"
+                        class="nested-delete" (click)="removeExperience(i)">Remove Experience</button>
                     <br><br>
                 </div>
             </div>
@@ -225,9 +224,8 @@
                         <button class="nested-add" mat-stroked-button type="button" (click)="addAward(i)">Add
                             Award</button>
                     </mat-card>
-                    <button *ngIf="i>0" mat-raised-button type="button" class="nested-delete"
-                        (click)="removeEducation(i)">Remove
-                        Education</button>
+                    <button *ngIf="educations.controls.length > 1" mat-raised-button type="button" class="nested-delete"
+                        (click)="removeEducation(i)">Remove Education</button>
                     <br><br>
                 </div>
             </div>

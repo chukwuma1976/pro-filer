@@ -6,20 +6,25 @@ import { ResumeDetailsComponent } from "../resume-details/resume-details.compone
 import { ResumeToolHeaderComponent } from "../resume-tool-header/resume-tool-header.component";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserService } from '../../services/user.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-resumes',
-  imports: [NgFor, NgIf, ResumeDetailsComponent, ResumeToolHeaderComponent, MatExpansionModule],
+  imports: [NgFor, ResumeDetailsComponent, ResumeToolHeaderComponent, MatExpansionModule, MatProgressSpinnerModule],
   templateUrl: './user-resumes.component.html',
   styleUrl: './user-resumes.component.scss'
 })
 export class UserResumesComponent {
   resumes: Resume[] = []; // Initialize resumes as an empty array
+  isLoading = true; // Flag to indicate loading state
 
   constructor(private resumeService: ResumeService) { }
 
   ngOnInit() {
-    this.resumeService.getResumesByUserId(UserService.userId).subscribe(resumes => this.resumes = resumes); // Fetch all resumes from the service
+    this.resumeService.getResumesByUserId(UserService.userId).subscribe(resumes => {
+      this.resumes = resumes
+      this.isLoading = false; // Set loading to false after fetching resumes
+    }); // Fetch all resumes from the service
   }
 
 }

@@ -1,8 +1,12 @@
 <div>
     <h1 class="resume-header">User Resumes</h1>
-    <div class="resume-header" *ngIf="resumes.length === 0">
+    @if(isLoading) {
+    <mat-spinner class="loading-spinner" diameter="200"></mat-spinner>
+    } @else if (resumes.length === 0) {
+    <div class="resume-header">
         <p>No resumes found. Please create a new resume.</p>
     </div>
+    }
     <div *ngFor="let resume of resumes" class="resume-card">
         <app-resume-tool-header [resume]="resume"></app-resume-tool-header>
         <app-resume-details [resumeData]="resume"></app-resume-details>

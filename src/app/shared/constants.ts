@@ -1,7 +1,9 @@
 export const TOOL_TIP_MESSAGES = {
     shareResume: 'Share your resume with other members of the Pro-Filer community.',
     ifCurrentlyEmployed: "If you are currently employed, set the end date of your last job to today's date. It will show as 'present' in your resume.",
-    stateWillBeAbbreviated: 'The state that you select will be entered as an abbreviation in your resume'
+    stateWillBeAbbreviated: 'The state that you select will be entered as an abbreviation in your resume',
+    editExperienceMessage: 'Edit your experience details here. You can update your job title, employer, and other relevant information.',
+    editEducationMessage: 'Edit your education details here. You can update your degree, institution, and other relevant information.',
 };
 
 export const STATES_DROPDOWN = [

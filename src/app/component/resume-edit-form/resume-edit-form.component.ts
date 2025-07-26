@@ -17,11 +17,16 @@ import { ResumeService } from '../../services/resume.service';
 import { ResumeFormComponent } from '../resume-form/resume-form.component';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { UtilityService } from '../../services/utility.service';
+import { ExperienceService } from '../../services/experience.service';
+import { EducationService } from '../../services/education.service';
 import { merge } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { get } from 'http';
+// Add this import if TOOL_TIP_MESSAGES is exported from a shared constants file
+import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -52,47 +57,52 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
   initialState!: Resume;
   updatedResume!: Resume;
   resumeId!: number | string;
+  editExperienceMessage = TOOL_TIP_MESSAGES.editExperienceMessage;
+  editEducationMessage = TOOL_TIP_MESSAGES.editEducationMessage;
 
-  constructor(fb: FormBuilder, resumeService: ResumeService, router: Router, private route: ActivatedRoute, private utilityService: UtilityService) {
+  constructor(
+    fb: FormBuilder,
+    resumeService: ResumeService,
+    router: Router,
+    private route: ActivatedRoute,
+    private utilityService: UtilityService,
+    private experienceService: ExperienceService,
+    private educationService: EducationService) {
+
     super(fb, resumeService, router);
+    this.resumeForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      phoneNumber: [''],
+      email: ['', [Validators.required, Validators.email]],
+      linkedIn: [''],
+      website: [''],
+      summary: ['', Validators.required],
+      experience: this.fb.array([]),
+      education: this.fb.array([]),
+      skills: this.fb.array([]),
+      additionalInfo: [''],
+      shareWithOthers: [false],
+    });
   }
 
   ngOnInit() {
     this.resumeId = this.route.snapshot.paramMap.get('id') ?? '';
     if (this.resumeId !== null) {
       this.resumeService.getResumeById(this.resumeId).subscribe(resume => {
-        this.populateUpdateForm(resume);
+        this.updatedResume = resume;
+        this.populateUpdateForm(this.updatedResume);
       });
     } else {
       // Handle the case where resumeId is null, e.g., show an error or redirect
       this._snackBar.open('Invalid resume ID.', 'Close', { duration: 5000 });
       this.router.navigate(['/pro-filer/resume-details']);
     }
-    this.processValueChanges();  //to capture changes in FormArray form controls
+    // this.processValueChanges();  //to capture changes in FormArray form controls
   }
 
   processDate(date: Date): Date {
     return this.utilityService.returnDate(date);
-  }
-
-  processValueChanges() {
-    merge(...this.experiences.controls.map((control, index) => control.valueChanges.pipe(
-      map((value) => ({ index, value })),
-      debounceTime(1000) // Debounce to reduce the number of updates  
-    ))).subscribe((changes) => {
-      this.experiences.removeAt(changes.index);
-      this.experiences.insert(changes.index, this.newUserExperienceControl(changes.value));
-      this.resumeForm.markAsDirty();
-    });
-
-    merge(...this.educations.controls.map((control, index) => control.valueChanges.pipe(
-      map((value) => ({ index, value })),
-      debounceTime(1000) // Debounce to reduce the number of updates  
-    ))).subscribe((changes) => {
-      this.educations.removeAt(changes.index);
-      this.educations.insert(changes.index, this.newUserEducationControl(changes.value));
-      this.resumeForm.markAsDirty();
-    });
   }
 
   populateUpdateForm(resume: Resume | any) {
@@ -172,6 +182,41 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   override addExperience(): void {
     this.router.navigate([`/pro-filer/add-experience/${this.resumeId}`]); // Redirect to the experience form with the resumeId  
+  }
+
+  editExperience(index: number): void {
+    const id = this.getExperienceId(index);
+    this.router.navigate([`/pro-filer/edit-experience/${this.resumeId}/${id}`]); // Redirect to the experience edit form with the experience id
+  }
+
+  getExperienceId(index: number): number | string {
+    return this.updatedResume.experience[index].id;
+  }
+
+  override removeExperience(index: number) {
+    this.experiences.removeAt(index);
+    const experienceId = this.getExperienceId(index);
+    this.experienceService.deleteExperience(experienceId).subscribe((data: any) => console.log('experience removed at index  of: ', index));
+    this.resumeForm.markAsDirty();
+  }
+
+  override addEducation(): void {
+    this.router.navigate([`/pro-filer/add-education/${this.resumeId}`]); // Redirect to the education form with the resumeId  
+  }
+
+  editEducation(index: number): void {
+    const id = this.getEducationId(index);
+    this.router.navigate([`/pro-filer/edit-education/${this.resumeId}/${id}`]); // Redirect to the education edit form with the education id
+  }
+  getEducationId(index: number): number | string {
+    return this.updatedResume.education[index].id;
+  }
+
+  override removeEducation(index: number) {
+    this.educations.removeAt(index);
+    const educationId = this.getEducationId(index);
+    this.educationService.deleteEducation(educationId).subscribe((data: any) => console.log('education removed at index of: ', index));
+    this.resumeForm.markAsDirty();
   }
 
   onEdit() {

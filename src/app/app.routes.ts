@@ -34,9 +34,9 @@ export const routes: Routes = [
             { path: 'edit-resume/:id', component: ResumeEditFormComponent },
             { path: 'view-resume/:id', component: ViewResumeComponent },
             { path: 'add-experience/:resumeId', component: ExperienceFormComponent },
-            { path: 'edit-experience/:id', component: ExperienceEditFormComponent },
+            { path: 'edit-experience/:resumeId/:id', component: ExperienceEditFormComponent },
             { path: 'add-education/:resumeId', component: EducationFormComponent },
-            { path: 'edit-education/:id', component: EducationEditFormComponent },
+            { path: 'edit-education/:resumeId/:id', component: EducationEditFormComponent },
         ]
     }
 ];

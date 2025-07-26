@@ -1,0 +1,80 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.education-form {
+    width: 95%;
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.start-date,
+.end-date,
+.firstName,
+.lastName,
+.phoneNumber,
+.email,
+.linkedIn,
+.website,
+.city,
+.state,
+.employer,
+.title,
+.institution,
+.degree,
+.fieldOfStudy,
+.graduationDate {
+    width: 49%;
+}
+
+.start-date,
+.firstName,
+.phoneNumber,
+.linkedIn,
+.city,
+.employer,
+.institution,
+.fieldOfStudy {
+    margin-right: 2%;
+}
+
+.nested-delete {
+    float: right;
+}
+
+mat-form-field.deeply-nested {
+    width: 90%;
+    margin-left: 2%;
+}
+
+button.deeply-nested {
+    margin-left: 2%;
+}
+
+button.nested-add {
+    width: fit-content;
+    margin-left: 2%;
+}
+
+mat-panel-title.nested-add {
+    margin-left: 1%;
+}
+
+.description-form,
+.award-form,
+.skill-form {
+    display: flex;
+}
+
+.mat-mdc-card {
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface-container)
+}

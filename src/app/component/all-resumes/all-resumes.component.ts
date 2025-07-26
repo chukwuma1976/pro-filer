@@ -14,6 +14,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-all-resumes',
@@ -28,7 +29,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './all-resumes.component.html',
   styleUrl: './all-resumes.component.scss'
@@ -43,6 +45,7 @@ export class AllResumesComponent {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
   viewResumeMessage = 'View the details of this resume.';
+  isLoading = true; // Flag to indicate loading state
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -53,6 +56,7 @@ export class AllResumesComponent {
     this.resumeService.getAllResumes().subscribe(resumes => {
       this.resumes = resumes
       this.dataSource = new MatTableDataSource<Resume>(this.resumes);
+      this.isLoading = false; // Set loading to false after fetching resumes
     }); // Fetch all resumes from the service
   }
 

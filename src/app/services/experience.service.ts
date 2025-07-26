@@ -15,6 +15,10 @@ export class ExperienceService {
     this.http = http
   }
 
+  getExperienceById(id: number | string): Observable<Experience> {
+    return this.http.get<Experience>(`${this.domain}/${id}`);
+  }
+
   addExperienceByResumeId(resumeId: number | string, experience: Experience): Observable<Experience> {
     return this.http.post<Experience>(`${this.domain}/resume/${resumeId}`, experience);
   }
@@ -23,7 +27,7 @@ export class ExperienceService {
     return this.http.put<Experience>(`${this.domain}/${experience.id}`, experience);
   }
 
-  deleteExperience(experienceId: string): Observable<any> {
+  deleteExperience(experienceId: number | string): Observable<any> {
     return this.http.delete(`${this.domain}/${experienceId}`);
   }
 }

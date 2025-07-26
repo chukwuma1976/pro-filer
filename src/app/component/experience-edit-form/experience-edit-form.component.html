@@ -1,1 +1,97 @@
-<p>experience-edit-form works!</p>
+<div class="resume-form-header">
+    <h1>Edit Experience</h1>
+    <p>Make changes below to edit experience.</p>
+    <button mat-button color="primary" (click)="goBackToEditResume()"><mat-icon>arrow_back_ios</mat-icon>Back</button>
+    <br>
+</div>
+<form [formGroup]="experienceForm" (submit)="onUpdate()" class="experience-form">
+    <mat-accordion multi>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title> Employment History / Job Experience </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="fill" class="employer">
+                <mat-label>Employer</mat-label>
+                <input type="text" matInput [formControlName]="'employer'">
+                <mat-error *ngIf="experienceForm.get('employer')?.hasError('required')">Employer is
+                    required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="title">
+                <mat-label>Job Title</mat-label>
+                <input type="text" matInput [formControlName]="'title'">
+                <mat-error *ngIf="experienceForm.get('title')?.hasError('required')">Job title is
+                    required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="city">
+                <mat-label>City</mat-label>
+                <input type="text" matInput [formControlName]="'city'">
+                <mat-error *ngIf="experienceForm.get('city')?.hasError('required')">City is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="state">
+                <mat-label>State</mat-label>
+                <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto"
+                    [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                    matTooltipClass="custom-tooltip">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option [value]="state.value"
+                        *ngFor="let state of filteredStateOptions | async">{{state.name}}</mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="experienceForm.get('state')?.hasError('required')">State is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="start-date" appearance="fill">
+                <mat-label>Start Date</mat-label>
+                <input matInput [formControlName]="'startDate'" [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="experienceForm.get('startDate')?.hasError('required')">Start date is
+                    required</mat-error>
+                <mat-error *ngIf="experienceForm.get('startDate')?.hasError('invalidDate')">Start date cannot be in
+                    the future</mat-error>
+            </mat-form-field>
+            <mat-form-field class="end-date" appearance="fill">
+                <mat-label>End Date</mat-label>
+                <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2"
+                    [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!"
+                    matTooltipClass="custom-tooltip">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error *ngIf="experienceForm.get('endDate')?.hasError('required')">End date is
+                    required</mat-error>
+                <mat-error *ngIf="experienceForm.get('endDate')?.hasError('invalidDate')">End date cannot be in
+                    the future</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-card class="example-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-panel-title class="nested-add">Add one or more job descriptions
+                        (Required)</mat-panel-title>
+                </mat-card-header>
+                <div formArrayName="description" *ngFor="let description of descriptions.controls; let i = index">
+                    <div class="description-form">
+                        <mat-form-field appearance="fill" class="deeply-nested">
+                            <mat-label>Job Description</mat-label>
+                            <input matInput [formControlName]="i">
+                            <mat-error *ngIf="description.hasError('required')">
+                                Description is required
+                            </mat-error>
+                        </mat-form-field>
+                        <button mat-fab type="button" class="deeply-nested" [disabled]="i===0"
+                            matTooltip="Delete Job Description" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip"
+                            (click)="removeDescription(i)"><mat-icon>delete</mat-icon></button>
+                        <br>
+                    </div>
+                </div>
+                <button mat-stroked-button class="nested-add" type="button" (click)="addDescription()">
+                    Add Another Job Description
+                </button>
+            </mat-card>
+        </mat-expansion-panel>
+        <br>
+        <button mat-raised-button color="primary" type="submit" [disabled]="experienceForm.invalid">Submit</button>
+    </mat-accordion>
+</form>
