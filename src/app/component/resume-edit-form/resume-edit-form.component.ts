@@ -222,11 +222,8 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
   onEdit() {
     if (this.resumeForm.valid) {
       if (this.resumeForm.dirty) {
-        this.updatedResume = this.resumeForm.value;
+        this.updatedResume = this.resumeForm.getRawValue() as Resume; // Get the updated resume data including disabled fields
         this.updatedResume.id = this.resumeId;
-        this.updatedResume.experience.map((exp: any) => {         // any experience end date is set to 'present' if it is the current date
-          exp.endDate = this.processPresentAsEndDate(exp.endDate);
-        });
         this.resumeService.editResume(this.updatedResume).subscribe(data => console.log(data));
         this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });
         this.router.navigate(['/pro-filer/resume-details']);

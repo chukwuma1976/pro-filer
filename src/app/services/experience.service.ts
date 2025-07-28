@@ -24,6 +24,7 @@ export class ExperienceService {
   }
 
   editExperience(experience: Experience): Observable<Experience> {
+    console.log('Editing experience: ', experience.id);
     return this.http.put<Experience>(`${this.domain}/${experience.id}`, experience);
   }
 

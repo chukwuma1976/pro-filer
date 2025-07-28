@@ -1,7 +1,11 @@
 <div class="resume-form-header">
     <h1>Edit Resume Form</h1>
     <p>Please fill out the form below to edit your resume.</p>
-    <button mat-button color="primary" (click)="goBack()"><mat-icon>arrow_back_ios</mat-icon>Back</button>
+    <button mat-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+        Back To User
+        Resumes
+    </button>
     <br>
 </div>
 <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form">

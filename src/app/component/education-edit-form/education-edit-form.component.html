@@ -1,7 +1,10 @@
 <div class="resume-form-header">
     <h1>Edit Education</h1>
     <p>Please make changes below to edit education.</p>
-    <button mat-button color="primary" (click)="goBackToEditResume()"><mat-icon>arrow_back_ios</mat-icon>Back</button>
+    <button mat-button color="primary" (click)="goBackToEditResume()">
+        <mat-icon>arrow_back_ios</mat-icon>
+        Back To Edit Resume
+    </button>
     <br>
 </div>
 <form [formGroup]="educationForm" (submit)="onUpdate()" class="education-form">

@@ -86,7 +86,8 @@ export class ExperienceEditFormComponent extends ExperienceFormComponent {
   }
 
   onUpdate() {
-    this.newExperience = this.experienceForm.value as Experience;
+    this.newExperience = this.experienceForm.getRawValue() as Experience;
+    this.newExperience.id = this.id;
     this.newExperience.endDate = (this.newExperience.endDate instanceof Date)
       ? this.processPresentAsEndDate(this.newExperience.endDate)
       : this.newExperience.endDate;
@@ -95,7 +96,7 @@ export class ExperienceEditFormComponent extends ExperienceFormComponent {
       this.experienceService.editExperience(this.newExperience).subscribe({
         next: () => {
           this._snackBar.open('Experience updated successfully', 'Close', { duration: 3000 });
-          this.router.navigate(['/resume/edit', this.resumeId]);
+          this.router.navigate(['pro-filer/edit-resume', this.resumeId]);
         },
         error: (err: any) => {
           console.error('Error updating experience:', err);

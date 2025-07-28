@@ -88,11 +88,13 @@ export class EducationEditFormComponent extends EducationFormComponent {
   }
 
   onUpdate() {
+    console.log('Updating education with ID:', this.id);
     this.newEducation = this.educationForm.value as Education;
+    this.newEducation.id = this.id;
     this.educationService.editEducation(this.newEducation).subscribe({
       next: () => {
         this._snackBar.open('Education updated successfully', 'Close', { duration: 3000 });
-        this.router.navigate(['/resume-edit', this.resumeId]);
+        this.router.navigate(['pro-filer/edit-resume', this.resumeId]);
       },
       error: (error) => {
         console.error('Error updating education:', error);
