@@ -6,11 +6,12 @@ import { ResumeDetailsComponent } from "../resume-details/resume-details.compone
 import { ResumeToolHeaderComponent } from "../resume-tool-header/resume-tool-header.component";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserService } from '../../services/user.service';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-resumes',
-  imports: [NgFor, ResumeDetailsComponent, ResumeToolHeaderComponent, MatExpansionModule, MatProgressSpinnerModule],
+  imports: [NgFor, ResumeDetailsComponent, ResumeToolHeaderComponent, MatExpansionModule, MatBadgeModule, MatProgressSpinnerModule],
   templateUrl: './user-resumes.component.html',
   styleUrl: './user-resumes.component.scss'
 })

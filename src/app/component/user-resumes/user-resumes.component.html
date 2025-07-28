@@ -1,5 +1,7 @@
 <div>
-    <h1 class="resume-header">User Resumes</h1>
+    <h1 class="resume-header">
+        <span [matBadge]="resumes.length" matBadgeOverlap="false">User Resumes</span>
+    </h1>
     @if(isLoading) {
     <mat-spinner class="loading-spinner" diameter="200"></mat-spinner>
     } @else if (resumes.length === 0) {

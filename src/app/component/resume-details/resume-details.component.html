@@ -1,6 +1,10 @@
 <div class="resume-details-container" [id]="resumeData?.id">
     <h4>{{resumeData?.firstName?.toUpperCase()}} {{resumeData?.lastName?.toUpperCase()}}</h4>
-    <p>{{resumeData?.email}} | {{resumeData?.phoneNumber}} | {{resumeData?.linkedIn}} | {{resumeData?.website}}</p>
+    <p>{{resumeData?.email}}
+        @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
+        @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}
+        @if(resumeData?.website){<span>| {{resumeData?.website}}</span>}
+    </p>
     <h5>SUMMARY</h5>
     <hr />
     <p>{{resumeData?.summary}}</p>
