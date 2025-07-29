@@ -10,7 +10,7 @@ import { AllResumesComponent } from './component/all-resumes/all-resumes.compone
 import { ResumeFormComponent } from './component/resume-form/resume-form.component';
 import { loginGuard } from './guards/login.guard';
 import { ResumeEditFormComponent } from './component/resume-edit-form/resume-edit-form.component';
-import { ViewResumeComponent } from './view-resume/view-resume.component';
+import { ViewResumeComponent } from './component/view-resume/view-resume.component';
 import { ExperienceFormComponent } from './component/experience-form/experience-form.component';
 import { ExperienceEditFormComponent } from './component/experience-edit-form/experience-edit-form.component';
 import { EducationFormComponent } from './component/education-form/education-form.component';

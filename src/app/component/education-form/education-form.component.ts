@@ -86,9 +86,6 @@ export class EducationFormComponent {
 
   onSubmit() {
     this.newEducation = this.educationForm.value as Education;
-    this.newEducation.graduationDate = (this.newEducation.graduationDate instanceof Date)
-      ? this.processPresentAsEndDate(this.newEducation.graduationDate)
-      : this.newEducation.graduationDate;
 
     this.educationService.addEducationByResumeId(this.resumeId, this.newEducation).subscribe(data => console.log(data));
     this.educationForm.reset();
@@ -139,15 +136,6 @@ export class EducationFormComponent {
   removeDescription(descriptionIndex: number) {
     this.descriptions.removeAt(descriptionIndex);
     this.educationForm.markAsDirty();
-  }
-
-  processPresentAsEndDate(endDate: Date): string | Date {
-    const currentDate = new Date();
-    const yearIsEqual = endDate.getFullYear() === currentDate.getFullYear();
-    const monthIsEqual = endDate.getMonth() === currentDate.getMonth();
-    const dayIsEqual = endDate.getDate() === currentDate.getDate();
-    if (yearIsEqual && monthIsEqual && dayIsEqual) return 'present';
-    return endDate;
   }
 
   getAwards(): FormArray {

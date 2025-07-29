@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ResumeService } from '../services/resume.service';
+import { ResumeService } from '../../services/resume.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Resume } from '../shared/models/resume';
-import { ResumeDetailsComponent } from '../component/resume-details/resume-details.component';
+import { Resume } from '../../shared/models/resume';
+import { ResumeDetailsComponent } from '../resume-details/resume-details.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
