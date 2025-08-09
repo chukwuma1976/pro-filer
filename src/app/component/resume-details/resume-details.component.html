@@ -1,6 +1,5 @@
 <div class="resume-details-container" [id]="resumeData?.id">
-    <p id="full-name">{{resumeData?.firstName?.toUpperCase()}} {{resumeData?.lastName?.toUpperCase()}}</p>
-    <hr />
+    <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
     <p id="contact-info">{{resumeData?.email}}
         @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
         @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}
@@ -12,11 +11,11 @@
     <p id="experience">EXPERIENCE</p>
     <hr />
     <div *ngFor="let job of resumeData?.experience">
-        <p>{{job.employer}}, {{job.city}}, {{job.state}}</p>
         <div class="job-title">
-            <p>{{job.title}}</p>
+            <p class="job-role">{{job.title}}</p>
             <p>{{formatDate(job.startDate)}} - {{formatDate(job.endDate)}}</p>
         </div>
+        <p>{{job.employer}}, {{job.city}}, {{job.state}}</p>
         <ul>
             <li *ngFor="let desc of job.description">{{desc}}</li>
         </ul>

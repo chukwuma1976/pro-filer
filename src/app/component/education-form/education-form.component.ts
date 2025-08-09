@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -9,13 +9,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { customDateValidator } from '../../custom-validators/custom-date-validator';
 import { DEGREE_OPTIONS, TOOL_TIP_MESSAGES } from '../../shared/constants';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -23,6 +21,7 @@ import { STATES_DROPDOWN } from '../../shared/constants';
 import { Observable } from 'rxjs';
 import { EducationService } from '../../services/education.service';
 import { Education } from '../../shared/models/education';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-education-form',
@@ -53,7 +52,7 @@ export class EducationFormComponent {
   educationForm: FormGroup;
   newEducation!: Education;
   resumeId!: number | string;
-  protected _snackBar = inject(MatSnackBar);
+  util: UtilityService = new UtilityService();
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
   ifCurrentlyEmployedMessage = TOOL_TIP_MESSAGES.ifCurrentlyEmployed;
@@ -90,14 +89,8 @@ export class EducationFormComponent {
     this.educationService.addEducationByResumeId(this.resumeId, this.newEducation).subscribe(data => console.log(data));
     this.educationForm.reset();
     this.formGroupDirective.resetForm();
-    this.openSnackBar('Education submitted successfully!', 'Close');
+    this.util.openSnackBar('Education submitted successfully!', 'Close');
     this.goBackToEditResume() // Redirect to the education form with the resumeId  
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000
-    });
   }
 
   manageEducationStateFilter() {

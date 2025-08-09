@@ -95,7 +95,7 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       });
     } else {
       // Handle the case where resumeId is null, e.g., show an error or redirect
-      this._snackBar.open('Invalid resume ID.', 'Close', { duration: 5000 });
+      this.util.openSnackBar('Invalid resume ID.', 'Close');
       this.router.navigate(['/pro-filer/resume-details']);
     }
     // this.processValueChanges();  //to capture changes in FormArray form controls
@@ -225,14 +225,14 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
         this.updatedResume = this.resumeForm.getRawValue() as Resume; // Get the updated resume data including disabled fields
         this.updatedResume.id = this.resumeId;
         this.resumeService.editResume(this.updatedResume).subscribe(data => console.log(data));
-        this._snackBar.open('Resume updated successfully!', 'Close', { duration: 5000 });
+        this.util.openSnackBar('Resume updated successfully!', 'Close');
         this.router.navigate(['/pro-filer/resume-details']);
       }
       else {
-        this._snackBar.open('No changes made to the resume.', 'Close', { duration: 5000 });
+        this.util.openSnackBar('No changes made to the resume.', 'Close');
       }
     } else {
-      this._snackBar.open('Please fill in all required fields.', 'Close', { duration: 5000 });
+      this.util.openSnackBar('Please fill in all required fields.', 'Close');
     }
   }
 

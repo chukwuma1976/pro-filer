@@ -95,16 +95,16 @@ export class ExperienceEditFormComponent extends ExperienceFormComponent {
     if (this.experienceForm.valid) {
       this.experienceService.editExperience(this.newExperience).subscribe({
         next: () => {
-          this._snackBar.open('Experience updated successfully', 'Close', { duration: 3000 });
+          this.util.openSnackBar('Experience updated successfully', 'Close');
           this.router.navigate(['pro-filer/edit-resume', this.resumeId]);
         },
         error: (err: any) => {
           console.error('Error updating experience:', err);
-          this._snackBar.open('Failed to update experience', 'Close', { duration: 3000 });
+          this.util.openSnackBar('Failed to update experience', 'Close');
         }
       });
     } else {
-      this._snackBar.open('Please fill out all required fields', 'Close', { duration: 3000 });
+      this.util.openSnackBar('Please fill out all required fields', 'Close');
     }
   }
 

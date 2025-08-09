@@ -1,15 +1,15 @@
-:host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 .resume-form {
     width: 95%;
     margin: auto;
     padding: 2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
+}
+
+.resume-form-preview-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 mat-form-field {
@@ -77,4 +77,8 @@ mat-panel-title.nested-add {
 .mat-mdc-card {
     background-color: var(--mat-sys-surface-container);
     color: var(--mat-sys-on-surface-container)
+}
+
+#preview-mode {
+    display: flex;
 }

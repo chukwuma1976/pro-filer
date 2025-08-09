@@ -93,12 +93,12 @@ export class EducationEditFormComponent extends EducationFormComponent {
     this.newEducation.id = this.id;
     this.educationService.editEducation(this.newEducation).subscribe({
       next: () => {
-        this._snackBar.open('Education updated successfully', 'Close', { duration: 3000 });
+        this.util.openSnackBar('Education updated successfully', 'Close');
         this.router.navigate(['pro-filer/edit-resume', this.resumeId]);
       },
       error: (error) => {
         console.error('Error updating education:', error);
-        this._snackBar.open('Failed to update education', 'Close', { duration: 3000 });
+        this.util.openSnackBar('Failed to update education', 'Close');
       }
     });
   }

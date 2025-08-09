@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -9,7 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,6 +22,7 @@ import { STATES_DROPDOWN } from '../../shared/constants';
 import { Observable } from 'rxjs';
 import { ExperienceService } from '../../services/experience.service';
 import { Experience } from '../../shared/models/experience';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-experience-form',
@@ -53,7 +53,7 @@ export class ExperienceFormComponent {
   experienceForm: FormGroup;
   newExperience!: Experience;
   resumeId!: number | string;
-  protected _snackBar = inject(MatSnackBar);
+  util: UtilityService = new UtilityService();
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
   ifCurrentlyEmployedMessage = TOOL_TIP_MESSAGES.ifCurrentlyEmployed;
@@ -88,14 +88,8 @@ export class ExperienceFormComponent {
     this.experienceService.addExperienceByResumeId(this.resumeId, this.newExperience).subscribe(data => console.log(data));
     this.experienceForm.reset();
     this.formGroupDirective.resetForm();
-    this.openSnackBar('Experience submitted successfully!', 'Close');
+    this.util.openSnackBar('Experience submitted successfully!', 'Close');
     this.goBackToEditResume() // Redirect to the experience form with the resumeId  
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000
-    });
   }
 
   manageExperienceStateFilter() {

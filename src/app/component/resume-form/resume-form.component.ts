@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl, AbstractControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,7 +10,6 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Resume } from '../../shared/models/resume';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
 import { ResumeService } from '../../services/resume.service';
@@ -24,6 +23,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { STATES_DROPDOWN, DEGREE_OPTIONS } from '../../shared/constants';
 import { map, Observable, startWith } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { UtilityService } from '../../services/utility.service';
+import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
 
 @Component({
   selector: 'app-resume-form',
@@ -43,7 +44,8 @@ import { UserService } from '../../services/user.service';
     MatRadioModule,
     MatCheckboxModule,
     MatCardModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ResumeDetailsComponent
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
@@ -54,7 +56,7 @@ export class ResumeFormComponent {
   @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
   resumeForm: FormGroup;
   newResume!: Resume;
-  protected _snackBar = inject(MatSnackBar);
+  util: UtilityService = new UtilityService();
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position = new FormControl(this.positionOptions[2]);
   shareResumeMessage = TOOL_TIP_MESSAGES.shareResume;
@@ -66,6 +68,7 @@ export class ResumeFormComponent {
   filteredStateOptionsExp!: Observable<any[]>;
   filteredStateOptionsEdu!: Observable<any[]>;
   filteredDegreeOptions!: Observable<any[]>;
+  isPreviewMode = false;
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
@@ -96,14 +99,8 @@ export class ResumeFormComponent {
     this.resumeService.addResume(this.newResume, UserService.userId).subscribe(data => console.log(data));
     this.resumeForm.reset();
     this.formGroupDirective.resetForm();
-    this.openSnackBar('Resume submitted successfully!', 'Close');
+    this.util.openSnackBar('Resume submitted successfully!', 'Close');
     this.router.navigate(['/pro-filer/resume-details']);
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000
-    });
   }
 
   manageExperienceStateFilter(i: number) {
@@ -236,6 +233,10 @@ export class ResumeFormComponent {
     const dayIsEqual = endDate.getDate() === currentDate.getDate();
     if (yearIsEqual && monthIsEqual && dayIsEqual) return 'present';
     return endDate;
+  }
+
+  setPreviewMode() {
+    this.isPreviewMode = !this.isPreviewMode;
   }
 
 }

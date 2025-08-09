@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-resume-tool-header',
@@ -20,6 +21,7 @@ export class ResumeToolHeaderComponent {
 
   @Input() resume: Resume | null = null; // Input property to receive the resume ID
   pdf!: jsPDF;
+  util: UtilityService = new UtilityService();
 
   constructor(private resumeService: ResumeService, private dialog: MatDialog) { } // Inject the ResumeService
 
@@ -37,6 +39,7 @@ export class ResumeToolHeaderComponent {
       });
       this.pdf.setFontSize(10);
       this.pdf.save(`Resume${this.resume?.id}.pdf`);
+      this.util.openSnackBar('PDF generated successfully!', 'Close');
     });
   }
 

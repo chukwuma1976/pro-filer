@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilityService {
-
+  protected _snackBar = inject(MatSnackBar);
   constructor() { }
 
   formatDate(date: string | Date | undefined): any {
@@ -40,5 +41,11 @@ export class UtilityService {
       return new Date(date); // Convert string to Date object
     }
     return date; // If it's already a Date object, return it
+  }
+
+  openSnackBar(message: string, action: string, timeInMs: number = 5000) {
+    this._snackBar.open(message, action, {
+      duration: timeInMs
+    });
   }
 }
