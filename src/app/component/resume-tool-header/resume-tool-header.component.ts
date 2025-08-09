@@ -27,8 +27,10 @@ export class ResumeToolHeaderComponent {
     console.log('generate pdf');
     const resumeToPrint: any = document.getElementById(String(this.resume!.id));
     html2canvas(resumeToPrint, { scale: 2 }).then((canvas) => {
-      this.pdf = new jsPDF();
-      this.pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 298);
+      this.pdf = new jsPDF(); //PDF page height is 297
+      const pdfWidth = this.pdf.internal.pageSize.getWidth();
+      const pdfHeight = (resumeToPrint.offsetHeight * pdfWidth) / resumeToPrint.offsetWidth;
+      this.pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdfWidth, pdfHeight);
       this.pdf.setProperties({
         title: 'Resume PDF',
         author: `${this.resume?.firstName} ${this.resume?.lastName}`

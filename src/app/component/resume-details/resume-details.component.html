@@ -1,14 +1,15 @@
 <div class="resume-details-container" [id]="resumeData?.id">
-    <h4>{{resumeData?.firstName?.toUpperCase()}} {{resumeData?.lastName?.toUpperCase()}}</h4>
-    <p>{{resumeData?.email}}
+    <p id="full-name">{{resumeData?.firstName?.toUpperCase()}} {{resumeData?.lastName?.toUpperCase()}}</p>
+    <hr />
+    <p id="contact-info">{{resumeData?.email}}
         @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
         @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}
         @if(resumeData?.website){<span>| {{resumeData?.website}}</span>}
     </p>
-    <h5>SUMMARY</h5>
+    <p id="summary">SUMMARY</p>
     <hr />
     <p>{{resumeData?.summary}}</p>
-    <h5>EXPERIENCE</h5>
+    <p id="experience">EXPERIENCE</p>
     <hr />
     <div *ngFor="let job of resumeData?.experience">
         <p>{{job.employer}}, {{job.city}}, {{job.state}}</p>
@@ -20,7 +21,7 @@
             <li *ngFor="let desc of job.description">{{desc}}</li>
         </ul>
     </div>
-    <h5>EDUCATION</h5>
+    <p id="education">EDUCATION</p>
     <hr />
     <div *ngFor="let edu of resumeData?.education">
         <p>{{edu.institution}}, {{edu.city}}, {{edu.state}}</p>
@@ -33,7 +34,7 @@
             <li *ngFor="let award of edu.awards">{{award}}</li>
         </ul>
     </div>
-    <h5>SKILLS</h5>
+    <p id="skills">SKILLS</p>
     <hr />
     <ul>
         <li *ngFor="let skill of resumeData?.skills">{{skill}}</li>
