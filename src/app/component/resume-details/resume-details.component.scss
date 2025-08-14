@@ -22,9 +22,10 @@ p {
     padding: 5rem;
     background-color: var(--mat-sys-background);
     color: var(--mat-sys-on-background);
-    margin-right: 2em;
-    margin-left: 2em;
-    font-size: larger;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    font-size: 1.25vw;
+    scale: inherit;
 }
 
 #full-name,
@@ -42,7 +43,7 @@ p {
 
 #full-name {
     text-transform: uppercase;
-    font-size: 30px;
+    font-size: 2.5vw;
     text-align: center;
     padding-bottom: 10px;
 }

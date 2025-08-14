@@ -1,9 +1,16 @@
 .resume-form {
-    width: 95%;
-    margin: auto;
+    margin-top: 0px;
     padding: 2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
+}
+
+.show-preview {
+    width: 47%;
+}
+
+.hide-preview {
+    width: 95%;
 }
 
 .resume-form-preview-header {
@@ -81,4 +88,14 @@ mat-panel-title.nested-add {
 
 #preview-mode {
     display: flex;
+}
+
+.preview {
+    width: 47%;
+    border: 1px solid black;
+}
+
+.preview-btn {
+    margin-top: 1rem;
+    margin-right: 2rem;
 }

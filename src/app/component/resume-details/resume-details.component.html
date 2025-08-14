@@ -1,5 +1,6 @@
 <div class="resume-details-container" [id]="resumeData?.id">
-    <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
+    <p id="full-name">{{resumeData?.firstName}}
+        {{resumeData?.lastName}}</p>
     <p id="contact-info">{{resumeData?.email}}
         @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
         @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}

@@ -1,5 +1,13 @@
 <div class="resume-form-header">
-    <h1>Edit Resume Form</h1>
+    <div class="resume-form-preview-header">
+        <h1>Edit Resume Form</h1>
+        <div>
+            <button mat-raised-button type="button" class="preview-btn" matTooltip="Toggle Preview Mode"
+                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip" (click)="setPreviewMode()">
+                {{isPreviewMode?'Hide Preview Mode':'Show Preview Mode'}}
+            </button>
+        </div>
+    </div>
     <p>Please fill out the form below to edit your resume.</p>
     <button mat-button color="primary" (click)="goBack()">
         <mat-icon>arrow_back_ios</mat-icon>
@@ -8,268 +16,282 @@
     </button>
     <br>
 </div>
-<form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form">
-    <mat-accordion multi>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title> Contact Information and Summary </mat-panel-title>
-            </mat-expansion-panel-header>
-            <mat-form-field appearance="fill" class="firstName">
-                <mat-label>First Name</mat-label>
-                <input type="text" matInput formControlName="firstName">
-                <mat-error *ngIf="resumeForm.get('firstName')?.hasError('required')">First name is required</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="lastName">
-                <mat-label>Last Name</mat-label>
-                <input type="text" matInput formControlName="lastName">
-                <mat-error *ngIf="resumeForm.get('lastName')?.hasError('required')">Last name is required</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="phoneNumber">
-                <mat-label>Phone Number</mat-label>
-                <input type="text" matInput formControlName="phoneNumber">
-                <mat-error *ngIf="resumeForm.get('phoneNumber')?.hasError('required')">Phone number is
-                    required</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="email">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="email">
-                <mat-error *ngIf="resumeForm.get('email')?.hasError('required')">Email is required</mat-error>
-                <mat-error *ngIf="resumeForm.get('email')?.hasError('email')">Invalid email format</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="linkedIn">
-                <mat-label>LinkedIn</mat-label>
-                <input type="text" matInput formControlName="linkedIn">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="website">
-                <mat-label>Website</mat-label>
-                <input type="text" matInput formControlName="website">
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="fill">
-                <mat-label>Summary</mat-label>
-                <textarea matInput formControlName="summary" rows="3"></textarea>
-                <mat-error *ngIf="resumeForm.get('summary')?.hasError('required')">Summary is required</mat-error>
-            </mat-form-field>
-            <br>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title> Employment History / Job Experience </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div formArrayName="experience" *ngFor="let experience of experiences.controls; let i = index">
-                <div [formGroupName]="i" class="experience-form">
-                    <button mat-button color="primary" type="button" (click)="editExperience(i)"
-                        [matTooltip]="editExperienceMessage" [matTooltipPosition]="position.value!"
-                        matTooltipClass="custom-tooltip">
-                        <mat-icon>edit</mat-icon>
-                        Edit Job Experience {{i+1}}
-                    </button>
-                    <br>
-                    <mat-form-field appearance="fill" class="employer">
-                        <mat-label>Employer</mat-label>
-                        <input type="text" matInput [formControlName]="'employer'">
-                        <mat-error *ngIf="experience.get('employer')?.hasError('required')">Employer is
-                            required</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="title">
-                        <mat-label>Job Title</mat-label>
-                        <input type="text" matInput [formControlName]="'title'">
-                        <mat-error *ngIf="experience.get('title')?.hasError('required')">Job title is
-                            required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field appearance="fill" class="city">
-                        <mat-label>City</mat-label>
-                        <input type="text" matInput [formControlName]="'city'">
-                        <mat-error *ngIf="experience.get('city')?.hasError('required')">City is required</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="state">
-                        <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto"
-                            [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+<div id="preview-mode">
+    <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form">
+        <mat-accordion multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Contact Information and Summary </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field appearance="fill" class="firstName">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" matInput formControlName="firstName">
+                    <mat-error *ngIf="resumeForm.get('firstName')?.hasError('required')">First name is
+                        required</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="lastName">
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" matInput formControlName="lastName">
+                    <mat-error *ngIf="resumeForm.get('lastName')?.hasError('required')">Last name is
+                        required</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="phoneNumber">
+                    <mat-label>Phone Number</mat-label>
+                    <input type="text" matInput formControlName="phoneNumber">
+                    <mat-error *ngIf="resumeForm.get('phoneNumber')?.hasError('required')">Phone number is
+                        required</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="email">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email">
+                    <mat-error *ngIf="resumeForm.get('email')?.hasError('required')">Email is required</mat-error>
+                    <mat-error *ngIf="resumeForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="linkedIn">
+                    <mat-label>LinkedIn</mat-label>
+                    <input type="text" matInput formControlName="linkedIn">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="website">
+                    <mat-label>Website</mat-label>
+                    <input type="text" matInput formControlName="website">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Summary</mat-label>
+                    <textarea matInput formControlName="summary" rows="3"></textarea>
+                    <mat-error *ngIf="resumeForm.get('summary')?.hasError('required')">Summary is required</mat-error>
+                </mat-form-field>
+                <br>
+            </mat-expansion-panel>
+            <mat-divider></mat-divider>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Employment History / Job Experience </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div formArrayName="experience" *ngFor="let experience of experiences.controls; let i = index">
+                    <div [formGroupName]="i" class="experience-form">
+                        <button mat-button color="primary" type="button" (click)="editExperience(i)"
+                            [matTooltip]="editExperienceMessage" [matTooltipPosition]="position.value!"
                             matTooltipClass="custom-tooltip">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option [value]="state.value"
-                                *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
-                        </mat-autocomplete>
-                        <mat-error *ngIf="experience.get('state')?.hasError('required')">State is required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field class="start-date" appearance="fill">
-                        <mat-label>Start Date</mat-label>
-                        <input matInput [formControlName]="'startDate'" [matDatepicker]="picker">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="experience.get('startDate')?.hasError('required')">Start date is
-                            required</mat-error>
-                        <mat-error *ngIf="experience.get('startDate')?.hasError('invalidDate')">Start date cannot be in
-                            the future</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="end-date" appearance="fill">
-                        <mat-label>End Date</mat-label>
-                        <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2"
-                            [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!"
-                            matTooltipClass="custom-tooltip">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
-                        <mat-error *ngIf="experience.get('endDate')?.hasError('required')">End date is
-                            required</mat-error>
-                        <mat-error *ngIf="experience.get('endDate')?.hasError('invalidDate')">End date cannot be in
-                            the future</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-card class="example-card" appearance="outlined">
-                        <mat-card-header>
-                            <mat-panel-title class="nested-add">Add one or more job descriptions
-                                (Required)</mat-panel-title>
-                        </mat-card-header>
-                        <div formArrayName="description"
-                            *ngFor="let description of getDescription(i).controls; let j = index">
-                            <div class="description-form">
-                                <mat-form-field appearance="fill" class="deeply-nested">
-                                    <mat-label>Job Description</mat-label>
-                                    <input matInput [formControlName]="j">
-                                    <mat-error *ngIf="description.hasError('required')">
-                                        Description is required
-                                    </mat-error>
-                                </mat-form-field>
-                                <br>
+                            <mat-icon>edit</mat-icon>
+                            Edit Job Experience {{i+1}}
+                        </button>
+                        <br>
+                        <mat-form-field appearance="fill" class="employer">
+                            <mat-label>Employer</mat-label>
+                            <input type="text" matInput [formControlName]="'employer'">
+                            <mat-error *ngIf="experience.get('employer')?.hasError('required')">Employer is
+                                required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="title">
+                            <mat-label>Job Title</mat-label>
+                            <input type="text" matInput [formControlName]="'title'">
+                            <mat-error *ngIf="experience.get('title')?.hasError('required')">Job title is
+                                required</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="city">
+                            <mat-label>City</mat-label>
+                            <input type="text" matInput [formControlName]="'city'">
+                            <mat-error *ngIf="experience.get('city')?.hasError('required')">City is required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="state">
+                            <mat-label>State</mat-label>
+                            <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto"
+                                [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                                matTooltipClass="custom-tooltip">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option [value]="state.value"
+                                    *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
+                            </mat-autocomplete>
+                            <mat-error *ngIf="experience.get('state')?.hasError('required')">State is
+                                required</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="start-date" appearance="fill">
+                            <mat-label>Start Date</mat-label>
+                            <input matInput [formControlName]="'startDate'" [matDatepicker]="picker">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="experience.get('startDate')?.hasError('required')">Start date is
+                                required</mat-error>
+                            <mat-error *ngIf="experience.get('startDate')?.hasError('invalidDate')">Start date cannot be
+                                in
+                                the future</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="end-date" appearance="fill">
+                            <mat-label>End Date</mat-label>
+                            <input matInput [formControlName]="'endDate'" [matDatepicker]="picker2"
+                                [matTooltip]="ifCurrentlyEmployedMessage" [matTooltipPosition]="position.value!"
+                                matTooltipClass="custom-tooltip">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error *ngIf="experience.get('endDate')?.hasError('required')">End date is
+                                required</mat-error>
+                            <mat-error *ngIf="experience.get('endDate')?.hasError('invalidDate')">End date cannot be in
+                                the future</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-card class="example-card" appearance="outlined">
+                            <mat-card-header>
+                                <mat-panel-title class="nested-add">Add one or more job descriptions
+                                    (Required)</mat-panel-title>
+                            </mat-card-header>
+                            <div formArrayName="description"
+                                *ngFor="let description of getDescription(i).controls; let j = index">
+                                <div class="description-form">
+                                    <mat-form-field appearance="fill" class="deeply-nested">
+                                        <mat-label>Job Description</mat-label>
+                                        <input matInput [formControlName]="j">
+                                        <mat-error *ngIf="description.hasError('required')">
+                                            Description is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                    <br>
+                                </div>
                             </div>
-                        </div>
-                    </mat-card>
-                    <button *ngIf="experiences.controls.length > 1" mat-raised-button type="button"
-                        class="nested-delete" (click)="removeExperience(i)">Remove Experience</button>
-                    <br><br>
+                        </mat-card>
+                        <button *ngIf="experiences.controls.length > 1" mat-raised-button type="button"
+                            class="nested-delete" (click)="removeExperience(i)">Remove Experience</button>
+                        <br><br>
+                    </div>
                 </div>
-            </div>
-            <button mat-flat-button type="button" (click)="addExperience()">Add Experience</button>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title> Education </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div formArrayName="education" *ngFor="let education of educations.controls; let i = index">
-                <div [formGroupName]="i" class="education-form">
-                    <button mat-button color="primary" type="button" (click)="editEducation(i)"
-                        [matTooltip]="editEducationMessage" [matTooltipPosition]="position.value!"
-                        matTooltipClass="custom-tooltip">
-                        <mat-icon>edit</mat-icon>
-                        Edit Education {{i+1}}
-                    </button>
-                    <br>
-                    <mat-form-field appearance="fill" class="institution">
-                        <mat-label>School</mat-label>
-                        <input type="text" matInput [formControlName]="'institution'">
-                        <mat-error *ngIf="education.get('institution')?.hasError('required')">An institution is
-                            required</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="degree">
-                        <mat-label>Degree</mat-label>
-                        <input type="text" matInput [formControlName]="'degree'" [matAutocomplete]="auto2">
-                        <mat-autocomplete #auto2="matAutocomplete">
-                            <mat-option [value]="degree.name"
-                                *ngFor="let degree of filteredDegreeOptions | async">{{degree.name}}
-                            </mat-option>
-                        </mat-autocomplete>
-                        <mat-error *ngIf="education.get('degree')?.hasError('required')">Degree is required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field appearance="fill" class="city">
-                        <mat-label>City</mat-label>
-                        <input type="text" matInput [formControlName]="'city'">
-                        <mat-error *ngIf="education.get('city')?.hasError('required')">City is required</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="state">
-                        <mat-label>State</mat-label>
-                        <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto3"
-                            [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                <button mat-flat-button type="button" (click)="addExperience()">Add Experience</button>
+            </mat-expansion-panel>
+            <mat-divider></mat-divider>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Education </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div formArrayName="education" *ngFor="let education of educations.controls; let i = index">
+                    <div [formGroupName]="i" class="education-form">
+                        <button mat-button color="primary" type="button" (click)="editEducation(i)"
+                            [matTooltip]="editEducationMessage" [matTooltipPosition]="position.value!"
                             matTooltipClass="custom-tooltip">
-                        <mat-autocomplete #auto3="matAutocomplete">
-                            <mat-option [value]="state.value"
-                                *ngFor="let state of filteredStateOptionsEdu | async">{{state.name}}</mat-option>
-                        </mat-autocomplete>
-                        <mat-error *ngIf="education.get('state')?.hasError('required')">State is required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field appearance="fill" class="fieldOfStudy">
-                        <mat-label>Field of Study</mat-label>
-                        <input type="text" matInput [formControlName]="'fieldOfStudy'">
-                        <mat-error *ngIf="education.get('fieldOfStudy')?.hasError('required')">Field of study is
-                            required</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="graduationDate">
-                        <mat-label>Graduation Date</mat-label>
-                        <input matInput [formControlName]="'graduationDate'" [matDatepicker]="picker3">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-                        <mat-datepicker #picker3></mat-datepicker>
-                        <mat-error *ngIf="education.get('graduationDate')?.hasError('required')">Graduation date is
-                            required</mat-error>
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Description of Education (Optional)</mat-label>
-                        <input type="text" matInput [formControlName]="'descriptionEdu'">
-                        <mat-error *ngIf="education.get('descriptionEdu')?.hasError('required')">Description is
-                            required</mat-error>
-                    </mat-form-field>
-                    <mat-card class="example-card" appearance="outlined">
-                        <mat-card-header>
-                            <mat-panel-title class="nested-add">Add one or more awards Here (Optional)</mat-panel-title>
-                        </mat-card-header>
-                        <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
-                            <div class="award-form">
-                                <mat-form-field appearance="fill" class="deeply-nested">
-                                    <mat-label>Award</mat-label>
-                                    <input matInput [formControlName]="j">
-                                    <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
-                                </mat-form-field>
-                                <br>
+                            <mat-icon>edit</mat-icon>
+                            Edit Education {{i+1}}
+                        </button>
+                        <br>
+                        <mat-form-field appearance="fill" class="institution">
+                            <mat-label>School</mat-label>
+                            <input type="text" matInput [formControlName]="'institution'">
+                            <mat-error *ngIf="education.get('institution')?.hasError('required')">An institution is
+                                required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="degree">
+                            <mat-label>Degree</mat-label>
+                            <input type="text" matInput [formControlName]="'degree'" [matAutocomplete]="auto2">
+                            <mat-autocomplete #auto2="matAutocomplete">
+                                <mat-option [value]="degree.name"
+                                    *ngFor="let degree of filteredDegreeOptions | async">{{degree.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-error *ngIf="education.get('degree')?.hasError('required')">Degree is
+                                required</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="city">
+                            <mat-label>City</mat-label>
+                            <input type="text" matInput [formControlName]="'city'">
+                            <mat-error *ngIf="education.get('city')?.hasError('required')">City is required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="state">
+                            <mat-label>State</mat-label>
+                            <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto3"
+                                [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                                matTooltipClass="custom-tooltip">
+                            <mat-autocomplete #auto3="matAutocomplete">
+                                <mat-option [value]="state.value"
+                                    *ngFor="let state of filteredStateOptionsEdu | async">{{state.name}}</mat-option>
+                            </mat-autocomplete>
+                            <mat-error *ngIf="education.get('state')?.hasError('required')">State is
+                                required</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill" class="fieldOfStudy">
+                            <mat-label>Field of Study</mat-label>
+                            <input type="text" matInput [formControlName]="'fieldOfStudy'">
+                            <mat-error *ngIf="education.get('fieldOfStudy')?.hasError('required')">Field of study is
+                                required</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="graduationDate">
+                            <mat-label>Graduation Date</mat-label>
+                            <input matInput [formControlName]="'graduationDate'" [matDatepicker]="picker3">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                            <mat-error *ngIf="education.get('graduationDate')?.hasError('required')">Graduation date is
+                                required</mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Description of Education (Optional)</mat-label>
+                            <input type="text" matInput [formControlName]="'descriptionEdu'">
+                            <mat-error *ngIf="education.get('descriptionEdu')?.hasError('required')">Description is
+                                required</mat-error>
+                        </mat-form-field>
+                        <mat-card class="example-card" appearance="outlined">
+                            <mat-card-header>
+                                <mat-panel-title class="nested-add">Add one or more awards Here
+                                    (Optional)</mat-panel-title>
+                            </mat-card-header>
+                            <div formArrayName="awards" *ngFor="let award of getAwards(i).controls; let j = index">
+                                <div class="award-form">
+                                    <mat-form-field appearance="fill" class="deeply-nested">
+                                        <mat-label>Award</mat-label>
+                                        <input matInput [formControlName]="j">
+                                        <mat-error *ngIf="award.hasError('required')">Award is required</mat-error>
+                                    </mat-form-field>
+                                    <br>
+                                </div>
                             </div>
-                        </div>
-                    </mat-card>
-                    <button *ngIf="educations.controls.length > 1" mat-raised-button type="button" class="nested-delete"
-                        (click)="removeEducation(i)">Remove Education</button>
-                    <br><br>
+                        </mat-card>
+                        <button *ngIf="educations.controls.length > 1" mat-raised-button type="button"
+                            class="nested-delete" (click)="removeEducation(i)">Remove Education</button>
+                        <br><br>
+                    </div>
                 </div>
-            </div>
-            <button mat-flat-button type="button" (click)="addEducation()">Add Education</button>
-        </mat-expansion-panel>
-        <mat-divider></mat-divider> <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title> Skills and Additional Information </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div formArrayName="skills" *ngFor="let skill of skills.controls; let i = index">
-                <div class="skill-form">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Skill</mat-label>
-                        <input matInput [formControlName]="i">
-                        <mat-error *ngIf="skill.hasError('required')">Skill is required</mat-error>
-                    </mat-form-field>
-                    <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0" matTooltip="Delete Skill"
-                        [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
-                        (click)="removeSkill(i)"><mat-icon>delete</mat-icon></button>
-                    <br>
+                <button mat-flat-button type="button" (click)="addEducation()">Add Education</button>
+            </mat-expansion-panel>
+            <mat-divider></mat-divider> <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Skills and Additional Information </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div formArrayName="skills" *ngFor="let skill of skills.controls; let i = index">
+                    <div class="skill-form">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Skill</mat-label>
+                            <input matInput [formControlName]="i">
+                            <mat-error *ngIf="skill.hasError('required')">Skill is required</mat-error>
+                        </mat-form-field>
+                        <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0" matTooltip="Delete Skill"
+                            [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
+                            (click)="removeSkill(i)"><mat-icon>delete</mat-icon></button>
+                        <br>
+                    </div>
                 </div>
-            </div>
-            <button mat-flat-button type="button" (click)="addSkill()">Add Skill</button>
-            <br><br>
-            <mat-form-field appearance="fill">
-                <mat-label>Additional Information</mat-label>
-                <textarea matInput formControlName="additionalInfo" rows="3"></textarea>
-            </mat-form-field>
+                <button mat-flat-button type="button" (click)="addSkill()">Add Skill</button>
+                <br><br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Additional Information</mat-label>
+                    <textarea matInput formControlName="additionalInfo" rows="3"></textarea>
+                </mat-form-field>
+                <br>
+                <mat-checkbox formControlName="shareWithOthers" [matTooltip]="shareResumeMessage"
+                    [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip">
+                    <mat-label>Share resume with other users</mat-label>
+                </mat-checkbox>
+                <br>
+            </mat-expansion-panel>
             <br>
-            <mat-checkbox formControlName="shareWithOthers" [matTooltip]="shareResumeMessage"
-                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip">
-                <mat-label>Share resume with other users</mat-label>
-            </mat-checkbox>
-            <br>
-        </mat-expansion-panel>
-        <br>
-        <button mat-raised-button color="primary" type="submit" [disabled]="resumeForm.invalid">Submit</button>
-    </mat-accordion>
-</form>
+            <button mat-raised-button color="primary" type="submit" [disabled]="resumeForm.invalid">Submit</button>
+        </mat-accordion>
+    </form>
+    @if(isPreviewMode){
+    <div class="preview">
+        <app-resume-details [resumeData]="resumeForm.getRawValue() ?? null"></app-resume-details>
+    </div>
+    }
+</div>

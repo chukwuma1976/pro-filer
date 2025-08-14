@@ -19,14 +19,11 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { UtilityService } from '../../services/utility.service';
 import { ExperienceService } from '../../services/experience.service';
 import { EducationService } from '../../services/education.service';
-import { merge } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
 import { customDateValidator } from '../../custom-validators/custom-date-validator';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { get } from 'http';
-// Add this import if TOOL_TIP_MESSAGES is exported from a shared constants file
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
+import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -46,7 +43,8 @@ import { TOOL_TIP_MESSAGES } from '../../shared/constants';
     MatCheckbox,
     MatSelectModule,
     MatCardModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ResumeDetailsComponent
   ],
   templateUrl: './resume-edit-form.component.html',
   styleUrl: './resume-edit-form.component.scss',

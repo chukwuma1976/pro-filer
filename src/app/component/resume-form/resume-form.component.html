@@ -2,7 +2,7 @@
     <div class="resume-form-preview-header">
         <h1>Resume Form</h1>
         <div>
-            <button mat-raised-button type="button" matTooltip="Toggle Preview Mode"
+            <button mat-raised-button type="button" class="preview-btn" matTooltip="Toggle Preview Mode"
                 [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip" (click)="setPreviewMode()">
                 {{isPreviewMode?'Hide Preview Mode':'Show Preview Mode'}}
             </button>
@@ -12,7 +12,8 @@
     <br>
 </div>
 <div id="preview-mode">
-    <form [formGroup]="resumeForm" (submit)="onSubmit()" class="resume-form">
+    <form [formGroup]="resumeForm" (submit)="onSubmit()" class="resume-form"
+        [ngClass]="isPreviewMode ? 'show-preview':'hide-preview'">
         <mat-accordion multi>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
