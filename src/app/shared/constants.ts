@@ -84,6 +84,7 @@ export const DEGREE_OPTIONS = [
 ];
 
 export const TEMPLATES = [
+    { name: 'Default', value: 'default' },
     { name: 'Chronological', value: 'chronological' },
     { name: 'Functional', value: 'functional' },
     { name: 'Combination', value: 'combination' }

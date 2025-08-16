@@ -86,13 +86,13 @@ export class ResumeFormComponent {
       experience: this.fb.array([this.newExperienceControl()]),
       education: this.fb.array([this.newEducationControl()]),
       skills: this.fb.array([this.fb.control('', Validators.required)]),
-      certifications: this.fb.array([this.fb.control('')]),
-      projects: this.fb.array([this.fb.control('')]),
-      publications: this.fb.array([this.fb.control('')]),
-      volunteerExperience: this.fb.array([this.fb.control('')]),
+      certifications: this.fb.array([]),
+      projects: this.fb.array([]),
+      publications: this.fb.array([]),
+      volunteerExperience: this.fb.array([]),
       additionalInfo: [''],
       shareWithOthers: [false],
-      template: ['chronological'] // Default template
+      template: ['default'] // Default template
     });
 
     this.manageStateFilter();

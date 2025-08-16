@@ -19,7 +19,7 @@ export class UtilityService {
       const month = dateArray[1][0] === '0' ? dateArray[1][1] : dateArray[1]; // Handle single digit months
       const year = dateArray[0];
       return month + '/' + year;
-    } else if (!(date instanceof Date)) {
+    } else if ((date instanceof Date)) {
       const dateObj = new Date(date);
       return (dateObj.getMonth() + 1) + '/' + dateObj.getFullYear();
     }

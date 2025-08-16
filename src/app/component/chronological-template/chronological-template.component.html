@@ -1,0 +1,109 @@
+<div class="resume-details-container" [id]="resumeData?.id">
+    <header>
+        <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
+        @if(resumeData?.title) {<p id="title">{{resumeData?.title}}</p>}
+        <p id="contact-info">
+            @if(resumeData?.city && resumeData?.state) {<span>{{resumeData?.city}},
+                {{resumeData?.state}}</span> |}
+            {{resumeData?.email}}
+            @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
+            @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}
+            @if(resumeData?.website){<span>| {{resumeData?.website}}</span>}
+        </p>
+    </header>
+    <section id="summary-section">
+        <p id="summary">PROFESSIONAL SUMMARY</p>
+        <p>{{resumeData?.summary}}</p>
+    </section>
+    <section id="experience-section">
+        <p id="experience">WORK HISTORY</p>
+        <div class="section-container" *ngFor="let job of resumeData?.experience">
+            <div class="col-1">
+                <p class="work-dates">{{formatDate(job.startDate)}} - {{formatDate(job.endDate)}}</p>
+            </div>
+            <div class="col-2">
+                <p class="job-title">{{job.title}}</p>
+                <p class="job-employer">{{job.employer}}, {{job.city}}, {{job.state}}</p>
+                <ul>
+                    <li *ngFor="let desc of job.description">{{desc}}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section id="skills-section">
+        <p id="skills">SKILLS</p>
+        <div class="section-container">
+            <div class="col-1"></div>
+            <ul class="col-2">
+                <li class="skill-item" *ngFor="let skill of resumeData?.skills">{{skill}}</li>
+            </ul>
+        </div>
+    </section>
+    <section id="education-section">
+        <p id="education">EDUCATION</p>
+        <div class="section-container" *ngFor="let edu of resumeData?.education">
+            <div class="col-1"></div>
+            <div class="col-2">
+                <p><b>{{edu.degree}}:</b> {{edu.fieldOfStudy}}, {{formatDate(edu.graduationDate)}}</p>
+                <p><b>{{edu.institution}}</b> - {{edu.city}}, {{edu.state}}</p>
+                <p>{{edu.descriptionEdu}}</p>
+                <ul>
+                    <li *ngFor="let award of edu.awards">{{award}}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    @if(resumeData?.certifications?.length) {
+    <section id="certifications-section">
+        <p id="certifications">CERTIFICATIONS</p>
+        <div class="section-container">
+            <div class="col-1"></div>
+            <div class="col-2">
+                <p *ngFor="let cert of resumeData?.certifications">{{cert}}</p>
+            </div>
+        </div>
+    </section>
+    }
+    @if(resumeData?.projects?.length) {
+    <section id="projects-section">
+        <p id="projects">PROJECTS</p>
+        <div class="section-container">
+            <div class="col-1"></div>
+            <div class="col-2">
+                <p *ngFor="let project of resumeData?.projects">{{project}}</p>
+            </div>
+        </div>
+    </section>
+    }
+    @if(resumeData?.publications?.length) {
+    <section id="publications-section">
+        <p id="publications">PUBLICATIONS</p>
+        <div class="section-container">
+            <div class="col-1"></div>
+            <div class="col-2">
+                <li *ngFor="let publication of resumeData?.publications">{{publication}}</li>
+            </div>
+        </div>
+    </section>
+    }
+    @if(resumeData?.volunteerExperience?.length) {
+    <section id="volunteer-experience-section">
+        <p id="volunteer-experience">VOLUNTEER EXPERIENCE</p>
+        <div class="section-container">
+            <div class="col-1"></div>
+            <div class="col-2">
+                <p *ngFor="let experience of resumeData?.volunteerExperience">{{experience}}</p>
+            </div>
+        </div>
+    </section>
+    }
+    @if(resumeData?.additionalInfo) {
+    <section id="additional-info-section">
+        <p id="additional-info">ADDITIONAL INFORMATION</p>
+        <div class="section-container">
+            <div class="col-1"></div>
+            <p class="col-2">{{resumeData?.additionalInfo}}</p>
+        </div>
+    </section>
+    }
+</div>
