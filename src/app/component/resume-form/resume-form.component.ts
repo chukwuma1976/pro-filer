@@ -65,6 +65,7 @@ export class ResumeFormComponent {
 
   stateOptions = STATES_DROPDOWN
   degreeOptions = DEGREE_OPTIONS
+  filteredStateOptions!: Observable<any[]>;
   filteredStateOptionsExp!: Observable<any[]>;
   filteredStateOptionsEdu!: Observable<any[]>;
   filteredDegreeOptions!: Observable<any[]>;
@@ -74,6 +75,9 @@ export class ResumeFormComponent {
     this.resumeForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
+      title: [''],
+      city: [''],
+      state: [''],
       phoneNumber: [''],
       email: ['', [Validators.required, Validators.email]],
       linkedIn: [''],
@@ -82,10 +86,16 @@ export class ResumeFormComponent {
       experience: this.fb.array([this.newExperienceControl()]),
       education: this.fb.array([this.newEducationControl()]),
       skills: this.fb.array([this.fb.control('', Validators.required)]),
+      certifications: this.fb.array([this.fb.control('')]),
+      projects: this.fb.array([this.fb.control('')]),
+      publications: this.fb.array([this.fb.control('')]),
+      volunteerExperience: this.fb.array([this.fb.control('')]),
       additionalInfo: [''],
       shareWithOthers: [false],
+      template: ['chronological'] // Default template
     });
 
+    this.manageStateFilter();
     this.experiences.controls.forEach((control, index) => this.manageExperienceStateFilter(index));
     this.educations.controls.forEach((control, index) => this.manageEducationStateFilter(index));
     this.educations.controls.forEach((control, index) => this.manageEducationDegreeFilter(index));
@@ -101,6 +111,16 @@ export class ResumeFormComponent {
     this.formGroupDirective.resetForm();
     this.util.openSnackBar('Resume submitted successfully!', 'Close');
     this.router.navigate(['/pro-filer/resume-details']);
+  }
+
+  manageStateFilter() {
+    const control = this.resumeForm.get('state');
+    if (control) {
+      this.filteredStateOptions = control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value || '', this.stateOptions)),
+      );
+    }
   }
 
   manageExperienceStateFilter(i: number) {
@@ -148,6 +168,22 @@ export class ResumeFormComponent {
 
   get skills(): FormArray {
     return this.resumeForm.get('skills') as FormArray;
+  }
+
+  get certifications(): FormArray {
+    return this.resumeForm.get('certifications') as FormArray;
+  }
+
+  get projects(): FormArray {
+    return this.resumeForm.get('projects') as FormArray;
+  }
+
+  get publications(): FormArray {
+    return this.resumeForm.get('publications') as FormArray;
+  }
+
+  get volunteerExperience(): FormArray {
+    return this.resumeForm.get('volunteerExperience') as FormArray;
   }
 
   getDescription(index: number): FormArray {
@@ -221,8 +257,45 @@ export class ResumeFormComponent {
   addAward(educationIndex: number) {
     this.getAwards(educationIndex).push(this.fb.control('', Validators.required));
   }
+
   removeAward(educationIndex: number, awardIndex: number) {
     this.getAwards(educationIndex).removeAt(awardIndex);
+    this.resumeForm.markAsDirty();
+  }
+
+  addCertification() {
+    this.certifications.push(this.fb.control('', Validators.required));
+  }
+
+  removeCertification(index: number) {
+    this.certifications.removeAt(index);
+    this.resumeForm.markAsDirty();
+  }
+
+  addProject() {
+    this.projects.push(this.fb.control('', Validators.required));
+  }
+
+  removeProject(index: number) {
+    this.projects.removeAt(index);
+    this.resumeForm.markAsDirty();
+  }
+
+  addPublication() {
+    this.publications.push(this.fb.control('', Validators.required));
+  }
+
+  removePublication(index: number) {
+    this.publications.removeAt(index);
+    this.resumeForm.markAsDirty();
+  }
+
+  addVolunteerExperience() {
+    this.volunteerExperience.push(this.fb.control('', Validators.required));
+  }
+
+  removeVolunteerExperience(index: number) {
+    this.volunteerExperience.removeAt(index);
     this.resumeForm.markAsDirty();
   }
 

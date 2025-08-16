@@ -71,16 +71,24 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.resumeForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
+      title: [''],
+      city: [''],
+      state: [''],
       phoneNumber: [''],
       email: ['', [Validators.required, Validators.email]],
       linkedIn: [''],
       website: [''],
       summary: ['', Validators.required],
-      experience: this.fb.array([]),
-      education: this.fb.array([]),
-      skills: this.fb.array([]),
+      experience: this.fb.array([this.newExperienceControl()]),
+      education: this.fb.array([this.newEducationControl()]),
+      skills: this.fb.array([this.fb.control('', Validators.required)]),
+      certifications: this.fb.array([this.fb.control('')]),
+      projects: this.fb.array([this.fb.control('')]),
+      publications: this.fb.array([this.fb.control('')]),
+      volunteerExperience: this.fb.array([this.fb.control('')]),
       additionalInfo: [''],
       shareWithOthers: [false],
+      template: ['']
     });
   }
 
@@ -120,6 +128,27 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
       const newSkill: any = this.fb.control(skill, Validators.required);
       this.skills.controls.push(newSkill);
     });
+
+    resume.certifications?.forEach((certification: any) => {
+      const newCertification: any = this.fb.control(certification);
+      this.certifications.controls.push(newCertification);
+    });
+
+    resume.projects?.forEach((project: any) => {
+      const newProject: any = this.fb.control(project);
+      this.projects.controls.push(newProject);
+    });
+
+    resume.publications?.forEach((publication: any) => {
+      const newPublication: any = this.fb.control(publication);
+      this.publications.controls.push(newPublication);
+    });
+
+    resume.volunteerExperience?.forEach((volunteer: any) => {
+      const newVolunteer: any = this.fb.control(volunteer);
+      this.volunteerExperience.controls.push(newVolunteer);
+    });
+
     this.initialState = this.resumeForm.value as Resume;
   }
 

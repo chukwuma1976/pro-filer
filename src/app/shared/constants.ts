@@ -83,6 +83,13 @@ export const DEGREE_OPTIONS = [
     { name: 'No Degree', value: 'noDegree' }
 ];
 
+export const TEMPLATES = [
+    { name: 'Chronological', value: 'chronological' },
+    { name: 'Functional', value: 'functional' },
+    { name: 'Combination', value: 'combination' }
+];
+
+
 export const URL = {
     serverPort: "http://localhost:8080/",
     Auth: "api/v1/profiler/auth",

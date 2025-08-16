@@ -1,6 +1,6 @@
 <div class="resume-details-container" [id]="resumeData?.id">
-    <p id="full-name">{{resumeData?.firstName}}
-        {{resumeData?.lastName}}</p>
+    <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
+    @if(resumeData?.title) {<p id="title">{{resumeData?.title}}</p>}
     <p id="contact-info">{{resumeData?.email}}
         @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
         @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}
@@ -39,4 +39,34 @@
     <ul>
         <li *ngFor="let skill of resumeData?.skills">{{skill}}</li>
     </ul>
+    @if(resumeData?.certifications?.length) {
+    <p id="certifications">CERTIFICATIONS</p>
+    <hr />
+    <ul>
+        <li *ngFor="let cert of resumeData?.certifications">{{cert}}</li>
+    </ul>
+    }
+    @if(resumeData?.projects?.length) {
+    <p id="projects">PROJECTS</p>
+    <hr />
+    <ul>
+        <li *ngFor="let project of resumeData?.projects">{{project}}</li>
+    </ul>
+    }
+    @if(resumeData?.publications?.length) {
+    <p id="publications">PUBLICATIONS</p>
+    <hr />
+    <ul>
+        <li *ngFor="let publication of resumeData?.publications">{{publication}}</li>
+    </ul>
+    }
+    @if(resumeData?.volunteerExperience?.length) {
+    <p id="volunteer-experience">VOLUNTEER EXPERIENCE</p>
+    <hr />
+    <ul>
+        <ul>
+            <li *ngFor="let experience of resumeData?.volunteerExperience">{{experience}}</li>
+        </ul>
+    </ul>
+    }
 </div>

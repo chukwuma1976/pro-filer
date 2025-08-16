@@ -35,6 +35,25 @@
                     <mat-error *ngIf="resumeForm.get('lastName')?.hasError('required')">Last name is
                         required</mat-error>
                 </mat-form-field>
+                <mat-form-field appearance="fill" class="resume-title">
+                    <mat-label>Title</mat-label>
+                    <input type="text" matInput formControlName="title">
+                </mat-form-field><br>
+                <mat-form-field appearance="fill" class="city">
+                    <mat-label>City</mat-label>
+                    <input type="text" matInput formControlName="city">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="state">
+                    <mat-label>State</mat-label>
+                    <input type="text" matInput formControlName="state" [matAutocomplete]="auto"
+                        [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
+                        matTooltipClass="custom-tooltip">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option [value]="state.value"
+                            *ngFor="let state of filteredStateOptions | async">{{state.name}}</mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <br>
                 <mat-form-field appearance="fill" class="phoneNumber">
                     <mat-label>Phone Number</mat-label>
                     <input type="text" matInput formControlName="phoneNumber">
@@ -255,7 +274,8 @@
                 </div>
                 <button mat-flat-button type="button" (click)="addEducation()">Add Education</button>
             </mat-expansion-panel>
-            <mat-divider></mat-divider> <mat-expansion-panel>
+            <mat-divider></mat-divider>
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> Skills and Additional Information </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -273,6 +293,69 @@
                     </div>
                 </div>
                 <button mat-flat-button type="button" (click)="addSkill()">Add Skill</button>
+                <br><br>
+                <div formArrayName="certifications"
+                    *ngFor="let certification of certifications.controls; let i = index">
+                    <div class="skill-form">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Certification</mat-label>
+                            <input matInput [formControlName]="i">
+                        </mat-form-field>
+                        <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0"
+                            matTooltip="Delete Certification" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip"
+                            (click)="removeCertification(i)"><mat-icon>delete</mat-icon></button>
+                        <br>
+                    </div>
+                </div>
+                <button mat-flat-button type="button" (click)="addCertification()">Add Certification</button>
+                <br><br>
+                <div formArrayName="projects" *ngFor="let project of projects.controls; let i = index">
+                    <div class="skill-form">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Project</mat-label>
+                            <textarea matInput [formControlName]="i" rows="2"></textarea>
+                        </mat-form-field>
+                        <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0"
+                            matTooltip="Delete Project" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip"
+                            (click)="removeProject(i)"><mat-icon>delete</mat-icon></button>
+                        <br>
+                    </div>
+                </div>
+                <button mat-flat-button type="button" (click)="addProject()">Add Project</button>
+                <br><br>
+                <div formArrayName="publications" *ngFor="let publication of publications.controls; let i = index">
+                    <div class="skill-form">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Publication</mat-label>
+                            <textarea matInput [formControlName]="i" rows="2"></textarea>
+                        </mat-form-field>
+                        <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0"
+                            matTooltip="Delete Publication" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip"
+                            (click)="removePublication(i)"><mat-icon>delete</mat-icon></button>
+                        <br>
+                    </div>
+                </div>
+                <button mat-flat-button type="button" (click)="addPublication()">Add Publication</button>
+                <br><br>
+                <div formArrayName="volunteerExperience"
+                    *ngFor="let experience of volunteerExperience.controls; let i = index">
+                    <div class="skill-form">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Volunteer Experience</mat-label>
+                            <textarea matInput [formControlName]="i" rows="2"></textarea>
+                        </mat-form-field>
+                        <button mat-fab type="button" class="deeply-nested" [disabled]="i== 0"
+                            matTooltip="Delete Volunteer Experience" [matTooltipPosition]="position.value!"
+                            matTooltipClass="custom-tooltip"
+                            (click)="removeVolunteerExperience(i)"><mat-icon>delete</mat-icon></button>
+                        <br>
+                    </div>
+                </div>
+                <button mat-flat-button type="button" (click)="addVolunteerExperience()">Add Volunteer
+                    Experience</button>
                 <br><br>
                 <mat-form-field appearance="fill">
                     <mat-label>Additional Information</mat-label>
