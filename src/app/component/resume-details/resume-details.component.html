@@ -4,6 +4,12 @@
     {<app-chronological-template [resumeData]="resumeData"></app-chronological-template>}
     @case ('combination')
     {<app-combination-template [resumeData]="resumeData"></app-combination-template>}
+    @case ('functional')
+    {<app-functional-template [resumeData]="resumeData"></app-functional-template>}
+    @case ('modern')
+    {<app-modern-template [resumeData]="resumeData"></app-modern-template>}
+    @case ('simple')
+    {<app-simple-template [resumeData]="resumeData"></app-simple-template>}
     @default
     {<app-default-template [resumeData]="resumeData"></app-default-template>}
     }

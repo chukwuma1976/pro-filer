@@ -3,11 +3,11 @@ import { DefaultTemplateComponent } from '../default-template/default-template.c
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-functional-template',
+  selector: 'app-modern-template',
   imports: [CommonModule],
-  templateUrl: './functional-template.component.html',
-  styleUrl: './functional-template.component.scss'
+  templateUrl: './modern-template.component.html',
+  styleUrl: './modern-template.component.scss'
 })
-export class FunctionalTemplateComponent extends DefaultTemplateComponent {
+export class ModernTemplateComponent extends DefaultTemplateComponent {
 
 }

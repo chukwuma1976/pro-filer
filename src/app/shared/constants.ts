@@ -87,7 +87,9 @@ export const TEMPLATES = [
     { name: 'Default', value: 'default' },
     { name: 'Chronological', value: 'chronological' },
     { name: 'Functional', value: 'functional' },
-    { name: 'Combination', value: 'combination' }
+    { name: 'Combination', value: 'combination' },
+    { name: 'Modern', value: 'modern' },
+    { name: 'Simple', value: 'simple' },
 ];
 
 

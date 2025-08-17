@@ -9,13 +9,7 @@ p {
 }
 
 .degree {
-    display: flex;
-    justify-content: space-between;
-}
-
-.job-title {
-    display: flex;
-    justify-content: space-between;
+    font-weight: bold;
 }
 
 .resume-details-container {
@@ -29,7 +23,6 @@ p {
 }
 
 #full-name,
-#contact,
 #summary,
 #experience,
 #education,
@@ -41,64 +34,46 @@ p {
 #additional-info {
     font-weight: bold;
     padding-top: 1em;
-    padding-bottom: 1em;
-    color: var(--mat-sys-on-primary-container);
 }
 
 #contact-info {
-    text-align: left;
+    text-align: center;
 }
 
 #full-name {
     text-transform: uppercase;
     font-size: 2.5vw;
-    text-align: center;
+    text-align: left;
     padding-bottom: 10px;
 }
 
 #title {
-    text-align: center;
+    text-align: left;
     font-size: 1.5vw;
     padding-bottom: 10px;
     font-weight: bold;
 }
 
-#location {
-    text-align: center;
-    font-size: 1.25vw;
-    padding-bottom: 10px;
-}
-
+#location,
 #contact-info {
+    text-align: right;
+    font-size: 1vw;
     padding-bottom: 10px;
 }
 
-.job-role {
+.job-role,
+.employer {
     font-weight: bold;
 }
 
-#resume-body {
+#skills-section {
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.left-column {
-    width: 68%;
-    margin-right: 2%;
-}
-
-.right-column {
-    width: 30%;
-}
-
-.job-employer {
-    font-weight: bold;
-}
-
-header {
-    text-align: center;
-    padding-bottom: 2rem;
-    background-color: var(--mat-sys-primary-container);
-    border-bottom: 1px solid var(--mat-sys-on-primary-container);
+.skill-item {
+    width: 50%;
 }
 
 ul {

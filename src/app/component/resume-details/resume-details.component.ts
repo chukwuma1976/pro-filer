@@ -3,11 +3,21 @@ import { Resume } from '../../shared/models/resume'; // Import the Resume type
 import { DefaultTemplateComponent } from "../default-template/default-template.component";
 import { ChronologicalTemplateComponent } from '../chronological-template/chronological-template.component';
 import { CombinationTemplateComponent } from '../combination-template/combination-template.component';
+import { FunctionalTemplateComponent } from '../functional-template/functional-template.component';
+import { ModernTemplateComponent } from '../modern-template/modern-template.component';
+import { SimpleTemplateComponent } from '../simple-template/simple-template.component';
 
 @Component({
   selector: 'app-resume-details',
   standalone: true,
-  imports: [DefaultTemplateComponent, ChronologicalTemplateComponent, CombinationTemplateComponent],
+  imports: [
+    DefaultTemplateComponent,
+    ChronologicalTemplateComponent,
+    CombinationTemplateComponent,
+    FunctionalTemplateComponent,
+    ModernTemplateComponent,
+    SimpleTemplateComponent
+  ],
   templateUrl: './resume-details.component.html',
   styleUrl: './resume-details.component.scss'
 })

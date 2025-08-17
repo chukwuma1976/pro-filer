@@ -1,0 +1,79 @@
+<div class="resume-details-container" [id]="resumeData?.id">
+    <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
+    @if(resumeData?.title) {<p id="title">{{resumeData?.title}}</p>}
+    <hr>
+    <hr>
+    @if(resumeData?.city && resumeData?.state) {
+    <p id="location">{{resumeData?.city}}, {{resumeData?.state}}</p>
+    }
+    <p id="contact-info">{{resumeData?.email}}
+        @if(resumeData?.phoneNumber){<span>| {{resumeData?.phoneNumber}} </span>}
+        @if(resumeData?.linkedIn){<span>| {{resumeData?.linkedIn}} </span>}
+        @if(resumeData?.website){<span>| {{resumeData?.website}}</span>}
+    </p>
+    <p id="summary">Professional Summary</p>
+    <hr />
+    <p>{{resumeData?.summary}}</p>
+    <p id="experience">Work History</p>
+    <hr />
+    <div *ngFor="let job of resumeData?.experience">
+        <div class="job-title">
+            <p class="job-role">{{job.title}}</p>
+            <p>{{formatDate(job.startDate)}} to {{formatDate(job.endDate)}}</p>
+        </div>
+        <p><span class="employer">{{job.employer}}</span> - {{job.city}}, {{job.state}}</p>
+        <ul>
+            <li *ngFor="let desc of job.description">{{desc}}</li>
+        </ul>
+    </div>
+    <p id="skills">Skills</p>
+    <hr />
+    <ul id="skills-section">
+        <li class="skill-item" *ngFor="let skill of resumeData?.skills">{{skill}}</li>
+    </ul>
+    <p id="education">Education</p>
+    <hr />
+    <div *ngFor="let edu of resumeData?.education">
+        <p>
+            <span class="degree">{{edu.degree}} : {{edu.fieldOfStudy}}</span> - {{formatDate(edu.graduationDate)}}
+        </p>
+        <p class="degree">{{edu.institution}}, {{edu.city}}, {{edu.state}}</p>
+        <p>{{edu.descriptionEdu}}</p>
+        <ul>
+            <li *ngFor="let award of edu.awards">{{award}}</li>
+        </ul>
+    </div>
+    @if(resumeData?.certifications?.length) {
+    <p id="certifications">Certifications</p>
+    <hr />
+    <div>
+        <p *ngFor="let cert of resumeData?.certifications">{{cert}}</p>
+    </div>
+    }
+    @if(resumeData?.projects?.length) {
+    <p id="projects">Projects</p>
+    <hr />
+    <div>
+        <p *ngFor="let project of resumeData?.projects">{{project}}</p>
+    </div>
+    }
+    @if(resumeData?.publications?.length) {
+    <p id="publications">Publications</p>
+    <hr />
+    <div>
+        <p *ngFor="let publication of resumeData?.publications">{{publication}}</p>
+    </div>
+    }
+    @if(resumeData?.volunteerExperience?.length) {
+    <p id="volunteer-experience">Volunteer Experience</p>
+    <hr />
+    <div>
+        <p *ngFor="let experience of resumeData?.volunteerExperience">{{experience}}</p>
+    </div>
+    }
+    @if(resumeData?.additionalInfo) {
+    <p id="additional-info">Additional Information</p>
+    <hr />
+    <p>{{resumeData?.additionalInfo}}</p>
+    }
+</div>

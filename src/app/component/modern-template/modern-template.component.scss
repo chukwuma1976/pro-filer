@@ -29,7 +29,6 @@ p {
 }
 
 #full-name,
-#contact,
 #summary,
 #experience,
 #education,
@@ -40,65 +39,62 @@ p {
 #volunteer-experience,
 #additional-info {
     font-weight: bold;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    color: var(--mat-sys-on-primary-container);
 }
 
 #contact-info {
-    text-align: left;
+    text-align: center;
 }
 
 #full-name {
     text-transform: uppercase;
     font-size: 2.5vw;
-    text-align: center;
     padding-bottom: 10px;
 }
 
 #title {
-    text-align: center;
     font-size: 1.5vw;
     padding-bottom: 10px;
     font-weight: bold;
 }
 
-#location {
-    text-align: center;
-    font-size: 1.25vw;
-    padding-bottom: 10px;
-}
-
 #contact-info {
     padding-bottom: 10px;
+    text-align: left;
+    font-size: 1vw;
 }
 
-.job-role {
-    font-weight: bold;
-}
-
-#resume-body {
-    display: flex;
-}
-
-.left-column {
-    width: 68%;
-    margin-right: 2%;
-}
-
-.right-column {
-    width: 30%;
-}
-
+.work-dates,
+.job-title,
 .job-employer {
     font-weight: bold;
 }
 
-header {
-    text-align: center;
-    padding-bottom: 2rem;
-    background-color: var(--mat-sys-primary-container);
-    border-bottom: 1px solid var(--mat-sys-on-primary-container);
+.section-container {
+    display: flex;
+    padding-bottom: 1em;
+}
+
+.col-1 {
+    width: 20%;
+}
+
+.col-2 {
+    width: 80%;
+}
+
+#skills-section ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.skill-item {
+    width: 50%;
+}
+
+header,
+#summary-section {
+    padding-bottom: 1em;
 }
 
 ul {
