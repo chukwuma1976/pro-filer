@@ -1,0 +1,77 @@
+h5 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.degree {
+    font-weight: bold;
+}
+
+.resume-details-container {
+    padding: 5rem;
+    background-color: var(--mat-sys-background);
+    color: var(--mat-sys-on-background);
+    margin-right: 2rem;
+    margin-left: 2rem;
+    font-size: 1.25vw;
+    scale: inherit;
+}
+
+#full-name,
+#summary,
+#experience,
+#education,
+#skills,
+#certifications,
+#projects,
+#publications,
+#volunteer-experience,
+#additional-info {
+    font-weight: bold;
+    padding-top: 1em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--mat-sys-on-primary-container);
+}
+
+#contact-info,
+#location {
+    text-align: center;
+}
+
+#full-name {
+    text-transform: uppercase;
+    font-size: 2.5vw;
+    text-align: center;
+    padding-bottom: 10px;
+    color: var(--mat-sys-on-primary-container)
+}
+
+#title {
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.job-role {
+    font-weight: bold;
+}
+
+#skills-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.skill-item {
+    width: 50%;
+}
+
+ul {
+    margin-top: 0;
+}

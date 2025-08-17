@@ -7,6 +7,8 @@ import { FunctionalTemplateComponent } from '../functional-template/functional-t
 import { ModernTemplateComponent } from '../modern-template/modern-template.component';
 import { SimpleTemplateComponent } from '../simple-template/simple-template.component';
 import { CreativeTemplateComponent } from '../creative-template/creative-template.component';
+import { MinimalistTemplateComponent } from '../minimalist-template/minimalist-template.component';
+import { ATSFriendlyTemplateComponent } from '../ats-friendly-template/ats-friendly-template.component';
 
 
 @Component({
@@ -19,7 +21,9 @@ import { CreativeTemplateComponent } from '../creative-template/creative-templat
     FunctionalTemplateComponent,
     ModernTemplateComponent,
     SimpleTemplateComponent,
-    CreativeTemplateComponent
+    CreativeTemplateComponent,
+    MinimalistTemplateComponent,
+    ATSFriendlyTemplateComponent
   ],
   templateUrl: './resume-details.component.html',
   styleUrl: './resume-details.component.scss'

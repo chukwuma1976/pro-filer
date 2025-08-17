@@ -39,7 +39,7 @@ export class AllResumesComponent {
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   resumes: Resume[] = []; // Initialize resumes as an empty array
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'summary', 'action']; // Define the columns to display
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'template', 'summary', 'action']; // Define the columns to display
   dataSource: MatTableDataSource<Resume> = new MatTableDataSource<Resume>([]);
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
