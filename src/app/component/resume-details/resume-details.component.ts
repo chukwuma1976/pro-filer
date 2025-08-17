@@ -6,6 +6,8 @@ import { CombinationTemplateComponent } from '../combination-template/combinatio
 import { FunctionalTemplateComponent } from '../functional-template/functional-template.component';
 import { ModernTemplateComponent } from '../modern-template/modern-template.component';
 import { SimpleTemplateComponent } from '../simple-template/simple-template.component';
+import { CreativeTemplateComponent } from '../creative-template/creative-template.component';
+
 
 @Component({
   selector: 'app-resume-details',
@@ -16,7 +18,8 @@ import { SimpleTemplateComponent } from '../simple-template/simple-template.comp
     CombinationTemplateComponent,
     FunctionalTemplateComponent,
     ModernTemplateComponent,
-    SimpleTemplateComponent
+    SimpleTemplateComponent,
+    CreativeTemplateComponent
   ],
   templateUrl: './resume-details.component.html',
   styleUrl: './resume-details.component.scss'

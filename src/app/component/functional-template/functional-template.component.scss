@@ -60,6 +60,9 @@ p {
     font-size: 1vw;
     background-color: var(--mat-sys-primary-container);
     border-bottom: 1px solid var(--mat-sys-on-primary-container);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .work-dates,
@@ -78,12 +81,6 @@ p {
 
 .col-2 {
     width: 80%;
-}
-
-#contact-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 ul {

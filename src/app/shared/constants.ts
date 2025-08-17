@@ -90,6 +90,7 @@ export const TEMPLATES = [
     { name: 'Combination', value: 'combination' },
     { name: 'Modern', value: 'modern' },
     { name: 'Simple', value: 'simple' },
+    { name: 'Creative', value: 'creative' },
 ];
 
 
