@@ -20,7 +20,7 @@ import { customDateValidator } from '../../custom-validators/custom-date-validat
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { STATES_DROPDOWN, DEGREE_OPTIONS } from '../../shared/constants';
+import { STATES_DROPDOWN, DEGREE_OPTIONS, TEMPLATES } from '../../shared/constants';
 import { map, Observable, startWith } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { UtilityService } from '../../services/utility.service';
@@ -62,13 +62,16 @@ export class ResumeFormComponent {
   shareResumeMessage = TOOL_TIP_MESSAGES.shareResume;
   ifCurrentlyEmployedMessage = TOOL_TIP_MESSAGES.ifCurrentlyEmployed;
   stateWillBeAbbreviatedMessage = TOOL_TIP_MESSAGES.stateWillBeAbbreviated;
+  previewMessage = TOOL_TIP_MESSAGES.previewMessage;
 
   stateOptions = STATES_DROPDOWN
   degreeOptions = DEGREE_OPTIONS
+  templateOptions = TEMPLATES;
   filteredStateOptions!: Observable<any[]>;
   filteredStateOptionsExp!: Observable<any[]>;
   filteredStateOptionsEdu!: Observable<any[]>;
   filteredDegreeOptions!: Observable<any[]>;
+  filteredTemplateOptions!: Observable<any[]>;
   isPreviewMode = false;
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
@@ -96,6 +99,7 @@ export class ResumeFormComponent {
     });
 
     this.manageStateFilter();
+    this.manageTemplateFilter();
     this.experiences.controls.forEach((control, index) => this.manageExperienceStateFilter(index));
     this.educations.controls.forEach((control, index) => this.manageEducationStateFilter(index));
     this.educations.controls.forEach((control, index) => this.manageEducationDegreeFilter(index));
@@ -149,6 +153,16 @@ export class ResumeFormComponent {
       this.filteredDegreeOptions = control.valueChanges.pipe(
         startWith(''),
         map(value => this._filter(value.name || '', this.degreeOptions)),
+      );
+    }
+  }
+
+  manageTemplateFilter() {
+    const control = this.resumeForm.get('template');
+    if (control) {
+      this.filteredTemplateOptions = control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value.name || '', this.templateOptions)),
       );
     }
   }

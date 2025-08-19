@@ -2,7 +2,7 @@
     <div class="resume-form-preview-header">
         <h1>Resume Form</h1>
         <div>
-            <button mat-raised-button type="button" class="preview-btn" matTooltip="Toggle Preview Mode"
+            <button mat-raised-button type="button" class="preview-btn" [matTooltip]="previewMessage"
                 [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip" (click)="setPreviewMode()">
                 {{isPreviewMode?'Hide Preview Mode':'Show Preview Mode'}}
             </button>
@@ -15,6 +15,22 @@
     <form [formGroup]="resumeForm" (submit)="onSubmit()" class="resume-form"
         [ngClass]="isPreviewMode ? 'show-preview':'hide-preview'">
         <mat-accordion multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Select a Resume Template </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field appearance="fill" class="template">
+                    <mat-label>Select a Template</mat-label>
+                    <input type="text" matInput formControlName="template" [matAutocomplete]="auto6"
+                        matTooltip="select a template" [matTooltipPosition]="position.value!"
+                        matTooltipClass="custom-tooltip">
+                    <mat-autocomplete #auto6="matAutocomplete">
+                        <mat-option [value]="template.value"
+                            *ngFor="let template of filteredTemplateOptions | async">{{template.name}}</mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </mat-expansion-panel>
+            <mat-divider></mat-divider>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> Contact Information and Summary </mat-panel-title>
@@ -41,10 +57,10 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="state">
                     <mat-label>State</mat-label>
-                    <input type="text" matInput formControlName="state" [matAutocomplete]="auto"
+                    <input type="text" matInput formControlName="state" [matAutocomplete]="auto4"
                         [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
                         matTooltipClass="custom-tooltip">
-                    <mat-autocomplete #auto="matAutocomplete">
+                    <mat-autocomplete #auto4="matAutocomplete">
                         <mat-option [value]="state.value"
                             *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
                     </mat-autocomplete>
@@ -105,10 +121,10 @@
                         </mat-form-field>
                         <mat-form-field appearance="fill" class="state">
                             <mat-label>State</mat-label>
-                            <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto"
+                            <input type="text" matInput [formControlName]="'state'" [matAutocomplete]="auto5"
                                 [matTooltip]="stateWillBeAbbreviatedMessage" [matTooltipPosition]="position.value!"
                                 matTooltipClass="custom-tooltip">
-                            <mat-autocomplete #auto="matAutocomplete">
+                            <mat-autocomplete #auto5="matAutocomplete">
                                 <mat-option [value]="state.value"
                                     *ngFor="let state of filteredStateOptionsExp | async">{{state.name}}</mat-option>
                             </mat-autocomplete>

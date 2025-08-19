@@ -4,6 +4,7 @@ export const TOOL_TIP_MESSAGES = {
     stateWillBeAbbreviated: 'The state that you select will be entered as an abbreviation in your resume',
     editExperienceMessage: 'Edit your experience details here. You can update your job title, employer, and other relevant information.',
     editEducationMessage: 'Edit your education details here. You can update your degree, institution, and other relevant information.',
+    previewMessage: 'Preview your resume before saving. This will give you a chance to see how your resume looks with the current information.',
 };
 
 export const STATES_DROPDOWN = [

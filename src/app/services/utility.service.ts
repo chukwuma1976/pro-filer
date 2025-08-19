@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Resume } from '../shared/models/resume';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,32 @@ export class UtilityService {
     this._snackBar.open(message, action, {
       duration: timeInMs
     });
+  }
+
+  sortExperiencesByDate(experiences: any[]): any[] {
+    return experiences.sort((a, b) => {
+      const dateA = a.endDate.toLowerCase() !== "present" ? new Date(a.endDate) : new Date();
+      const dateB = b.endDate.toLowerCase() !== "present" ? new Date(b.endDate) : new Date();
+      return dateB.getTime() - dateA.getTime();
+    });
+  }
+
+  sortEducationsByDate(educations: any[]): any[] {
+    return educations.sort((a, b) => {
+      const dateA = a.graduationDate.toLowerCase() !== "present" ? new Date(a.graduationDate) : new Date();
+      const dateB = b.graduationDate.toLowerCase() !== "present" ? new Date(b.graduationDate) : new Date();
+      return dateB.getTime() - dateA.getTime();
+    });
+  }
+
+  processResume(resume: Resume): Resume | undefined {
+    if (resume) {
+      return {
+        ...resume,
+        experience: this.sortExperiencesByDate(resume.experience),
+        education: this.sortEducationsByDate(resume.education)
+      };
+    }
+    return undefined;
   }
 }

@@ -2,7 +2,7 @@
     <div class="resume-form-preview-header">
         <h1>Edit Resume Form</h1>
         <div>
-            <button mat-raised-button type="button" class="preview-btn" matTooltip="Toggle Preview Mode"
+            <button mat-raised-button type="button" class="preview-btn" [matTooltip]="previewMessage"
                 [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip" (click)="setPreviewMode()">
                 {{isPreviewMode?'Hide Preview Mode':'Show Preview Mode'}}
             </button>
@@ -19,6 +19,22 @@
 <div id="preview-mode">
     <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form">
         <mat-accordion multi>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Update Resume Template </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-form-field appearance="fill" class="template">
+                    <mat-label>Update Template</mat-label>
+                    <input type="text" matInput formControlName="template" [matAutocomplete]="auto6"
+                        matTooltip="select a template" [matTooltipPosition]="position.value!"
+                        matTooltipClass="custom-tooltip">
+                    <mat-autocomplete #auto6="matAutocomplete">
+                        <mat-option [value]="template.value"
+                            *ngFor="let template of filteredTemplateOptions | async">{{template.name}}</mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </mat-expansion-panel>
+            <mat-divider></mat-divider>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> Contact Information and Summary </mat-panel-title>

@@ -5,6 +5,7 @@ import { Resume } from '../../shared/models/resume';
 import { ResumeDetailsComponent } from '../resume-details/resume-details.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-view-resume',
@@ -15,11 +16,15 @@ import { MatIconModule } from '@angular/material/icon';
 export class ViewResumeComponent {
 
   resume: Resume | undefined;
-  constructor(private resumeService: ResumeService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private resumeService: ResumeService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private util: UtilityService) { }
 
   ngOnInit() {
     const resumeId = this.route.snapshot.paramMap.get('id') ?? '0';
-    this.resumeService.getResumeById(resumeId).subscribe(resume => this.resume = resume);
+    this.resumeService.getResumeById(resumeId).subscribe(resume => this.resume = this.util.processResume(resume));
   }
 
   goBack() {

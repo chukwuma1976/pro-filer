@@ -68,28 +68,6 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     private educationService: EducationService) {
 
     super(fb, resumeService, router);
-    this.resumeForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      title: [''],
-      city: [''],
-      state: [''],
-      phoneNumber: [''],
-      email: ['', [Validators.required, Validators.email]],
-      linkedIn: [''],
-      website: [''],
-      summary: ['', Validators.required],
-      experience: this.fb.array([this.newExperienceControl()]),
-      education: this.fb.array([this.newEducationControl()]),
-      skills: this.fb.array([this.fb.control('', Validators.required)]),
-      certifications: this.fb.array([]),
-      projects: this.fb.array([]),
-      publications: this.fb.array([]),
-      volunteerExperience: this.fb.array([]),
-      additionalInfo: [''],
-      shareWithOthers: [false],
-      template: ['']
-    });
   }
 
   ngOnInit() {
@@ -113,6 +91,15 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
 
   populateUpdateForm(resume: Resume | any) {
     this.resumeForm.patchValue(resume);
+
+    // Resetting the FormArrays before populating them with new data
+    this.resumeForm.setControl('experience', this.fb.array([]));
+    this.resumeForm.setControl('education', this.fb.array([]));
+    this.resumeForm.setControl('skills', this.fb.array([]));
+    this.resumeForm.setControl('certifications', this.fb.array([]));
+    this.resumeForm.setControl('projects', this.fb.array([]));
+    this.resumeForm.setControl('publications', this.fb.array([]));
+    this.resumeForm.setControl('volunteerExperience', this.fb.array([]));
 
     resume.experience.forEach((exp: any) => {
       const newExperience: any = this.newUserExperienceControl(exp);
