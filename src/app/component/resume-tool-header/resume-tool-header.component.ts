@@ -10,6 +10,7 @@ import { PopUpComponent } from '../pop-up/pop-up.component';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { UtilityService } from '../../services/utility.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-resume-tool-header',
@@ -38,7 +39,7 @@ export class ResumeToolHeaderComponent {
         author: `${this.resume?.firstName} ${this.resume?.lastName}`
       });
       this.pdf.setFontSize(10);
-      this.pdf.save(`Resume${this.resume?.id}.pdf`);
+      this.pdf.save(`Resume${this.resume?.firstName}${this.resume?.lastName}${this.resume?.id}.pdf`);
       this.util.openSnackBar('PDF generated successfully!', 'Close');
     });
   }
@@ -52,6 +53,21 @@ export class ResumeToolHeaderComponent {
         action: 'delete'
       }
     });
+  }
+
+  belongsToUser() {
+    // Compare the user ID with the resume's user ID
+    return UserService.userId === this.resume?.userId
+  }
+
+  printResume() {
+    const resumeElement = document.getElementById(String(this.resume?.id));
+    const originalContents = document.body.innerHTML;
+    if (resumeElement) {
+      document.body.innerHTML = resumeElement.innerHTML;
+      window.print();
+      document.body.innerHTML = originalContents;
+    }
   }
 
 }

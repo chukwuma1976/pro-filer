@@ -1,4 +1,5 @@
 <div class="resume-form-header">
+    @if(belongsToUser()) {
     <button mat-button [routerLink]="['/pro-filer/edit-resume', resume?.id]">
         <mat-icon>edit</mat-icon>
         Edit Resume
@@ -7,8 +8,13 @@
         <mat-icon>delete</mat-icon>
         Delete Resume
     </button>
+    }
     <button mat-button (click)="generatePDF()">
         <mat-icon>picture_as_pdf</mat-icon>
         Generate PDF
+    </button>
+    <button mat-button (click)="printResume()">
+        <mat-icon>print</mat-icon>
+        Print Resume
     </button>
 </div>

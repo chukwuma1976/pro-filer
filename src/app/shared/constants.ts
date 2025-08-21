@@ -93,6 +93,8 @@ export const TEMPLATES = [
     { name: 'Simple', value: 'simple' },
     { name: 'Creative', value: 'creative' },
     { name: 'Minimalist', value: 'minimalist' },
+    { name: 'ATS Friendly', value: 'ats friendly' },
+    { name: 'Unique', value: 'unique' }
 ];
 
 

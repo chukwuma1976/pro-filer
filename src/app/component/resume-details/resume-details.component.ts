@@ -9,6 +9,7 @@ import { SimpleTemplateComponent } from '../simple-template/simple-template.comp
 import { CreativeTemplateComponent } from '../creative-template/creative-template.component';
 import { MinimalistTemplateComponent } from '../minimalist-template/minimalist-template.component';
 import { ATSFriendlyTemplateComponent } from '../ats-friendly-template/ats-friendly-template.component';
+import { UniqueTemplateComponent } from '../unique-template/unique-template.component';
 
 
 @Component({
@@ -23,7 +24,8 @@ import { ATSFriendlyTemplateComponent } from '../ats-friendly-template/ats-frien
     SimpleTemplateComponent,
     CreativeTemplateComponent,
     MinimalistTemplateComponent,
-    ATSFriendlyTemplateComponent
+    ATSFriendlyTemplateComponent,
+    UniqueTemplateComponent
   ],
   templateUrl: './resume-details.component.html',
   styleUrl: './resume-details.component.scss'

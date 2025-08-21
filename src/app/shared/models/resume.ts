@@ -23,4 +23,5 @@ export interface Resume {
     additionalInfo?: string;
     shareWithOthers?: boolean;
     template?: string;
+    userId?: string | number;
 }

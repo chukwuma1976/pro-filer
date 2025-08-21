@@ -6,10 +6,11 @@ import { ResumeDetailsComponent } from '../resume-details/resume-details.compone
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { UtilityService } from '../../services/utility.service';
+import { ResumeToolHeaderComponent } from '../resume-tool-header/resume-tool-header.component';
 
 @Component({
   selector: 'app-view-resume',
-  imports: [ResumeDetailsComponent, MatIconModule, MatButtonModule],
+  imports: [ResumeDetailsComponent, MatIconModule, MatButtonModule, ResumeToolHeaderComponent],
   templateUrl: './view-resume.component.html',
   styleUrl: './view-resume.component.scss'
 })

@@ -23,7 +23,6 @@ p {
     scale: inherit;
 }
 
-#full-name,
 #summary,
 #experience,
 #education,
@@ -34,25 +33,45 @@ p {
 #volunteer-experience,
 #additional-info {
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--mat-sys-on-primary-container);
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 #full-name {
     font-size: 2.5vw;
     font-family: Arial, Helvetica, sans-serif;
-    padding-bottom: 10px;
+    padding-bottom: 0.5vh;
+    font-weight: bold;
+}
+
+#name-and-title {
+    padding: 1rem;
+    background-color: orange;
+}
+
+.top-left-triangle {
+    width: 0;
+    height: 0;
+    border-top: 2vw solid orange;
+    border-right: 2vw solid transparent;
 }
 
 #title {
     font-size: 1.5vw;
     padding-bottom: 10px;
-    font-weight: bold;
 }
 
 #contact-info {
     margin-bottom: 2rem;
-    text-align: left;
     font-size: 1vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+mat-icon {
+    margin-left: 0.5rem;
+    color: orange;
+    margin-top: 0.2rem;
 }
 
 .work-dates,
@@ -88,7 +107,7 @@ ul {
     }
 }
 
-.job-title {
+.job {
     display: flex;
     justify-content: space-between;
 }
