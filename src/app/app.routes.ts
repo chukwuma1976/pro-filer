@@ -15,9 +15,9 @@ import { ExperienceFormComponent } from './component/experience-form/experience-
 import { ExperienceEditFormComponent } from './component/experience-edit-form/experience-edit-form.component';
 import { EducationFormComponent } from './component/education-form/education-form.component';
 import { EducationEditFormComponent } from './component/education-edit-form/education-edit-form.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
@@ -26,7 +26,6 @@ export const routes: Routes = [
         component: NavContainerComponent,
         canActivate: [loginGuard],
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomePageComponent },
             { path: 'resume-details', component: UserResumesComponent },
             { path: 'all-resumes', component: AllResumesComponent },
@@ -37,8 +36,11 @@ export const routes: Routes = [
             { path: 'edit-experience/:resumeId/:id', component: ExperienceEditFormComponent },
             { path: 'add-education/:resumeId', component: EducationFormComponent },
             { path: 'edit-education/:resumeId/:id', component: EducationEditFormComponent },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
         ]
-    }
+    },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
