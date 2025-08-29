@@ -29,4 +29,8 @@ export class UserResumesComponent {
     }); // Fetch all resumes from the service
   }
 
+  getResumeDocumentId(resumeId: number | string): string {
+    return this.util.getResumeDocumentId(resumeId);
+  }
+
 }

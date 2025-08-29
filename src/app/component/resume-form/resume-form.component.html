@@ -379,7 +379,7 @@
         </mat-accordion>
     </form>
     @if(isPreviewMode){
-    <div class="preview">
+    <div class="preview" [ngStyle]="{'transform': 'scale(0.5)', 'transform-origin': 'top left', 'width': '100%'}">
         <app-resume-details [resumeData]="resumeForm.value ?? null"></app-resume-details>
     </div>
     }

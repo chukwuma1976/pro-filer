@@ -27,8 +27,10 @@ export class ResumeToolHeaderComponent {
   constructor(private resumeService: ResumeService, private dialog: MatDialog) { } // Inject the ResumeService
 
   generatePDF() {
-    console.log('generate pdf');
-    const resumeToPrint: any = document.getElementById(String(this.resume!.id));
+    const resumeDocumentId = this.util.getResumeDocumentId(this.resume!.id);
+    console.log('generating pdf with id:', resumeDocumentId);
+    const resumeToPrint: any = document.getElementById(resumeDocumentId);
+    resumeToPrint.setAttribute('style', 'background-color: white;'); // Ensure background is white for better PDF quality
     html2canvas(resumeToPrint, { scale: 2 }).then((canvas) => {
       this.pdf = new jsPDF(); //PDF page height is 297
       const pdfWidth = this.pdf.internal.pageSize.getWidth();
@@ -41,6 +43,7 @@ export class ResumeToolHeaderComponent {
       this.pdf.setFontSize(10);
       this.pdf.save(`Resume${this.resume?.firstName}${this.resume?.lastName}${this.resume?.id}.pdf`);
       this.util.openSnackBar('PDF generated successfully!', 'Close');
+      resumeToPrint.removeAttribute('style'); // Clean up the style change
     });
   }
 

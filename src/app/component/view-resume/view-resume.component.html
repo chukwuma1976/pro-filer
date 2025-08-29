@@ -8,5 +8,7 @@
         </button>
     </div>
     <app-resume-tool-header [resume]="resume ?? null"></app-resume-tool-header>
-    <app-resume-details [resumeData]="resume ?? null"></app-resume-details>
+    <div [id]="resumeDocumentId" class="resume-padding">
+        <app-resume-details [resumeData]="resume ?? null"></app-resume-details>
+    </div>
 </div>

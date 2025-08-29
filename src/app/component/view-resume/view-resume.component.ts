@@ -17,6 +17,7 @@ import { ResumeToolHeaderComponent } from '../resume-tool-header/resume-tool-hea
 export class ViewResumeComponent {
 
   resume: Resume | undefined;
+  resumeDocumentId!: string;
   constructor(
     private resumeService: ResumeService,
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class ViewResumeComponent {
 
   ngOnInit() {
     const resumeId = this.route.snapshot.paramMap.get('id') ?? '0';
+    this.resumeDocumentId = this.util.getResumeDocumentId(resumeId);
     this.resumeService.getResumeById(resumeId).subscribe(resume => this.resume = this.util.processResume(resume));
   }
 

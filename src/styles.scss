@@ -56,3 +56,14 @@ body {
     display: block;
     margin: 20px auto;
 }
+
+.resume-details-container {
+    // background-color: var(--mat-sys-background);
+    color: var(--mat-sys-on-background);
+    font-size: 1.25vw;
+}
+
+.resume-padding {
+    padding: 6em;
+    margin-top: -6em;
+}

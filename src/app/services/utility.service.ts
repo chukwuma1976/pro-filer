@@ -76,4 +76,8 @@ export class UtilityService {
     }
     return undefined;
   }
+
+  getResumeDocumentId(id: number | string): string {
+    return `resume-${id}`;
+  }
 }
