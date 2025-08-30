@@ -3,16 +3,15 @@
     padding: 2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
-    width: 95%;
 }
 
-// .show-preview {
-//     width: 47%;
-// }
+.show-preview {
+    width: 200%;
+}
 
-// .hide-preview {
-//     width: 95%;
-// }
+.hide-preview {
+    width: 95%;
+}
 
 .resume-form-preview-header {
     width: 100%;
@@ -94,6 +93,11 @@ mat-panel-title.nested-add {
 
 .preview {
     border: 1px solid black;
+    transform: scale(0.5);
+    transform-origin: 50% 0;
+    width: 200%;
+    padding: 3rem;
+    border-radius: 10px;
 }
 
 .preview-btn {

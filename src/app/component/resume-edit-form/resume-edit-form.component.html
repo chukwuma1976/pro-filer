@@ -17,7 +17,8 @@
     <br>
 </div>
 <div id="preview-mode">
-    <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form">
+    <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form"
+        [ngClass]="isPreviewMode ? 'show-preview':'hide-preview'">
         <mat-accordion multi>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -385,7 +386,7 @@
         </mat-accordion>
     </form>
     @if(isPreviewMode){
-    <div [ngStyle]="{'transform': 'scale(0.5)', 'transform-origin': 'top left', 'width': '100%'}">
+    <div class="preview">
         <app-resume-details [resumeData]="resumeForm.getRawValue() ?? null"></app-resume-details>
     </div>
     }
