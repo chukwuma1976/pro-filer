@@ -25,6 +25,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { UtilityService } from '../../services/utility.service';
 import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
+import { PreviewResumeComponent } from '../preview-resume/preview-resume.component';
 
 @Component({
   selector: 'app-resume-form',
@@ -45,7 +46,8 @@ import { ResumeDetailsComponent } from "../resume-details/resume-details.compone
     MatCheckboxModule,
     MatCardModule,
     MatAutocompleteModule,
-    ResumeDetailsComponent
+    ResumeDetailsComponent,
+    PreviewResumeComponent
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',

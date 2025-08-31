@@ -379,8 +379,8 @@
         </mat-accordion>
     </form>
     @if(isPreviewMode){
-    <div class="preview">
+    <app-preview-resume>
         <app-resume-details [resumeData]="resumeForm.value ?? null"></app-resume-details>
-    </div>
+    </app-preview-resume>
     }
 </div>

@@ -1,0 +1,13 @@
+.preview {
+    border: 1px solid black;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    width: 80%;
+    min-width: 50vw;
+    padding: 3rem;
+    border-radius: 10px;
+    position: fixed;
+    height: 115vh;
+    overflow-y: auto;
+    margin-left: 2rem;
+}

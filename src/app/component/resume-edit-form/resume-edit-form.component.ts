@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
+import { PreviewResumeComponent } from '../preview-resume/preview-resume.component';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -44,7 +45,8 @@ import { ResumeDetailsComponent } from "../resume-details/resume-details.compone
     MatSelectModule,
     MatCardModule,
     MatAutocompleteModule,
-    ResumeDetailsComponent
+    ResumeDetailsComponent,
+    PreviewResumeComponent
   ],
   templateUrl: './resume-edit-form.component.html',
   styleUrl: './resume-edit-form.component.scss',

@@ -1,12 +1,10 @@
 .resume-form {
-    margin-top: 0px;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .show-preview {
-    width: 200%;
+    width: 40%;
 }
 
 .hide-preview {
@@ -88,17 +86,17 @@ mat-panel-title.nested-add {
 
 #preview-mode {
     display: flex;
-    justify-content: space-between
+    // justify-content: space-between
 }
 
-.preview {
-    border: 1px solid black;
-    transform: scale(0.5);
-    transform-origin: 50% 0;
-    width: 200%;
-    padding: 3rem;
-    border-radius: 10px;
-}
+// .preview {
+//     border: 1px solid black;
+//     transform: scale(0.5);
+//     transform-origin: 50% 0;
+//     width: 200%;
+//     padding: 3rem;
+//     border-radius: 10px;
+// }
 
 .preview-btn {
     margin-top: 1rem;
