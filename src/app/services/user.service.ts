@@ -19,11 +19,15 @@ export class UserService {
     this.http = http;
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.domain);
+  }
+
   getUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(this.domain + '/username/' + username);
   }
 
-  getUserByUserId(id: string): Observable<User> {
+  getUserByUserId(id: string | number): Observable<User> {
     return this.http.get<User>(this.domain + '/id/' + id);
   }
 
@@ -31,7 +35,7 @@ export class UserService {
     return this.http.put<User>(this.domain + user.id, user);
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: string | number): Observable<any> {
     return this.http.delete(this.domain + id);
   }
 

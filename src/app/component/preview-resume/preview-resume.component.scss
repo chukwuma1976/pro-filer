@@ -1,5 +1,5 @@
 .preview {
-    border: 1px solid black;
+    border: 1px solid var(--mat-sys-on-background);
     transform: scale(0.5);
     transform-origin: 0 0;
     width: 80%;
@@ -10,4 +10,6 @@
     height: 115vh;
     overflow-y: auto;
     margin-left: 2rem;
+    scrollbar-color: var(--mat-sys-primary) transparent;
+    scrollbar-width: thin;
 }

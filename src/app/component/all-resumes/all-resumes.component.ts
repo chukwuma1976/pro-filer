@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UserService } from '../../services/user.service';
+import { User } from '../../shared/models/user';
 
 @Component({
   selector: 'app-all-resumes',
@@ -39,7 +41,8 @@ export class AllResumesComponent {
   private _liveAnnouncer = inject(LiveAnnouncer);
 
   resumes: Resume[] = []; // Initialize resumes as an empty array
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'template', 'summary', 'action']; // Define the columns to display
+  users: User[] = []; // Initialize a list of users to grab usernames
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'username', 'template', 'summary', 'action']; // Define the columns to display
   dataSource: MatTableDataSource<Resume> = new MatTableDataSource<Resume>([]);
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
@@ -60,9 +63,10 @@ export class AllResumesComponent {
     }
   }
 
-  constructor(private resumeService: ResumeService) { }
+  constructor(private resumeService: ResumeService, private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.getAllUsers().subscribe(users => this.users = users);
     this.resumeService.getAllResumes().subscribe(resumes => {
       this.resumes = resumes
       this.dataSource = new MatTableDataSource<Resume>(this.resumes);
@@ -82,5 +86,9 @@ export class AllResumesComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  getUsername(id: string | number) {
+    return this.users.find(user => user.id === id)?.username;
   }
 }

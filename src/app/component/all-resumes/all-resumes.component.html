@@ -24,13 +24,19 @@
             </th>
             <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
         </ng-container>
+        <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by username"> Username
+            </th>
+            <td mat-cell *matCellDef="let element"> {{getUsername(element.userId)}} </td>
+        </ng-container>
         <ng-container matColumnDef="template">
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by template"> Template
             </th>
             <td mat-cell *matCellDef="let element"> {{element.template}} </td>
         </ng-container>
         <ng-container matColumnDef="summary">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by summary"> Summary </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by summary"> Summary
+            </th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.summary" matTooltipClass="custom-tooltip"
                 [matTooltipPosition]="position.value!"> {{element.summary}} </td>
         </ng-container>

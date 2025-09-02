@@ -34,6 +34,11 @@ th {
     color: var(--mat-sys-on-primary)
 }
 
+.mat-column-username,
+.mat-column-template {
+    width: 10%;
+}
+
 .mat-column-summary {
     overflow: hidden;
     width: 50%;
@@ -48,4 +53,8 @@ td.mat-column-action {
 
 td.mat-column-template {
     text-transform: capitalize;
+}
+
+td.mat-column-lastName {
+    font-weight: bold;
 }

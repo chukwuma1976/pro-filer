@@ -22,9 +22,8 @@ export class ResumeToolHeaderComponent {
 
   @Input() resume: Resume | null = null; // Input property to receive the resume ID
   pdf!: jsPDF;
-  util: UtilityService = new UtilityService();
 
-  constructor(private resumeService: ResumeService, private dialog: MatDialog) { } // Inject the ResumeService
+  constructor(private resumeService: ResumeService, private dialog: MatDialog, private util: UtilityService) { } // Inject the ResumeService
 
   generatePDF() {
     const resumeDocumentId = this.util.getResumeDocumentId(this.resume!.id);

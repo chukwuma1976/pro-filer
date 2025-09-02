@@ -4,7 +4,8 @@
         <div>
             <button mat-raised-button type="button" class="preview-btn" [matTooltip]="previewMessage"
                 [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip" (click)="setPreviewMode()">
-                {{isPreviewMode?'Hide Preview Mode':'Show Preview Mode'}}
+                @if(isPreviewMode){<mat-icon>visibility_off</mat-icon>}@else{<mat-icon>visibility</mat-icon>}
+                {{isPreviewMode?'Hide Preview':'Show Preview'}}
             </button>
         </div>
     </div>
