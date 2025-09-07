@@ -17,7 +17,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<string> {
     const user = { username, password };
-    return this.http.post(this.domain + '/login', user, { responseType: 'text' });
+    return this.http.post(this.domain + '/login', user, { responseType: 'text', withCredentials: true });
   }
 
   signup(username: string, password: string, email: string): Observable<string> {
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   checkIsInSession(): Observable<string> {
-    return this.http.get(this.domain + "/check", { responseType: 'text' })
+    return this.http.get(this.domain + "/check", { responseType: 'text', withCredentials: true })
   }
 
   setIsLoggedIn() {
@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   logout(): Observable<string> {
-    return this.http.get(this.domain + "/logout", { responseType: 'text' });
+    return this.http.post(this.domain + "/logout", {}, { responseType: 'text', withCredentials: true });
   }
 
 }

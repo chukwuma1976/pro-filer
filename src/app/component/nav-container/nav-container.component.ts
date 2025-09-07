@@ -70,7 +70,7 @@ export class NavContainerComponent {
     });
 
     this.authService.checkIsInSession().subscribe((value: string) => {
-      if (value !== 'Not logged in') this.authService.setIsLoggedIn();
+      if (value.includes('Logged in as')) this.authService.setIsLoggedIn();
       console.log(value);
     })
   }
