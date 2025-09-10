@@ -1,0 +1,66 @@
+{
+    "id": 4,
+    "firstName": "",
+    "lastName": "",
+    "title": "",
+    "city": "",
+    "state": "",
+    "phoneNumber": "",
+    "email": "",
+    "linkedIn": "",
+    "website": "",
+    "summary": "",
+    "experience": [
+        {
+            "id": 8,
+            "employer": "",
+            "title": "",
+            "city": "",
+            "state": "",
+            "startDate": "",
+            "endDate": "",
+            "description": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "education": [
+        {
+            "id": 4,
+            "institution": "",
+            "city": "",
+            "state": "",
+            "degree": "",
+            "fieldOfStudy": "",
+            "graduationDate": "",
+            "descriptionEdu": "",
+            "awards": []
+        }
+    ],
+    "skills": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "certifications": [
+        ""
+    ],
+    "projects": [
+        "",
+        ""
+    ],
+    "publications": [
+        ""
+    ],
+    "volunteerExperience": [
+        ""
+    ],
+    "additionalInfo": "",
+    "shareWithOthers": true,
+    "template": "ats friendly",
+    "userId": 3
+}

@@ -1,0 +1,66 @@
+{
+    "id": 4,
+    "firstName": "Gary",
+    "lastName": "Sue",
+    "title": "Software Engineer",
+    "city": "Fort Worth",
+    "state": "TX",
+    "phoneNumber": "123456789",
+    "email": "gary.sue@gmail.com",
+    "linkedIn": "www.linkedin.com/in/garysue/",
+    "website": "https://github.com/chris1981",
+    "summary": "Software engineer with a surgical approach to software development. I build dynamic and immersive full stack applications using JavaScript, React, Angular, Ruby, Rails, Java, and Spring Boot.",
+    "experience": [
+        {
+            "id": 8,
+            "employer": "Prime Time Coding Solutions",
+            "title": "Contractor",
+            "city": "Dallas",
+            "state": "Texas",
+            "startDate": "2023-11-13T06:00:00.000Z",
+            "endDate": "Present",
+            "description": [
+                "Automation testing",
+                "UI coding"
+            ]
+        }
+    ],
+    "education": [
+        {
+            "id": 4,
+            "institution": "Premium Coding Bootcamp",
+            "city": "New York",
+            "state": "New York",
+            "degree": "Certificate in Software Engineering",
+            "fieldOfStudy": "Software Engineering",
+            "graduationDate": "2023-06-12T05:00:00.000Z",
+            "descriptionEdu": "Built cool projects using JavaScript, React, Angular, Ruby, Rails, Java, and Spring Boot.",
+            "awards": []
+        }
+    ],
+    "skills": [
+        "JavaScript",
+        "React",
+        "Angular",
+        "TypeScript",
+        "Java",
+        "Spring Boot"
+    ],
+    "certifications": [
+        "Software Engineering"
+    ],
+    "projects": [
+        "Healthcare System Interface",
+        "ProFiler"
+    ],
+    "publications": [
+        "The Projected Future of AI: The Good, The Bad, and Pretty"
+    ],
+    "volunteerExperience": [
+        "Teach the Kids to Code"
+    ],
+    "additionalInfo": "I made this ProFiler application",
+    "shareWithOthers": true,
+    "template": "ats friendly",
+    "userId": 3
+}

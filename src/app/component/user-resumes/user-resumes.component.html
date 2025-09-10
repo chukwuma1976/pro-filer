@@ -3,7 +3,9 @@
         <span [matBadge]="resumes.length" matBadgeOverlap="false">User Resumes</span>
     </h1>
     @if(isLoading) {
-    <mat-spinner class="loading-spinner" diameter="200"></mat-spinner>
+    <div id="loading-spinner">
+        <mat-spinner class="loading-spinner" diameter="200"></mat-spinner>
+    </div>
     } @else if (resumes.length === 0) {
     <div class="resume-header">
         <p>No resumes found. Please create a new resume.</p>
