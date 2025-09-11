@@ -35,7 +35,10 @@
             "fieldOfStudy": "",
             "graduationDate": "",
             "descriptionEdu": "",
-            "awards": []
+            "awards": [
+                "",
+                ""
+            ]
         }
     ],
     "skills": [

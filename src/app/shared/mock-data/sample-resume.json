@@ -1,14 +1,14 @@
 {
     "id": 4,
     "firstName": "Gary",
-    "lastName": "Sue",
+    "lastName": "Stu",
     "title": "Software Engineer",
     "city": "Fort Worth",
     "state": "TX",
     "phoneNumber": "123456789",
-    "email": "gary.sue@gmail.com",
-    "linkedIn": "www.linkedin.com/in/garysue/",
-    "website": "https://github.com/chris1981",
+    "email": "gary.stu@gmail.com",
+    "linkedIn": "www.linkedin.com/in/garystu/",
+    "website": "https://github.com/garystu",
     "summary": "Software engineer with a surgical approach to software development. I build dynamic and immersive full stack applications using JavaScript, React, Angular, Ruby, Rails, Java, and Spring Boot.",
     "experience": [
         {
@@ -17,7 +17,7 @@
             "title": "Contractor",
             "city": "Dallas",
             "state": "Texas",
-            "startDate": "2023-11-13T06:00:00.000Z",
+            "startDate": "2023-11-13",
             "endDate": "Present",
             "description": [
                 "Automation testing",
@@ -33,9 +33,12 @@
             "state": "New York",
             "degree": "Certificate in Software Engineering",
             "fieldOfStudy": "Software Engineering",
-            "graduationDate": "2023-06-12T05:00:00.000Z",
+            "graduationDate": "2023-06-12",
             "descriptionEdu": "Built cool projects using JavaScript, React, Angular, Ruby, Rails, Java, and Spring Boot.",
-            "awards": []
+            "awards": [
+                "Career showcase presentation",
+                "Most original concept"
+            ]
         }
     ],
     "skills": [

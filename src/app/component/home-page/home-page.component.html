@@ -2,7 +2,15 @@
 <div class="home-page-container">
     <section>
         <p>Your one-stop solution for creating and managing resumes.</p>
+        <p>Land Your Dream Job: Create a Professional Resume in Minutes.</p>
         <p>Get started by filling in your information!</p>
+        <p>Select from several choices of templates.</p>
+        <p>Current Selection: <span class="template-name">{{dynamicFormData.template?.toUpperCase()}}</span></p>
+        @for (template of templates; track $index) {
+        <button mat-raised-button type="button" (click)="demoTemplate(template)">
+            {{template.name}}
+        </button>
+        }
     </section>
     <app-preview-resume>
         <app-resume-details [resumeData]="dynamicFormData"></app-resume-details>

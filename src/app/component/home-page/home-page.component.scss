@@ -5,9 +5,53 @@
 
 .home-page-header {
     text-align: center;
+    animation-name: change-color;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
 }
 
 section {
     width: 40%;
     padding-left: 5%;
+}
+
+button {
+    width: 10vw;
+}
+
+.template-name {
+    font-weight: bolder;
+    animation-name: change-color;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+
+}
+
+p {
+    font-style: italic;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    animation-duration: 2s;
+    animation-name: slide-in;
+}
+
+@keyframes slide-in {
+    from {
+        translate: 150vw 0;
+        scale: 200% 1;
+    }
+
+    to {
+        translate: 0 0;
+        scale: 100% 1;
+    }
+}
+
+@keyframes change-color {
+    from {
+        color: red;
+    }
+
+    to {
+        color: var(--mat-sys-on-primary-container);
+    }
 }
