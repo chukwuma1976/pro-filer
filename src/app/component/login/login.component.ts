@@ -7,17 +7,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserService } from '../../services/user.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule, RouterLink, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule],
+  imports: [ReactiveFormsModule, RouterLink, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatIconModule],
 })
 export class LoginComponent {
   loginForm: FormGroup;
   submitted = false;
   loginError: string = '';
+  showPassword = false; // Initially hide the password
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +31,10 @@ export class LoginComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   onSubmit() {

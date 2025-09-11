@@ -1,5 +1,5 @@
 .login-container {
-    width: 300px;
+    width: 20vw;
     margin: auto;
     padding: 2rem;
     border: 1px solid #ccc;
@@ -21,4 +21,8 @@
 
 .auth-links a:hover {
     text-decoration: underline;
+}
+
+mat-form-field {
+    width: 20vw;
 }

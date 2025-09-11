@@ -77,6 +77,7 @@ export class HomePageComponent {
       if (arrayFields.includes(field)) {
         const values = this.formData[field as keyof Resume];
         if (Array.isArray(values)) {
+          (this.dynamicFormData as any)[field] = new Array(values.length);
           (values as string[]).forEach((value: string, index: number) => {
             this.typeAnimationArray(field, index, value);
           });
@@ -94,6 +95,7 @@ export class HomePageComponent {
                   this.typeAnimationObject(field, val, text);
                 } else {
                   const elements = (obj as Record<string, any>)[val];
+                  (this.dynamicFormData as any)[field][index1][val] = new Array(elements.length);
                   (elements as string[]).forEach((text: string, index: number) => {
                     this.typeAnimationObjectArray(field, index1, val, index, text);
                   });

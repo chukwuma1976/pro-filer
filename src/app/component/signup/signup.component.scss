@@ -1,9 +1,13 @@
 .signup-container {
-    width: 300px;
+    width: 20vw;
     margin: auto;
     padding: 2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin-top: 10em;
     background-color: aliceblue;
+}
+
+mat-form-field {
+    width: 20vw;
 }

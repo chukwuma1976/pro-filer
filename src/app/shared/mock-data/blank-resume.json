@@ -19,10 +19,7 @@
             "state": "",
             "startDate": "",
             "endDate": "",
-            "description": [
-                "",
-                ""
-            ]
+            "description": []
         }
     ],
     "education": [
@@ -35,33 +32,14 @@
             "fieldOfStudy": "",
             "graduationDate": "",
             "descriptionEdu": "",
-            "awards": [
-                "",
-                ""
-            ]
+            "awards": []
         }
     ],
-    "skills": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-    ],
-    "certifications": [
-        ""
-    ],
-    "projects": [
-        "",
-        ""
-    ],
-    "publications": [
-        ""
-    ],
-    "volunteerExperience": [
-        ""
-    ],
+    "skills": [],
+    "certifications": [],
+    "projects": [],
+    "publications": [],
+    "volunteerExperience": [],
     "additionalInfo": "",
     "shareWithOthers": true,
     "template": "ats friendly",

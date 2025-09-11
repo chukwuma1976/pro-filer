@@ -10,11 +10,14 @@
             @if (loginForm.controls['username'].errors && loginForm.controls['username'].errors['username']) {
             <mat-error>Invalid username format.</mat-error>
             }
-        </mat-form-field>
+        </mat-form-field><br>
 
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput type="password" formControlName="password" />
+            <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" />
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                {{showPassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
             @if (loginForm.controls['password'].errors && loginForm.controls['password'].errors['required']) {
             <mat-error>Password is required.</mat-error>
             }
