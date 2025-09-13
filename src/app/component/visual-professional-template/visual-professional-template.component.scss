@@ -1,0 +1,92 @@
+h5 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.degree {
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+#contact,
+#summary,
+#experience,
+#education,
+#skills,
+#certifications,
+#projects,
+#publications,
+#volunteer-experience,
+#additional-info {
+    font-weight: bold;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: var(--mat-sys-on-primary-container);
+}
+
+#full-name {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 2.5vw;
+    color: var(--mat-sys-on-primary-container);
+}
+
+#title {
+    font-size: 1.5vw;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+#location {
+    text-align: center;
+    font-size: 1.25vw;
+    padding-bottom: 10px;
+}
+
+#contact-info {
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: 1vw;
+}
+
+.job-role {
+    font-weight: bold;
+}
+
+#resume-body {
+    display: flex;
+}
+
+.left-column {
+    width: 68%;
+    margin-right: 2%;
+}
+
+.right-column {
+    width: 30%;
+}
+
+.job-employer {
+    font-weight: bold;
+}
+
+header {
+    text-align: center;
+    padding-bottom: 2rem;
+    background-color: var(--mat-sys-primary-container);
+    border-bottom: 1px solid var(--mat-sys-on-primary-container);
+}
+
+ul {
+    margin-top: 0;
+}
