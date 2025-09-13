@@ -26,6 +26,7 @@ import { UserService } from '../../services/user.service';
 import { UtilityService } from '../../services/utility.service';
 import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
 import { PreviewResumeComponent } from '../preview-resume/preview-resume.component';
+import { UploadImageComponent } from "../upload-image/upload-image.component";
 
 @Component({
   selector: 'app-resume-form',
@@ -47,7 +48,8 @@ import { PreviewResumeComponent } from '../preview-resume/preview-resume.compone
     MatCardModule,
     MatAutocompleteModule,
     ResumeDetailsComponent,
-    PreviewResumeComponent
+    PreviewResumeComponent,
+    UploadImageComponent
   ],
   templateUrl: './resume-form.component.html',
   styleUrl: './resume-form.component.scss',
@@ -75,6 +77,7 @@ export class ResumeFormComponent {
   filteredDegreeOptions!: Observable<any[]>;
   filteredTemplateOptions!: Observable<any[]>;
   isPreviewMode = false;
+  canUploadImage: boolean = false;
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
@@ -326,6 +329,10 @@ export class ResumeFormComponent {
 
   setPreviewMode() {
     this.isPreviewMode = !this.isPreviewMode;
+  }
+
+  setImageUploadDisplay() {
+    this.canUploadImage = !this.canUploadImage
   }
 
 }

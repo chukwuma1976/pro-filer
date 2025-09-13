@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   userInfo!: User; // Store user information
   domain: string = URL.serverPort + URL.User
+  imgDomain: string = URL.serverPort + URL.Image;
 
   static userName: string;
   static userId: number | string;
@@ -42,5 +43,17 @@ export class UserService {
   setUserInfo(username: string) {
     UserService.userName = username;
     this.http.get<User>(this.domain + '/username/' + username).subscribe(user => UserService.userId = user.id);
+  }
+
+  // Upload or replace profile image
+  uploadProfileImage(userId: string | number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.imgDomain}/${userId}/profile-image`, formData, { responseType: 'text' });
+  }
+
+  // Get user's profile image
+  getProfileImage(userId: string | number): Observable<Blob> {
+    return this.http.get(`${this.imgDomain}/${userId}/profile-image`, { responseType: 'blob' });
   }
 }

@@ -105,4 +105,5 @@ export const URL = {
     User: "api/v1/profiler/users",
     Experience: "api/v1/profiler/experiences",
     Education: "api/v1/profiler/educations",
+    Image: "api/v1/profiler/users"
 }

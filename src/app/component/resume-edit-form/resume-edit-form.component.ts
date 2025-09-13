@@ -25,6 +25,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 import { ResumeDetailsComponent } from "../resume-details/resume-details.component";
 import { PreviewResumeComponent } from '../preview-resume/preview-resume.component';
+import { UploadImageComponent } from '../upload-image/upload-image.component';
 
 @Component({
   selector: 'app-resume-edit-form',
@@ -46,7 +47,8 @@ import { PreviewResumeComponent } from '../preview-resume/preview-resume.compone
     MatCardModule,
     MatAutocompleteModule,
     ResumeDetailsComponent,
-    PreviewResumeComponent
+    PreviewResumeComponent,
+    UploadImageComponent
   ],
   templateUrl: './resume-edit-form.component.html',
   styleUrl: './resume-edit-form.component.scss',
