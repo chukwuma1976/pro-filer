@@ -95,8 +95,11 @@ export const TEMPLATES = [
     { name: 'Minimalist', value: 'minimalist' },
     { name: 'ATS Friendly', value: 'ats friendly' },
     { name: 'Unique', value: 'unique' },
-    { name: 'Visual Professional', value: 'visual professional' }
+    { name: 'Visual Professional', value: 'visual professional' },
+    { name: 'Clean Chromatic', value: 'clean chromatic' }
 ];
+
+export const templatesWithImage = ['visual professional', 'clean chromatic'];
 
 
 export const URL = {
@@ -107,4 +110,19 @@ export const URL = {
     Experience: "api/v1/profiler/experiences",
     Education: "api/v1/profiler/educations",
     Image: "api/v1/profiler/users"
+}
+
+export const MONTHS_OBJECT = {
+    '1': 'January',
+    '2': 'February',
+    '3': 'March',
+    '4': 'April',
+    '5': 'May',
+    '6': 'June',
+    '7': 'July',
+    '8': 'August',
+    '9': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'September'
 }

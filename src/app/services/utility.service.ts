@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Resume } from '../shared/models/resume';
+import { MONTHS_OBJECT } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ export class UtilityService {
   protected _snackBar = inject(MatSnackBar);
   constructor() { }
 
-  formatDate(date: string | Date | undefined): any {
+  formatDate(date: string | Date | undefined, displayMonthsName: boolean = false): any {
+    const months = MONTHS_OBJECT
     if (!date) {
       return 'N/A'; // Return 'N/A' if date is undefined or null
     }
@@ -19,10 +21,13 @@ export class UtilityService {
       const dateArray = date.split('-');
       const month = dateArray[1][0] === '0' ? dateArray[1][1] : dateArray[1]; // Handle single digit months
       const year = dateArray[0];
-      return month + '/' + year;
+      const displayedMonth = displayMonthsName ? (months[month as keyof typeof months] + ' ') : (month + '/')
+      return displayedMonth + year;
     } else if ((date instanceof Date)) {
       const dateObj = new Date(date);
-      return (dateObj.getMonth() + 1) + '/' + dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1)
+      const displayedMonth = displayMonthsName ? (months[month as keyof typeof months] + ' ') : (month + '/')
+      return displayedMonth + dateObj.getFullYear();
     }
   }
 

@@ -52,16 +52,28 @@ p {
 }
 
 #contact-info {
-    margin-bottom: 2rem;
-    font-size: 1vw;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    /* vertical alignment */
 }
 
-mat-icon {
-    margin-left: 0.5rem;
+#contact-info .contact-item {
+    display: inline-flex;
+    /* align icon + text */
+    align-items: center;
+    gap: 0.5rem;
+    /* space between icon and text */
+}
+
+#contact-info mat-icon,
+#contact-info i {
+    font-size: 1.2rem;
+    /* consistent sizing */
     color: orange;
-    margin-top: 0.2rem;
+    /* your icon color */
+    margin: 0;
+    /* reset margins */
 }
 
 .work-dates,

@@ -1,0 +1,128 @@
+h5 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.degree {
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+#contact,
+#summary,
+#experience,
+#education,
+#skills,
+#certifications,
+#projects,
+#publications,
+#volunteer-experience,
+#additional-info {
+    font-weight: bold;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    // color: var(--mat-sys-on-primary-container);
+}
+
+#full-name {
+    font-weight: bold;
+    font-size: 4vw;
+    color: var(--mat-sys-primary);
+}
+
+#title {
+    font-size: 1.5vw;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+#contact-info {
+    display: flex;
+    flex-direction: column;
+    /* stack vertically */
+    align-items: flex-start;
+    /* left align text */
+    gap: 0.5rem;
+    /* uniform vertical spacing */
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+#contact-info p {
+    margin: 0;
+    /* reset default <p> margins */
+    line-height: 1.5;
+    /* consistent height */
+}
+
+.job-role {
+    font-weight: bold;
+}
+
+#resume-body {
+    display: flex;
+    color: var(--mat-sys-on-background);
+    font-size: 1.25vw;
+    min-height: 100vh;
+
+    /* Aspect ratio (A4 paper ~ 210mm × 297mm = 1:1.414) */
+    aspect-ratio: 1 / 1.414;
+}
+
+.left-column {
+    width: 30%;
+    height: 100%;
+    margin-top: -5%;
+    margin-left: -4%;
+    padding: 5% 4% 10% 4%;
+    color: var(--mat-sys-on-primary);
+
+    /* Top 20% black, bottom 80% primary */
+    background: linear-gradient(to bottom,
+            black 13%,
+            var(--mat-sys-primary) 13%);
+}
+
+.right-column {
+    flex: 1;
+    width: 68%;
+    margin-left: 2%;
+}
+
+.right-column hr {
+    color: var(--mat-sys-primary);
+}
+
+#profile-picture {
+    width: 100%;
+    /* 100% of parent container */
+    aspect-ratio: 1 / 1;
+    /* makes it a perfect square */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* crop without distortion */
+    object-position: center;
+    display: block;
+}
+
+ul {
+    margin-top: 0;
+}

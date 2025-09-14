@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DefaultTemplateComponent } from '../default-template/default-template.component';
+import { CommonModule } from '@angular/common';
+import { UtilityService } from '../../services/utility.service';
 import { UserService } from '../../services/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UtilityService } from '../../services/utility.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-visual-professional-template',
-  imports: [CommonModule],
-  templateUrl: './visual-professional-template.component.html',
-  styleUrl: './visual-professional-template.component.scss'
+  selector: 'app-clean-chromatic-template',
+  imports: [CommonModule, MatIconModule],
+  templateUrl: './clean-chromatic-template.component.html',
+  styleUrl: './clean-chromatic-template.component.scss'
 })
-
-export class VisualProfessionalTemplateComponent extends DefaultTemplateComponent {
+export class CleanChromaticTemplateComponent extends DefaultTemplateComponent {
 
   profileImageUrl: any;
   defaultImageUrl = 'assets/images/placeholder_headshot_coming_soon.png';

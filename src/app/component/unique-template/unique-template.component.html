@@ -9,15 +9,36 @@
                 <div class="top-left-triangle"></div>
             </div>
             <p id="contact-info" class="col-2">
-                @if(resumeData?.phoneNumber){<span> <mat-icon>phone_enabled</mat-icon> {{resumeData?.phoneNumber}}&nbsp;
-                </span>}
-                <span><mat-icon>mail_outline</mat-icon> {{resumeData?.email}}&nbsp;</span>
-                @if(resumeData?.linkedIn){<span> <mat-icon>web</mat-icon> {{resumeData?.linkedIn}} &nbsp;</span>}
-                @if(resumeData?.website){<span> <mat-icon>web</mat-icon> {{resumeData?.website}} &nbsp;</span>}
-                @if(resumeData?.city && resumeData?.state) {<span> <mat-icon>location_on</mat-icon>
-                    {{resumeData?.city}},
-                    {{resumeData?.state}}&nbsp;</span>}
+                @if(resumeData?.phoneNumber){
+                <span class="contact-item">
+                    <mat-icon>phone_enabled</mat-icon>
+                    {{ resumeData?.phoneNumber }}
+                </span>
+                }
+                <span class="contact-item">
+                    <mat-icon>mail_outline</mat-icon>
+                    {{ resumeData?.email }}
+                </span>
+                @if(resumeData?.linkedIn){
+                <span class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    {{ resumeData?.linkedIn }}
+                </span>
+                }
+                @if(resumeData?.website){
+                <span class="contact-item">
+                    <mat-icon>web</mat-icon>
+                    {{ resumeData?.website }}
+                </span>
+                }
+                @if(resumeData?.city && resumeData?.state){
+                <span class="contact-item">
+                    <mat-icon>location_on</mat-icon>
+                    {{ resumeData?.city }}, {{ resumeData?.state }}
+                </span>
+                }
             </p>
+
         </div>
     </header>
     <section id="summary-section" class="section-container">

@@ -1,10 +1,21 @@
 <div class="resume-details-container" [id]="resumeData?.id">
-    <div id="top-bar"></div>
     <div id="resume-body">
         <div class="left-column">
-            <section id="header">
-                <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
-                @if(resumeData?.title) {<p id="title">{{resumeData?.title}}</p>}
+            <section id="profile-picture">
+                <img [src]="profileImageUrl || defaultImageUrl" alt="Uploaded image" />
+            </section>
+            <section id="contact-info">
+                <p id="contact">CONTACT</p>
+                @if(resumeData?.city && resumeData?.state) {
+                <p><span> <mat-icon>location_on</mat-icon>{{resumeData?.city}}, {{resumeData?.state}}&nbsp;</span></p>
+                }
+                @if(resumeData?.phoneNumber){
+                <p><span> <mat-icon>smartphone</mat-icon> {{resumeData?.phoneNumber}}&nbsp;</span></p>
+                }
+                <p><span><i class="fa-solid fa-paper-plane"></i>&nbsp;{{resumeData?.email}}&nbsp;</span></p>
+                @if(resumeData?.linkedIn){<p><span><i class="fab fa-linkedin"></i></span>&nbsp;{{ resumeData?.linkedIn
+                    }}</p>}
+                @if(resumeData?.website){<p><span> <mat-icon>web</mat-icon> {{resumeData?.website}} &nbsp;</span></p>}
             </section>
             <hr>
             <section id="summary-section">
@@ -12,12 +23,27 @@
                 <p>{{resumeData?.summary}}</p>
             </section>
             <hr>
+            <section id="skills-section">
+                <p id="skills">SKILLS</p>
+                <div class="section-container">
+                    <div class="col-1"></div>
+                    <ul class="col-2">
+                        <li class="skill-item" *ngFor="let skill of resumeData?.skills">{{skill}}</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <div class="right-column">
+            <section id="header">
+                <p id="full-name">{{resumeData?.firstName}} {{resumeData?.lastName}}</p>
+                @if(resumeData?.title) {<p id="title">{{resumeData?.title}}</p>}
+            </section>
+            <hr>
             <section id="experience-section">
                 <p id="experience">EXPERIENCE</p>
                 <div class="section-container" *ngFor="let job of resumeData?.experience">
-                    <p class="job-employer">{{job.employer}} - {{job.title}}</p>
-                    <p class="job-location">{{job.city}}, {{job.state}} - {{formatDate(job.startDate)}} -
-                        {{formatDate(job.endDate)}}</p>
+                    <p>{{formatDate(job.startDate)}} - {{formatDate(job.endDate)}}</p>
+                    <p class="job-employer"><b>{{job.title}} {{job.employer}}</b> | {{job.city}}, {{job.state}}</p>
                     <ul>
                         <li *ngFor="let desc of job.description">{{desc}}</li>
                     </ul>
@@ -29,8 +55,9 @@
                 <div class="section-container" *ngFor="let edu of resumeData?.education">
                     <div class="col-1"></div>
                     <div class="col-2">
-                        <p><b>{{edu.degree}}: {{edu.fieldOfStudy}}, {{formatDate(edu.graduationDate)}}</b></p>
-                        <p><b>{{edu.institution}}</b> - {{edu.city}}, {{edu.state}}</p>
+                        <p> {{formatDate(edu.graduationDate)}}</p>
+                        <p><b>{{edu.degree}}</b> | {{edu.fieldOfStudy}}</p>
+                        <p>{{edu.institution}}, {{edu.city}}, {{edu.state}}</p>
                         <p>{{edu.descriptionEdu}}</p>
                         <ul>
                             <li *ngFor="let award of edu.awards">{{award}}</li>
@@ -45,30 +72,6 @@
                 <p *ngFor="let experience of resumeData?.volunteerExperience">{{experience}}</p>
             </section>
             }
-        </div>
-        <div class="right-column">
-            <section id="profile-picture">
-                <img [src]="profileImageUrl || defaultImageUrl" alt="Uploaded image" />
-            </section>
-            <section id="contact-info">
-                <p id="contact">CONTACT</p>
-                @if(resumeData?.city && resumeData?.state) {<p><b>Address: </b>{{resumeData?.city}},
-                    {{resumeData?.state}}</p>}
-                @if(resumeData?.phoneNumber){<p><b>Phone: </b> {{resumeData?.phoneNumber}} </p>}
-                <p><b>Email: </b>{{resumeData?.email}}</p>
-                @if(resumeData?.linkedIn){<p><b>LinkedIn: </b> {{resumeData?.linkedIn}} </p>}
-                @if(resumeData?.website){<p><b>Website: </b> {{resumeData?.website}}</p>}
-            </section>
-            <hr>
-            <section id="skills-section">
-                <p id="skills">SKILLS</p>
-                <div class="section-container">
-                    <div class="col-1"></div>
-                    <ul class="col-2">
-                        <li class="skill-item" *ngFor="let skill of resumeData?.skills">{{skill}}</li>
-                    </ul>
-                </div>
-            </section>
             @if(resumeData?.certifications?.length) {
             <hr>
             <section id="certifications-section">

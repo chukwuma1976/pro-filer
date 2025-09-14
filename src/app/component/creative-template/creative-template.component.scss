@@ -63,16 +63,36 @@ p {
 #contact-info {
     padding-bottom: 10px;
     text-align: left;
-    text-wrap: wrap;
     background-color: var(--mat-sys-primary-container);
+    display: flex;
+    flex-direction: column;
+}
 
-    p {
-        font-size: 1vw;
-    }
+#contact-info p {
+    margin: 0;
+    font-size: 1vw;
+    line-height: 1.6;
+    /* ensures even row height */
+    display: flex;
+    /* make each row flex */
+    align-items: center;
+    /* vertically align icons with text */
+    gap: 0.5rem;
+    /* space between icon and text */
+}
 
-    p#contact {
-        font-size: 1.25vw;
-    }
+#contact-info p#contact {
+    font-size: 1.25vw;
+    font-weight: bold;
+}
+
+#contact-info mat-icon,
+#contact-info i {
+    font-size: 1.2em;
+    /* keep icons consistent size */
+    color: var(--mat-sys-on-primary-container);
+    flex-shrink: 0;
+    /* prevent icons from shrinking */
 }
 
 .job-role {

@@ -60,6 +60,10 @@ body {
 .resume-details-container {
     color: var(--mat-sys-on-background);
     font-size: 1.25vw;
+    min-height: 100vh;
+
+    /* Aspect ratio (A4 paper ~ 210mm × 297mm = 1:1.414) */
+    aspect-ratio: 1 / 1.414;
 }
 
 .resume-padding {

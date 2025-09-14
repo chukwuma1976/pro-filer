@@ -7,12 +7,6 @@
                 @if(isPreviewMode){<mat-icon>visibility_off</mat-icon>}@else{<mat-icon>visibility</mat-icon>}
                 {{isPreviewMode?'Hide Preview':'Show Preview'}}
             </button>
-            <button mat-raised-button type="button" class="preview-btn" matTooltip="upload image"
-                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip"
-                (click)="setImageUploadDisplay()">
-                @if(canUploadImage){<mat-icon>visibility_off</mat-icon>}@else{<mat-icon>visibility</mat-icon>}
-                {{canUploadImage?'Hide Image Upload':'Show Image Upload'}}
-            </button>
         </div>
     </div>
     <p>Please fill out the form below to edit your resume.</p>
@@ -27,14 +21,6 @@
     <form [formGroup]="resumeForm" (submit)="onEdit()" class="resume-form"
         [ngClass]="isPreviewMode ? 'show-preview':'hide-preview'">
         <mat-accordion multi>
-            @if(canUploadImage){
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Upload an Updated Resume Photo (Optional)</mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-upload-image></app-upload-image>
-            </mat-expansion-panel>
-            }
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> Update Resume Template </mat-panel-title>
@@ -50,6 +36,14 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </mat-expansion-panel>
+            @if(setImageUploadDisplay){
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Upload a Resume Photo</mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-upload-image></app-upload-image>
+            </mat-expansion-panel>
+            }
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> Contact Information and Summary </mat-panel-title>

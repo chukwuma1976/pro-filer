@@ -20,7 +20,7 @@ import { customDateValidator } from '../../custom-validators/custom-date-validat
 import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { STATES_DROPDOWN, DEGREE_OPTIONS, TEMPLATES } from '../../shared/constants';
+import { STATES_DROPDOWN, DEGREE_OPTIONS, TEMPLATES, templatesWithImage } from '../../shared/constants';
 import { map, Observable, startWith } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { UtilityService } from '../../services/utility.service';
@@ -77,7 +77,6 @@ export class ResumeFormComponent {
   filteredDegreeOptions!: Observable<any[]>;
   filteredTemplateOptions!: Observable<any[]>;
   isPreviewMode = false;
-  canUploadImage: boolean = false;
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
@@ -331,8 +330,8 @@ export class ResumeFormComponent {
     this.isPreviewMode = !this.isPreviewMode;
   }
 
-  setImageUploadDisplay() {
-    this.canUploadImage = !this.canUploadImage
+  get setImageUploadDisplay() {
+    return templatesWithImage.includes(this.resumeForm?.get('template')?.value)
   }
 
 }

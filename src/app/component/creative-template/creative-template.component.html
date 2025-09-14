@@ -37,13 +37,34 @@
         <div class="right-column">
             <section id="contact-info">
                 <p id="contact">CONTACT</p>
-                @if(resumeData?.phoneNumber){<p><mat-icon>phone_enabled</mat-icon> {{resumeData?.phoneNumber}} </p>}
-                <p><mat-icon>mail_outline</mat-icon> {{resumeData?.email}}</p>
-                @if(resumeData?.linkedIn){<p>
-                <p><mat-icon>web</mat-icon> {{resumeData?.linkedIn}} </p>}
-                @if(resumeData?.website){<p><mat-icon>web</mat-icon> {{resumeData?.website}}</p>}
-                @if(resumeData?.city && resumeData?.state) {<p><mat-icon>location_on</mat-icon>{{resumeData?.city}},
-                    {{resumeData?.state}}</p>}
+                @if(resumeData?.phoneNumber){
+                <p class="contact-row">
+                    <mat-icon>phone_enabled</mat-icon>
+                    {{ resumeData?.phoneNumber }}
+                </p>
+                }
+                <p class="contact-row">
+                    <mat-icon>mail_outline</mat-icon>
+                    {{ resumeData?.email }}
+                </p>
+                @if(resumeData?.linkedIn){
+                <p class="contact-row">
+                    <i class="fab fa-linkedin"></i>
+                    {{ resumeData?.linkedIn }}
+                </p>
+                }
+                @if(resumeData?.website){
+                <p class="contact-row">
+                    <mat-icon>web</mat-icon>
+                    {{ resumeData?.website }}
+                </p>
+                }
+                @if(resumeData?.city && resumeData?.state){
+                <p class="contact-row">
+                    <mat-icon>location_on</mat-icon>
+                    {{ resumeData?.city }}, {{ resumeData?.state }}
+                </p>
+                }
             </section>
             <section id="skills-section">
                 <p id="skills">SKILLS</p>
