@@ -12,7 +12,7 @@ import { UtilityService } from '../../services/utility.service';
 export class DefaultTemplateComponent {
   @Input() resumeData: Resume | null = null; // Input property to receive the resume ID
 
-  constructor(private utilityService: UtilityService) { }
+  constructor(protected utilityService: UtilityService) { }
 
   formatDate(date: Date | string | undefined): string {
     return this.utilityService.formatDate(date);

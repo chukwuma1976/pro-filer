@@ -47,16 +47,9 @@ p {
     font-weight: bold;
 }
 
-#location {
-    text-align: center;
-    font-size: 1.25vw;
-    padding-bottom: 10px;
-}
-
 #contact-info {
     padding-bottom: 10px;
     text-align: left;
-    font-size: 1vw;
 }
 
 .job-role {
@@ -76,17 +69,40 @@ p {
     width: 30%;
 }
 
-.job-employer {
-    font-weight: bold;
+
+#profile-picture {
+    width: 100%;
+    /* 100% of parent container */
+    aspect-ratio: 1 / 1;
+    /* makes it a perfect square */
+    overflow: hidden;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-header {
-    text-align: center;
-    padding-bottom: 2rem;
-    background-color: var(--mat-sys-primary-container);
-    border-bottom: 1px solid var(--mat-sys-on-primary-container);
+#profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* crop without distortion */
+    object-position: center;
+    display: block;
+}
+
+.job-employer,
+.job-location {
+    font-weight: bold;
 }
 
 ul {
     margin-top: 0;
+}
+
+#top-bar {
+    height: 10vh;
+    background-color: var(--mat-sys-on-primary-container);
+    margin-top: -7vh;
+    margin-bottom: 5vh;
 }

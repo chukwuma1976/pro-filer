@@ -1,4 +1,5 @@
 <div class="resume-details-container" [id]="resumeData?.id">
+    <div id="top-bar"></div>
     <div id="resume-body">
         <div class="left-column">
             <section id="header">
@@ -28,7 +29,7 @@
                 <div class="section-container" *ngFor="let edu of resumeData?.education">
                     <div class="col-1"></div>
                     <div class="col-2">
-                        <p><b>{{edu.degree}}:</b> {{edu.fieldOfStudy}}, {{formatDate(edu.graduationDate)}}</p>
+                        <p><b>{{edu.degree}}: {{edu.fieldOfStudy}}, {{formatDate(edu.graduationDate)}}</b></p>
                         <p><b>{{edu.institution}}</b> - {{edu.city}}, {{edu.state}}</p>
                         <p>{{edu.descriptionEdu}}</p>
                         <ul>
@@ -46,14 +47,17 @@
             }
         </div>
         <div class="right-column">
+            <section id="profile-picture">
+                <img [src]="profileImageUrl" alt="Uploaded image" />
+            </section>
             <section id="contact-info">
                 <p id="contact">CONTACT</p>
-                <p>{{resumeData?.email}}</p>
-                @if(resumeData?.phoneNumber){<p> {{resumeData?.phoneNumber}} </p>}
-                @if(resumeData?.linkedIn){<p> {{resumeData?.linkedIn}} </p>}
-                @if(resumeData?.website){<p> {{resumeData?.website}}</p>}
-                @if(resumeData?.city && resumeData?.state) {<p>{{resumeData?.city}},
+                @if(resumeData?.city && resumeData?.state) {<p><b>Address: </b>{{resumeData?.city}},
                     {{resumeData?.state}}</p>}
+                @if(resumeData?.phoneNumber){<p><b>Phone: </b> {{resumeData?.phoneNumber}} </p>}
+                <p><b>Email: </b>{{resumeData?.email}}</p>
+                @if(resumeData?.linkedIn){<p><b>LinkedIn: </b> {{resumeData?.linkedIn}} </p>}
+                @if(resumeData?.website){<p><b>Website: </b> {{resumeData?.website}}</p>}
             </section>
             <hr>
             <section id="skills-section">
