@@ -49,7 +49,7 @@
                 </p>
                 @if(resumeData?.linkedIn){
                 <p class="contact-row">
-                    <i class="fab fa-linkedin"></i>
+                    <i class="fab fa-linkedin"></i>&nbsp;
                     {{ resumeData?.linkedIn }}
                 </p>
                 }
@@ -100,7 +100,7 @@
             @if(resumeData?.publications?.length) {
             <section id="publications-section">
                 <p id="publications">PUBLICATIONS</p>
-                <li *ngFor="let publication of resumeData?.publications">{{publication}}</li>
+                <p *ngFor="let publication of resumeData?.publications">{{publication}}</p>
             </section>
             }
             @if(resumeData?.additionalInfo) {

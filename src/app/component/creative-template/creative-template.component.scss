@@ -20,6 +20,7 @@ p {
 
 .resume-details-container {
     border-left: 50px solid var(--mat-sys-on-primary-container);
+    padding-left: 1%;
 }
 
 #full-name,
@@ -93,6 +94,11 @@ p {
     color: var(--mat-sys-on-primary-container);
     flex-shrink: 0;
     /* prevent icons from shrinking */
+}
+
+.contact-row,
+#contact {
+    padding-left: 1rem;
 }
 
 .job-role {

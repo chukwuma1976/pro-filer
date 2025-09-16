@@ -30,15 +30,20 @@ export class CleanChromaticTemplateComponent extends DefaultTemplateComponent {
   }
 
   loadProfileImage(): void {
-    this.userService.getProfileImage(UserService.userId).subscribe({
-      next: (blob: Blob) => {
-        const objectURL = URL.createObjectURL(blob);
-        this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      },
-      error: () => {
-        console.warn('No profile image found for user ' + UserService.userId);
-      }
-    });
+    const userId = this.resumeData?.userId;
+    if (userId !== undefined && userId !== null) {
+      this.userService.getProfileImage(userId).subscribe({
+        next: (blob: Blob) => {
+          const objectURL = URL.createObjectURL(blob);
+          this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        },
+        error: () => {
+          console.warn('No profile image found for user ' + userId);
+        }
+      });
+    } else {
+      console.warn('User ID is undefined or null, cannot load profile image.');
+    }
   }
 
   override formatDate(date: Date | string | undefined): string {
