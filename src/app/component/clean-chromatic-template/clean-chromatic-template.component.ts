@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { DefaultTemplateComponent } from '../default-template/default-template.component';
 import { CommonModule } from '@angular/common';
 import { UtilityService } from '../../services/utility.service';
-import { UserService } from '../../services/user.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
+import { ProfileImageComponent } from "../profile-image/profile-image.component";
 
 @Component({
   selector: 'app-clean-chromatic-template',
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, ProfileImageComponent],
   templateUrl: './clean-chromatic-template.component.html',
   styleUrl: './clean-chromatic-template.component.scss'
 })
@@ -19,31 +18,8 @@ export class CleanChromaticTemplateComponent extends DefaultTemplateComponent {
 
   constructor(
     protected override utilityService: UtilityService, // inherited from parent
-    private userService: UserService,
-    private sanitizer: DomSanitizer
   ) {
     super(utilityService); // pass base class dependency
-  }
-
-  ngOnInit(): void {
-    this.loadProfileImage();
-  }
-
-  loadProfileImage(): void {
-    const userId = this.resumeData?.userId;
-    if (userId !== undefined && userId !== null) {
-      this.userService.getProfileImage(userId).subscribe({
-        next: (blob: Blob) => {
-          const objectURL = URL.createObjectURL(blob);
-          this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        },
-        error: () => {
-          console.warn('No profile image found for user ' + userId);
-        }
-      });
-    } else {
-      console.warn('User ID is undefined or null, cannot load profile image.');
-    }
   }
 
   override formatDate(date: Date | string | undefined): string {

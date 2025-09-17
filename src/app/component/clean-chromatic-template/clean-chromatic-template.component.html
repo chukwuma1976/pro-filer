@@ -2,7 +2,7 @@
     <div id="resume-body">
         <div class="left-column">
             <section id="profile-picture">
-                <img [src]="profileImageUrl || defaultImageUrl" alt="Uploaded image" />
+                <app-profile-image [userId]="resumeData?.userId"></app-profile-image>
             </section>
             <section id="contact-info">
                 <p id="contact">CONTACT</p>
