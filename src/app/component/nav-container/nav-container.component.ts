@@ -68,11 +68,6 @@ export class NavContainerComponent {
         this.themeState = 'Light Mode';
       }
     });
-
-    this.authService.checkIsInSession().subscribe((value: string) => {
-      if (value.includes('Logged in as')) this.authService.setIsLoggedIn();
-      console.log(value);
-    })
   }
 
   openLogOutDialog() {

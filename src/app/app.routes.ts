@@ -8,7 +8,7 @@ import { NavContainerComponent } from './component/nav-container/nav-container.c
 import { UserResumesComponent } from './component/user-resumes/user-resumes.component';
 import { AllResumesComponent } from './component/all-resumes/all-resumes.component';
 import { ResumeFormComponent } from './component/resume-form/resume-form.component';
-import { loginGuard } from './guards/login.guard';
+import { LoginGuard } from './guards/login.guard';
 import { ResumeEditFormComponent } from './component/resume-edit-form/resume-edit-form.component';
 import { ViewResumeComponent } from './component/view-resume/view-resume.component';
 import { ExperienceFormComponent } from './component/experience-form/experience-form.component';
@@ -16,15 +16,16 @@ import { ExperienceEditFormComponent } from './component/experience-edit-form/ex
 import { EducationFormComponent } from './component/education-form/education-form.component';
 import { EducationEditFormComponent } from './component/education-edit-form/education-edit-form.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { GuestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
+    { path: 'signup', component: SignupComponent, canActivate: [GuestGuard] },
+    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [GuestGuard] },
     {
         path: 'pro-filer',
         component: NavContainerComponent,
-        canActivate: [loginGuard],
+        canActivate: [LoginGuard],
         children: [
             { path: 'home', component: HomePageComponent },
             { path: 'resume-details', component: UserResumesComponent },
@@ -42,9 +43,3 @@ export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
-
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-})
-export class AppRoutingModule { }

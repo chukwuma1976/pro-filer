@@ -44,7 +44,6 @@ export class SignupComponent {
         value => {
           if (value === "User registered") {
             this.authService.login(username, password);
-            this.authService.setIsLoggedIn();
             this.router.navigate(['/pro-filer/home'])
           }
           else this.signupError = 'Signup failed. username may already be in use.';

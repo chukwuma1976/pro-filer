@@ -41,11 +41,10 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       this.authService.login(username, password).subscribe(
-        value => {
-          if (value.toLowerCase() === "login successful") {
+        response => {
+          if (response.status === "success") {
             this.submitted = true;
-            this.authService.setIsLoggedIn();
-            this.userService.setUserInfo(username);
+            this.userService.setUserInfo(response.username);
             this.router.navigate(['/pro-filer/home'])
           } else this.loginError = 'Invalid username or password.'
         }
