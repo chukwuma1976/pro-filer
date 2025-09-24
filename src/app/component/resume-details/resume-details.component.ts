@@ -13,6 +13,7 @@ import { ATSFriendlyTemplateComponent } from '../ats-friendly-template/ats-frien
 import { UniqueTemplateComponent } from '../unique-template/unique-template.component';
 import { VisualProfessionalTemplateComponent } from "../visual-professional-template/visual-professional-template.component";
 import { CleanChromaticTemplateComponent } from "../clean-chromatic-template/clean-chromatic-template.component";
+import { TwoColumnTemplateComponent } from '../two-column-template/two-column-template.component';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class ResumeDetailsComponent {
     unique: UniqueTemplateComponent,
     'visual professional': VisualProfessionalTemplateComponent,
     'clean chromatic': CleanChromaticTemplateComponent,
+    'two column': TwoColumnTemplateComponent,
     default: DefaultTemplateComponent,
   };
 

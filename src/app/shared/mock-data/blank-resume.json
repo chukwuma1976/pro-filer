@@ -20,11 +20,32 @@
             "startDate": "",
             "endDate": "",
             "description": []
+        },
+        {
+            "id": 9,
+            "employer": "",
+            "title": "",
+            "city": "",
+            "state": "",
+            "startDate": "",
+            "endDate": "",
+            "description": []
         }
     ],
     "education": [
         {
             "id": 4,
+            "institution": "",
+            "city": "",
+            "state": "",
+            "degree": "",
+            "fieldOfStudy": "",
+            "graduationDate": "",
+            "descriptionEdu": "",
+            "awards": []
+        },
+        {
+            "id": 5,
             "institution": "",
             "city": "",
             "state": "",

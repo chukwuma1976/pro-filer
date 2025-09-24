@@ -30,9 +30,9 @@ export class AuthService {
     );
   }
 
-  signup(username: string, password: string, email: string): Observable<string> {
+  signup(username: string, password: string, email: string): Observable<any> {
     const user = { username, password, email };
-    return this.http.post(this.domain + '/register', user, { responseType: 'text' });
+    return this.http.post(this.domain + '/register', user, { withCredentials: true });
   }
 
   resetPassword(email: string): Observable<boolean> {

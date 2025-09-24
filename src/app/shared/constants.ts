@@ -96,7 +96,8 @@ export const TEMPLATES = [
     { name: 'ATS Friendly', value: 'ats friendly' },
     { name: 'Unique', value: 'unique' },
     { name: 'Visual Professional', value: 'visual professional' },
-    { name: 'Clean Chromatic', value: 'clean chromatic' }
+    { name: 'Clean Chromatic', value: 'clean chromatic' },
+    { name: 'Two Column', value: 'two column' }
 ];
 
 export const templatesWithImage = ['visual professional', 'clean chromatic'];

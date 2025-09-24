@@ -23,6 +23,20 @@
                 "Automation testing",
                 "UI coding"
             ]
+        },
+        {
+            "id": 9,
+            "employer": "Tech Innovations Inc.",
+            "title": "Junior Software Developer",
+            "city": "Austin",
+            "state": "Texas",
+            "startDate": "2023-07-01",
+            "endDate": "2023-11-10",
+            "description": [
+                "Assisted in developing web applications using JavaScript and React.",
+                "Collaborated with senior developers to implement new features and fix bugs.",
+                "Participated in code reviews and team meetings."
+            ]
         }
     ],
     "education": [
@@ -39,6 +53,20 @@
                 "Career showcase presentation",
                 "Most original concept"
             ]
+        },
+        {
+            "id": 5,
+            "institution": "State University",
+            "city": "Los Angeles",
+            "state": "California",
+            "degree": "Bachelor of Science",
+            "fieldOfStudy": "Computer Science",
+            "graduationDate": "2021-05-15",
+            "descriptionEdu": "Studied core computer science concepts including algorithms, data structures, and software engineering principles.",
+            "awards": [
+                "Dean's List",
+                "Graduated with Honors"
+            ]
         }
     ],
     "skills": [
@@ -47,23 +75,36 @@
         "Angular",
         "TypeScript",
         "Java",
-        "Spring Boot"
+        "Spring Boot",
+        "Ruby on Rails",
+        "HTML",
+        "CSS",
+        "SQL",
+        "Git",
+        "Agile Methodologies"
     ],
     "certifications": [
-        "Software Engineering"
+        "Software Engineering",
+        "Full Stack Web Development",
+        "Java Programming"
     ],
     "projects": [
         "Healthcare System Interface",
-        "ProFiler"
+        "ProFiler",
+        "E-commerce Platform"
     ],
     "publications": [
-        "The Projected Future of AI: The Good, The Bad, and Pretty"
+        "The Projected Future of AI: The Good, The Bad, and Pretty",
+        "Understanding Quantum Computing: A Beginner's Guide",
+        "The Rise of Edge Computing: Transforming Data Processing"
     ],
     "volunteerExperience": [
-        "Teach the Kids to Code"
+        "Teach the Kids to Code",
+        "Community Tech Workshops",
+        "Open Source Contributor"
     ],
     "additionalInfo": "I made this ProFiler application",
     "shareWithOthers": true,
-    "template": "ats friendly",
+    "template": "",
     "userId": 3
 }
