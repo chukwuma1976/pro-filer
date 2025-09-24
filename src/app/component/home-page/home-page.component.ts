@@ -22,9 +22,11 @@ export class HomePageComponent {
 
   constructor() { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    console.log('Welcome to Pro-Filer! 👋');
     this.randomlyPickTemplate();
-    this.simulateFormFill();
+    await this.simulateFormFill();
+    console.log('🎉 All fields filled!');
   }
 
   demoTemplate(template: any) {
@@ -44,8 +46,10 @@ export class HomePageComponent {
     setTimeout(() => this.buttonsDisabled = false, timeInterval);
   }
 
-  simulateFormFill() {
-    this.temporarilyDisableButtons();
+  async simulateFormFill(): Promise<void> {
+    this.buttonsDisabled = true;
+
+    const promises: Promise<void>[] = [];
     const fields: string[] = Object.keys(this.formData);
 
     const objectFields = ["experience", "education"];
@@ -65,7 +69,7 @@ export class HomePageComponent {
       if (!(objectFields.includes(field) || arrayFields.includes(field) || nonTextFields.includes(field))) {
         const value = this.formData[field as keyof Resume];
         const text: string = value !== undefined ? String(value) : '';
-        this.typeAnimation(field, text);
+        promises.push(this.typeAnimation(field, text));
       }
 
       // Arrays of strings
@@ -73,11 +77,12 @@ export class HomePageComponent {
         const values = this.formData[field as keyof Resume];
         if (Array.isArray(values)) {
           (this.dynamicFormData as any)[field] = new Array(values.length);
-          values.forEach((value, index) => {
-            if (typeof value === 'string') {
-              this.typeAnimationArray(field, index, value);
-            }
-          });
+          // Only process if the array contains strings
+          if (values.every((v) => typeof v === 'string')) {
+            (values as string[]).forEach((value: string, index: number) => {
+              promises.push(this.typeAnimationArray(field, index, value));
+            });
+          }
         }
       }
 
@@ -97,14 +102,13 @@ export class HomePageComponent {
                   if (dateFields.includes(val)) {
                     (this.dynamicFormData as any)[field][index1][val] = text;
                   } else {
-                    this.typeAnimationObject(field, index1, val, text);
+                    promises.push(this.typeAnimationObject(field, index1, val, text));
                   }
                 } else {
-                  // nested array inside the object (description, awards)
                   const elements = obj[val];
                   (this.dynamicFormData as any)[field][index1][val] = new Array(elements.length);
                   elements.forEach((text: string, index2: number) => {
-                    this.typeAnimationObjectArray(field, index1, val, index2, text);
+                    promises.push(this.typeAnimationObjectArray(field, index1, val, index2, text));
                   });
                 }
               });
@@ -113,49 +117,62 @@ export class HomePageComponent {
         }
       }
     });
+
+    // Wait for all typing animations to complete
+    await Promise.all(promises);
+
+    this.buttonsDisabled = false;
   }
 
-
   // Simple top-level text field
-  typeAnimation(fieldName: string, text: string) {
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      if (currentIndex <= text.length) {
-        const partialText = text.substring(0, currentIndex);
-        (this.dynamicFormData as any)[fieldName] = partialText;
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-      }
-    }, this.typingSpeed);
+  typeAnimation(fieldName: string, text: string): Promise<void> {
+    return new Promise(resolve => {
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        if (currentIndex <= text.length) {
+          const partialText = text.substring(0, currentIndex);
+          (this.dynamicFormData as any)[fieldName] = partialText;
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+          resolve();
+        }
+      }, this.typingSpeed);
+    });
   }
 
   // Arrays of strings (skills, certifications, etc.)
-  typeAnimationArray(fieldName: string, index: number, text: string) {
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      if (currentIndex <= text.length) {
-        const partialText = text.substring(0, currentIndex);
-        (this.dynamicFormData as any)[fieldName][index] = partialText;
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-      }
-    }, this.typingSpeed);
+  typeAnimationArray(fieldName: string, index: number, text: string): Promise<void> {
+    return new Promise(resolve => {
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        if (currentIndex <= text.length) {
+          const partialText = text.substring(0, currentIndex);
+          (this.dynamicFormData as any)[fieldName][index] = partialText;
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+          resolve();
+        }
+      }, this.typingSpeed);
+    });
   }
 
   // Objects inside arrays (experience, education, etc.)
-  typeAnimationObject(fieldName: string, index1: number, property: string, text: string) {
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      if (currentIndex <= text.length) {
-        const partialText = text.substring(0, currentIndex);
-        (this.dynamicFormData as any)[fieldName][index1][property] = partialText;
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-      }
-    }, this.typingSpeed);
+  typeAnimationObject(fieldName: string, index1: number, property: string, text: string): Promise<void> {
+    return new Promise(resolve => {
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        if (currentIndex <= text.length) {
+          const partialText = text.substring(0, currentIndex);
+          (this.dynamicFormData as any)[fieldName][index1][property] = partialText;
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+          resolve();
+        }
+      }, this.typingSpeed);
+    });
   }
 
   // Nested arrays inside objects (description, awards, etc.)
@@ -165,17 +182,19 @@ export class HomePageComponent {
     property: string,
     index2: number,
     text: string
-  ) {
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      if (currentIndex <= text.length) {
-        const partialText = text.substring(0, currentIndex);
-        (this.dynamicFormData as any)[fieldName][index1][property][index2] = partialText;
-        currentIndex++;
-      } else {
-        clearInterval(intervalId);
-      }
-    }, this.typingSpeed);
+  ): Promise<void> {
+    return new Promise(resolve => {
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        if (currentIndex <= text.length) {
+          const partialText = text.substring(0, currentIndex);
+          (this.dynamicFormData as any)[fieldName][index1][property][index2] = partialText;
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+          resolve();
+        }
+      }, this.typingSpeed);
+    });
   }
-
 }
