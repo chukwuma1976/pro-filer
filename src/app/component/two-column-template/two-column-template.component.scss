@@ -79,11 +79,10 @@ p {
 
 .skill-item {
     display: inline-block;
-    margin: 1%;
+    // margin: 1%;
     padding-left: 1%;
     padding-right: 1%;
-    padding-top: 2%;
-    border-bottom: solid 1px var(--mat-sys-outline-variant);
+    border-bottom: solid 2px var(--mat-sys-outline-variant);
     font-weight: bold;
 }
 

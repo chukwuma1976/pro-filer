@@ -16,7 +16,7 @@ import { Resume } from '../../shared/models/resume';
 export class HomePageComponent {
   formData: Resume = sampleResume;
   dynamicFormData: Resume = { ...blankResume };
-  typingSpeed = 50;  //Milliseconds per character
+  typingSpeed = 10;  //Milliseconds per character
   templates = TEMPLATES;
   buttonsDisabled = false;
 
@@ -40,16 +40,9 @@ export class HomePageComponent {
     this.dynamicFormData["template"] = this.templates[index].value;
   }
 
-  temporarilyDisableButtons() {
-    this.buttonsDisabled = true;
-    const timeInterval = this.formData.summary.length * this.typingSpeed; //this is the longest string to type
-    setTimeout(() => this.buttonsDisabled = false, timeInterval);
-  }
-
   async simulateFormFill(): Promise<void> {
     this.buttonsDisabled = true;
 
-    const promises: Promise<void>[] = [];
     const fields: string[] = Object.keys(this.formData);
 
     const objectFields = ["experience", "education"];
@@ -64,24 +57,21 @@ export class HomePageComponent {
     const arraysInsideObjects = ["description", "awards"];
     const dateFields = ["startDate", "endDate", "graduationDate"];
 
-    fields.forEach((field: string) => {
+    for (const field of fields) {
       // Simple text fields
       if (!(objectFields.includes(field) || arrayFields.includes(field) || nonTextFields.includes(field))) {
         const value = this.formData[field as keyof Resume];
         const text: string = value !== undefined ? String(value) : '';
-        promises.push(this.typeAnimation(field, text));
+        await this.typeAnimation(field, text); // ⬅️ sequential
       }
 
       // Arrays of strings
       if (arrayFields.includes(field)) {
-        const values = this.formData[field as keyof Resume];
+        const values: any = this.formData[field as keyof Resume];
         if (Array.isArray(values)) {
           (this.dynamicFormData as any)[field] = new Array(values.length);
-          // Only process if the array contains strings
-          if (values.every((v) => typeof v === 'string')) {
-            (values as string[]).forEach((value: string, index: number) => {
-              promises.push(this.typeAnimationArray(field, index, value));
-            });
+          for (let i = 0; i < values.length; i++) {
+            await this.typeAnimationArray(field, i, values[i]); // ⬅️ sequential
           }
         }
       }
@@ -94,32 +84,30 @@ export class HomePageComponent {
             .fill(null)
             .map(() => ({}));
 
-          value.forEach((obj: any, index1: number) => {
+          for (let index1 = 0; index1 < value.length; index1++) {
+            const obj = value[index1];
             if (typeof obj === 'object' && obj !== null) {
-              Object.keys(obj).forEach((val: string) => {
-                if (!arraysInsideObjects.includes(val)) {
-                  const text = obj[val];
-                  if (dateFields.includes(val)) {
-                    (this.dynamicFormData as any)[field][index1][val] = text;
+              for (const key of Object.keys(obj)) {
+                if (!arraysInsideObjects.includes(key)) {
+                  const text = (obj as Record<string, any>)[key];
+                  if (dateFields.includes(key)) {
+                    (this.dynamicFormData as any)[field][index1][key] = text;
                   } else {
-                    promises.push(this.typeAnimationObject(field, index1, val, text));
+                    await this.typeAnimationObject(field, index1, key, text); // ⬅️ sequential
                   }
                 } else {
-                  const elements = obj[val];
-                  (this.dynamicFormData as any)[field][index1][val] = new Array(elements.length);
-                  elements.forEach((text: string, index2: number) => {
-                    promises.push(this.typeAnimationObjectArray(field, index1, val, index2, text));
-                  });
+                  const elements = (obj as any)[key];
+                  (this.dynamicFormData as any)[field][index1][key] = new Array(elements.length);
+                  for (let i = 0; i < elements.length; i++) {
+                    await this.typeAnimationObjectArray(field, index1, key, i, elements[i]); // ⬅️ sequential
+                  }
                 }
-              });
+              }
             }
-          });
+          }
         }
       }
-    });
-
-    // Wait for all typing animations to complete
-    await Promise.all(promises);
+    }
 
     this.buttonsDisabled = false;
   }

@@ -17,6 +17,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserService } from '../../services/user.service';
 import { User } from '../../shared/models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'app-all-resumes',
@@ -46,9 +48,12 @@ export class AllResumesComponent {
   dataSource: MatTableDataSource<Resume> = new MatTableDataSource<Resume>([]);
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
-  position = new FormControl(this.positionOptions[2]);
-  viewResumeMessage = 'View the details of this resume.';
+  position: FormControl = new FormControl(this.positionOptions[2]);
+  viewResumeMessage: string = 'View the details of this resume.';
+  editResumeMessage: string = 'Edit this resume.';
+  deleteResumeMessage: string = 'Delete this resume.';
   isLoading = true; // Flag to indicate loading state
+  currentUserId!: string | number;
 
   @ViewChild(MatPaginator, { static: false }) //set paginator for dynamically loaded data
   set paginator(value: MatPaginator) {
@@ -63,9 +68,15 @@ export class AllResumesComponent {
     }
   }
 
-  constructor(private resumeService: ResumeService, private userService: UserService) { }
+  constructor(
+    private resumeService: ResumeService,
+    private userService: UserService,
+    private dialog: MatDialog,
+    private util: UtilityService
+  ) { }
 
   ngOnInit() {
+    this.currentUserId = UserService.userId;
     this.userService.getAllUsers().subscribe(users => this.users = users);
     this.resumeService.getAllResumes().subscribe(resumes => {
       this.resumes = resumes
@@ -90,5 +101,10 @@ export class AllResumesComponent {
 
   getUsername(id: string | number) {
     return this.users.find(user => user.id === id)?.username;
+  }
+
+  openDeleteDialog(resumeId: number | string) {
+    const resume = this.resumes.find(r => r.id === resumeId);
+    this.util.openDeleteDialog(this.dialog, resume!);
   }
 }

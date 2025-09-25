@@ -47,14 +47,9 @@ export class ResumeToolHeaderComponent {
   }
 
   openDeleteDialog() {
-    this.dialog.open(PopUpComponent, {
-      data: {
-        id: this.resume?.id,
-        message: 'Are you sure you want to delete this resume? This action cannot be undone.',
-        header: 'Delete Resume',
-        action: 'delete'
-      }
-    });
+    if (this.resume) {
+      this.util.openDeleteDialog(this.dialog, this.resume);
+    }
   }
 
   belongsToUser() {
