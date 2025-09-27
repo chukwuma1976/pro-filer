@@ -13,7 +13,7 @@
     }
     <div *ngFor="let resume of resumes" class="resume-card">
         <app-resume-tool-header [resume]="resume"></app-resume-tool-header>
-        <div [id]="getResumeDocumentId(resume.id)" class="resume-padding">
+        <div [id]="getResumeDocumentId(resume.id ?? '')" class="resume-padding">
             <app-resume-details [resumeData]="resume"></app-resume-details>
         </div>
     </div>

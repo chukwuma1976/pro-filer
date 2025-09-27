@@ -208,7 +208,8 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
   }
 
   getExperienceId(index: number): number | string {
-    return this.updatedResume.experience[index].id;
+    const id = this.updatedResume.experience[index].id;
+    return id !== undefined ? id : '';
   }
 
   override removeExperience(index: number) {
@@ -227,7 +228,8 @@ export class ResumeEditFormComponent extends ResumeFormComponent {
     this.router.navigate([`/pro-filer/edit-education/${this.resumeId}/${id}`]); // Redirect to the education edit form with the education id
   }
   getEducationId(index: number): number | string {
-    return this.updatedResume.education[index].id;
+    const id = this.updatedResume.education[index].id;
+    return id !== undefined ? id : '';
   }
 
   override removeEducation(index: number) {

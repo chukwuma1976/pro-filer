@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Resume } from '../shared/models/resume';
 import { MONTHS_OBJECT } from '../shared/constants';
 import { PopUpComponent } from '../component/pop-up/pop-up.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -84,12 +84,12 @@ export class UtilityService {
     return undefined;
   }
 
-  getResumeDocumentId(id: number | string): string {
-    return `resume-${id}`;
+  getResumeDocumentId(id: number | string | undefined): string {
+    return `resume-${id || 'unknown'}`;
   }
 
-  openDeleteDialog(dialog: MatDialog, resume: Resume) {
-    dialog.open(PopUpComponent, {
+  openDeleteDialog(dialog: MatDialog, resume: Resume): MatDialogRef<PopUpComponent> {
+    return dialog.open(PopUpComponent, {
       data: {
         id: resume?.id,
         message: 'Are you sure you want to delete this resume? This action cannot be undone.',

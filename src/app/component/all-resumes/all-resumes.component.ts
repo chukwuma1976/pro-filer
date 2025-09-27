@@ -50,7 +50,7 @@ export class AllResumesComponent {
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position: FormControl = new FormControl(this.positionOptions[2]);
   viewResumeMessage: string = 'View the details of this resume.';
-  editResumeMessage: string = 'Edit this resume.';
+  cloneResumeMessage: string = 'Clone this resume.';
   deleteResumeMessage: string = 'Delete this resume.';
   isLoading = true; // Flag to indicate loading state
   currentUserId!: string | number;
@@ -103,8 +103,57 @@ export class AllResumesComponent {
     return this.users.find(user => user.id === id)?.username;
   }
 
+  deepCloneWithoutId<T>(obj: T): T {
+    if (obj === null || obj === undefined) {
+      return obj;
+    }
+
+    if (Array.isArray(obj)) {
+      return obj.map(item => this.deepCloneWithoutId(item)) as unknown as T;
+    }
+
+    if (typeof obj === 'object') {
+      const cloned: any = {};
+      for (const key in obj) {
+        if (!obj.hasOwnProperty(key)) continue;
+        if (key === 'id') continue; // skip all 'id' fields
+        cloned[key] = this.deepCloneWithoutId((obj as any)[key]);
+      }
+      return cloned;
+    }
+
+    // primitive value
+    return obj;
+  }
+
+  cloneResume(resume: Resume) {
+    console.log('Cloning resume:', resume);
+    // Deep clone resume and remove all IDs
+    const clonedResume: Resume = this.deepCloneWithoutId(resume);
+
+    // Prepend clone info to summary
+    clonedResume.summary = `Cloned from Resume ID: ${resume.id} for User ID ${resume.userId}. ` + (clonedResume.summary || '');
+
+    // Persist via backend
+    this.resumeService.addResume(clonedResume, this.currentUserId)
+      .subscribe(newResume => {
+        this.resumes.unshift(newResume);
+        this.dataSource.data = this.resumes;
+        this.util.openSnackBar('Resume cloned successfully!', 'Close');
+      });
+  }
+
   openDeleteDialog(resumeId: number | string) {
     const resume = this.resumes.find(r => r.id === resumeId);
-    this.util.openDeleteDialog(this.dialog, resume!);
+    const dialogRef = this.util.openDeleteDialog(this.dialog, resume!);
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        // Remove the deleted resume from the array
+        this.resumes = this.resumes.filter(r => r.id !== resumeId);
+        this.dataSource.data = this.resumes;
+      }
+    });
   }
+
 }

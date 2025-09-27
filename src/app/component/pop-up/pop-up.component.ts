@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ResumeService } from '../../services/resume.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-pop-up',
   imports: [MatButtonModule, MatDialogModule],
   templateUrl: './pop-up.component.html',
-  styleUrl: './pop-up.component.scss'
+  styleUrls: ['./pop-up.component.scss']
 })
 export class PopUpComponent {
 
@@ -18,7 +18,13 @@ export class PopUpComponent {
   header?: string;
   action?: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private resumeService: ResumeService, private authService: AuthService, private router: Router) {
+  constructor(
+    public dialogRef: MatDialogRef<PopUpComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private resumeService: ResumeService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.id = data.id;
     this.message = data.message;
     this.header = data.header;
@@ -27,14 +33,22 @@ export class PopUpComponent {
 
   executeAction() {
     if (this.id && this.action === 'delete') {
-      this.resumeService.deleteResume(this.id).subscribe(() => console.log('Resume with id of ', this.id, ' deleted'));
-    };
+      this.resumeService.deleteResume(this.id).subscribe(() => {
+        console.log('Resume with id of ', this.id, ' deleted');
+        this.dialogRef.close(true);   // ✅ return true on success
+      });
+    }
+
     if (this.action === 'logout') {
       this.authService.logout().subscribe(response => {
         console.log(response.message);
+        this.dialogRef.close(true);   // ✅ return true on success
         this.router.navigate(['/login']);
       });
     }
   }
 
+  onCancel(): void {
+    this.dialogRef.close(false);      // ✅ return false on cancel
+  }
 }

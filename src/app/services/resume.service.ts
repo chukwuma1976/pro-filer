@@ -35,7 +35,7 @@ export class ResumeService {
     return this.http.put<Resume>(this.domain + "/" + resume.id, resume);
   }
 
-  deleteResume(resumeId: string): Observable<any> {
+  deleteResume(resumeId: number | string): Observable<any> {
     return this.http.delete(this.domain + "/" + resumeId);
   }
 }

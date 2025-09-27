@@ -51,10 +51,10 @@
                     matTooltipClass="custom-tooltip" [routerLink]="['/pro-filer/view-resume', element.id]">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button mat-icon-button [matTooltip]="editResumeMessage" [matTooltipPosition]="position.value!"
-                    matTooltipClass="custom-tooltip" [routerLink]="['/pro-filer/edit-resume', element?.id]"
+                <button mat-icon-button [matTooltip]="cloneResumeMessage" [matTooltipPosition]="position.value!"
+                    matTooltipClass="custom-tooltip" (click)="cloneResume(element)"
                     [disabled]="element.userId != currentUserId">
-                    <mat-icon>edit</mat-icon>
+                    <mat-icon>content_copy</mat-icon>
                 </button>
                 <button mat-icon-button [matTooltip]="deleteResumeMessage" [matTooltipPosition]="position.value!"
                     matTooltipClass="custom-tooltip" (click)="openDeleteDialog(element.id)"
