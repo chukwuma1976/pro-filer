@@ -4,17 +4,26 @@
         <p>Your one-stop solution for creating and managing resumes.</p>
         <p>Land Your Dream Job: Create a Professional Resume in Minutes.</p>
         <p>Get started by filling in your information!</p>
-        <p>Select a template below for a demo {{buttonsDisabled? 'once buttons are enabled':''}}.</p>
-        <p>Current Selection: <span class="template-name">{{dynamicFormData.template?.toUpperCase()}}</span></p>
-        <div class="template-buttons">
-            @for (template of templates; track $index; let i = $index) {
-            <button mat-raised-button type="button" (click)="demoTemplate(template)" [disabled]="buttonsDisabled"
-                [style.--i]="i">
-                {{ template.name }}
-            </button>
-            }
-        </div>
+        <p>
+            Select a template below
+            {{ buttonsDisabled ? 'once buttons are enabled' : '' }}.
+        </p>
+        <mat-form-field appearance="fill" class="template-dropdown">
+            <mat-select [formControl]="templateControl" [disabled]="buttonsDisabled">
+                @for (template of templates; track $index){
+                <mat-option [value]="template">{{ template.name }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <p>
+            Current Selection:
+            <span class="template-name">
+                {{ templateControl.value?.name?.toUpperCase() || 'NONE' }}
+            </span>
+        </p>
     </section>
+
     <app-preview-resume>
         <app-resume-details [resumeData]="dynamicFormData"></app-resume-details>
     </app-preview-resume>

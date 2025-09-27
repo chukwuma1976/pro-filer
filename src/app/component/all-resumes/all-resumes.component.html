@@ -11,7 +11,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Type in a value to filter" #input>
         </mat-form-field>
     </div>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table class="resume-table" mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id"> ID </th>
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -50,6 +50,11 @@
                 <button mat-icon-button [matTooltip]="viewResumeMessage" [matTooltipPosition]="position.value!"
                     matTooltipClass="custom-tooltip" [routerLink]="['/pro-filer/view-resume', element.id]">
                     <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button [matTooltip]="editResumeMessage" [matTooltipPosition]="position.value!"
+                    matTooltipClass="custom-tooltip" [routerLink]="['/pro-filer/edit-resume', element.id]"
+                    [disabled]="element.userId != currentUserId">
+                    <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button [matTooltip]="cloneResumeMessage" [matTooltipPosition]="position.value!"
                     matTooltipClass="custom-tooltip" (click)="cloneResume(element)"

@@ -19,6 +19,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../shared/models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilityService } from '../../services/utility.service';
+import { TOOL_TIP_MESSAGES } from '../../shared/constants';
 
 @Component({
   selector: 'app-all-resumes',
@@ -49,9 +50,10 @@ export class AllResumesComponent {
 
   positionOptions: TooltipPosition[] = ['after', 'before', 'above', 'below', 'left', 'right'];
   position: FormControl = new FormControl(this.positionOptions[2]);
-  viewResumeMessage: string = 'View the details of this resume.';
-  cloneResumeMessage: string = 'Clone this resume.';
-  deleteResumeMessage: string = 'Delete this resume.';
+  viewResumeMessage: string = TOOL_TIP_MESSAGES.viewResumeMessage;
+  cloneResumeMessage: string = TOOL_TIP_MESSAGES.cloneResumeMessage;
+  deleteResumeMessage: string = TOOL_TIP_MESSAGES.deleteResumeMessage;
+  editResumeMessage: string = TOOL_TIP_MESSAGES.editResumeMessage;
   isLoading = true; // Flag to indicate loading state
   currentUserId!: string | number;
 

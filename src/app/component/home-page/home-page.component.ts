@@ -2,42 +2,73 @@ import { Component } from '@angular/core';
 import { PreviewResumeComponent } from '../preview-resume/preview-resume.component';
 import { ResumeDetailsComponent } from '../resume-details/resume-details.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { TEMPLATES } from '../../shared/constants';
-import sampleResume from '../../shared/mock-data/sample-resume.json'
-import blankResume from '../../shared/mock-data/blank-resume.json'
+import sampleResume from '../../shared/mock-data/sample-resume.json';
+import blankResume from '../../shared/mock-data/blank-resume.json';
 import { Resume } from '../../shared/models/resume';
 
 @Component({
   selector: 'app-home-page',
-  imports: [PreviewResumeComponent, ResumeDetailsComponent, MatButtonModule],
+  standalone: true,
+  imports: [
+    PreviewResumeComponent,
+    ResumeDetailsComponent,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
   formData: Resume = sampleResume;
   dynamicFormData: Resume = { ...blankResume };
-  typingSpeed = 10;  //Milliseconds per character
+  typingSpeed = 10;
   templates = TEMPLATES;
   buttonsDisabled = false;
+
+  // 🔹 Reactive FormControl for dropdown
+  templateControl = new FormControl();
 
   constructor() { }
 
   async ngOnInit() {
     console.log('Welcome to Pro-Filer! 👋');
     this.randomlyPickTemplate();
+
+    // 🔹 Listen for selection changes
+    this.templateControl.valueChanges.subscribe((template) => {
+      if (template) {
+        this.demoTemplate(template);
+      }
+    });
+
     await this.simulateFormFill();
     console.log('🎉 All fields filled!');
   }
 
   demoTemplate(template: any) {
     this.dynamicFormData = { ...blankResume };
-    this.dynamicFormData["template"] = template.value;
+    this.dynamicFormData['template'] = template.value;
     this.simulateFormFill();
   }
 
   randomlyPickTemplate() {
     const index = Math.floor(Math.random() * (this.templates.length - 1));
-    this.dynamicFormData["template"] = this.templates[index].value;
+    const selected = this.templates[index];
+    this.dynamicFormData['template'] = selected.value;
+
+    // 🔹 Preselect in dropdown
+    this.templateControl.setValue(selected);
   }
 
   async simulateFormFill(): Promise<void> {

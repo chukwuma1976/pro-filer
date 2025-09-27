@@ -25,7 +25,6 @@ button {
     animation-name: change-color;
     animation-duration: 5s;
     animation-iteration-count: infinite;
-
 }
 
 section p,
@@ -57,9 +56,18 @@ section p:nth-of-type(5) {
     animation-delay: 800ms;
 }
 
-/* buttons: auto-stagger using CSS variable */
-section .template-buttons button {
-    animation-delay: calc(1000ms + var(--i) * 200ms);
+/* ✅ Style and animate the Angular Material dropdown */
+mat-form-field.template-dropdown {
+    width: 250px;
+    margin-top: 1em;
+    display: block;
+
+    /* Reuse slideIn animation */
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideIn 500ms ease-out forwards;
+    animation-delay: 1000ms;
+    /* after your <p> tags finish */
 }
 
 @keyframes slideIn {
@@ -77,4 +85,12 @@ section .template-buttons button {
     to {
         color: var(--mat-sys-on-primary-container);
     }
+}
+
+/* ✅ Style the Angular Material dropdown */
+mat-form-field.template-dropdown {
+    width: 250px;
+    /* adjust as needed */
+    margin-top: 1em;
+    display: block;
 }
