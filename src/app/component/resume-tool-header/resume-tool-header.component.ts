@@ -29,22 +29,44 @@ export class ResumeToolHeaderComponent {
     const resumeDocumentId = this.util.getResumeDocumentId(this.resume!.id);
     console.log('generating pdf with id:', resumeDocumentId);
     const resumeToPrint: any = document.getElementById(resumeDocumentId);
-    resumeToPrint.setAttribute('style', 'background-color: white;'); // Ensure background is white for better PDF quality
+
+    if (!resumeToPrint) return;
+
+    // ✅ Save current inline style
+    const previousStyle = resumeToPrint.getAttribute('style') || '';
+
+    // ✅ Force white background + remove borders
+    resumeToPrint.setAttribute(
+      'style',
+      previousStyle + ';background-color: white;border: none;outline: none;box-shadow: none;'
+    );
+
     html2canvas(resumeToPrint, { scale: 2 }).then((canvas) => {
-      this.pdf = new jsPDF(); //PDF page height is 297
+      this.pdf = new jsPDF();
       const pdfWidth = this.pdf.internal.pageSize.getWidth();
       const pdfHeight = (resumeToPrint.offsetHeight * pdfWidth) / resumeToPrint.offsetWidth;
+
       this.pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdfWidth, pdfHeight);
+
       this.pdf.setProperties({
         title: 'Resume PDF',
         author: `${this.resume?.firstName} ${this.resume?.lastName}`
       });
+
       this.pdf.setFontSize(10);
       this.pdf.save(`Resume${this.resume?.firstName}${this.resume?.lastName}${this.resume?.id}.pdf`);
+
       this.util.openSnackBar('PDF generated successfully!', 'Close');
-      resumeToPrint.removeAttribute('style'); // Clean up the style change
+
+      // ✅ Restore original style
+      if (previousStyle) {
+        resumeToPrint.setAttribute('style', previousStyle);
+      } else {
+        resumeToPrint.removeAttribute('style');
+      }
     });
   }
+
 
   openDeleteDialog() {
     if (this.resume) {
