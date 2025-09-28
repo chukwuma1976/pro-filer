@@ -88,12 +88,13 @@ export class HomePageComponent {
     const arraysInsideObjects = ["description", "awards"];
     const dateFields = ["startDate", "endDate", "graduationDate"];
 
+    // 🔹 Sequential execution
     for (const field of fields) {
       // Simple text fields
       if (!(objectFields.includes(field) || arrayFields.includes(field) || nonTextFields.includes(field))) {
         const value = this.formData[field as keyof Resume];
         const text: string = value !== undefined ? String(value) : '';
-        await this.typeAnimation(field, text); // ⬅️ sequential
+        await this.typeAnimation(field, text);
       }
 
       // Arrays of strings
@@ -102,7 +103,7 @@ export class HomePageComponent {
         if (Array.isArray(values)) {
           (this.dynamicFormData as any)[field] = new Array(values.length);
           for (let i = 0; i < values.length; i++) {
-            await this.typeAnimationArray(field, i, values[i]); // ⬅️ sequential
+            await this.typeAnimationArray(field, i, values[i]);
           }
         }
       }
@@ -124,13 +125,13 @@ export class HomePageComponent {
                   if (dateFields.includes(key)) {
                     (this.dynamicFormData as any)[field][index1][key] = text;
                   } else {
-                    await this.typeAnimationObject(field, index1, key, text); // ⬅️ sequential
+                    await this.typeAnimationObject(field, index1, key, text);
                   }
                 } else {
                   const elements = (obj as any)[key];
                   (this.dynamicFormData as any)[field][index1][key] = new Array(elements.length);
                   for (let i = 0; i < elements.length; i++) {
-                    await this.typeAnimationObjectArray(field, index1, key, i, elements[i]); // ⬅️ sequential
+                    await this.typeAnimationObjectArray(field, index1, key, i, elements[i]);
                   }
                 }
               }
