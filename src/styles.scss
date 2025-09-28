@@ -36,8 +36,15 @@ body {
 }
 
 .custom-tooltip {
+    position: relative;
     overflow: visible !important;
-    /* Ensure the triangle is visible */
+    /* so the arrow can extend outside */
+    background: black;
+    /* tooltip bg */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
 }
 
 .custom-tooltip::after {
@@ -51,6 +58,31 @@ body {
     transform: translateX(-50%);
     border-top-color: black;
 }
+
+.custom-tooltip-top-arrow {
+    position: relative;
+    overflow: visible !important;
+    /* so the arrow can extend outside */
+    background: black;
+    /* tooltip bg */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.custom-tooltip-top-arrow::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    /* place above the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: black;
+    /* arrow points down toward tooltip */
+}
+
 
 .loading-spinner {
     display: block;

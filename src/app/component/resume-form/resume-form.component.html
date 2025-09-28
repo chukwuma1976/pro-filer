@@ -3,7 +3,8 @@
         <h1>Resume Form</h1>
         <div>
             <button mat-raised-button type="button" class="preview-btn" [matTooltip]="previewMessage"
-                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip" (click)="setPreviewMode()">
+                [matTooltipPosition]="position.value!" matTooltipClass="custom-tooltip-top-arrow"
+                (click)="setPreviewMode()">
                 @if(isPreviewMode){<mat-icon>visibility_off</mat-icon>}@else{<mat-icon>visibility</mat-icon>}
                 {{isPreviewMode?'Hide Preview':'Show Preview'}}
             </button>
