@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,8 @@ export class SignupComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -40,15 +42,25 @@ export class SignupComponent {
     this.submitted = true;
     if (this.signupForm.valid) {
       const { username, password, email } = this.signupForm.value;
-      this.authService.signup(username, password, email).subscribe(
-        value => {
-          if (value === "User registered") {
-            this.authService.login(username, password);
-            this.router.navigate(['/pro-filer/home'])
+      this.authService.signup(username, password, email).subscribe({
+        next: value => {
+          if (value.status === "success") {
+            this.authService.login(username, password).subscribe({
+              next: response => {
+                this.userService.setUserInfo(response.username);
+                this.router.navigate(['/pro-filer/home']);
+              },
+              error: () => this.signupError = 'Auto-login failed. Please log in manually.'
+            });
+          } else {
+            this.signupError = 'Signup failed. Username may already be in use.';
           }
-          else this.signupError = 'Signup failed. username may already be in use.';
+        },
+        error: () => {
+          this.signupError = 'An unexpected error occurred. Please try again later.';
         }
-      );
+      });
     }
   }
+
 }

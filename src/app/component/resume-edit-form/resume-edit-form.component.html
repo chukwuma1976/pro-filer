@@ -37,18 +37,16 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </mat-expansion-panel>
-            @if(setImageUploadDisplay){
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Upload a Resume Photo</mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-upload-image></app-upload-image>
-            </mat-expansion-panel>
-            }
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title> Contact Information and Summary </mat-panel-title>
                 </mat-expansion-panel-header>
+                @if(setImageUploadDisplay){
+                <mat-label>Upload a Resume Photo</mat-label>
+                <app-upload-image></app-upload-image>
+                <mat-divider></mat-divider>
+                <br>
+                }
                 <mat-form-field appearance="fill" class="firstName">
                     <mat-label>First Name</mat-label>
                     <input type="text" matInput formControlName="firstName">

@@ -17,7 +17,7 @@
     <form [formGroup]="resumeForm" (submit)="onSubmit()" class="resume-form"
         [ngClass]="isPreviewMode ? 'show-preview':'hide-preview'">
         <mat-accordion multi>
-            <mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step() === 0" (opened)="setStep(0)">
                 <mat-expansion-panel-header>
                     <mat-panel-title> Select a Resume Template </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -31,16 +31,17 @@
                             *ngFor="let template of filteredTemplateOptions | async">{{template.name}}</mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
+                <mat-action-row>
+                    <button type="button" mat-button (click)="nextStep()">Next</button>
+                </mat-action-row>
             </mat-expansion-panel>
-            @if(setImageUploadDisplay){
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Upload a Resume Photo</mat-panel-title>
-                </mat-expansion-panel-header>
+            <mat-expansion-panel [expanded]="step() === 1" (opened)="setStep(1)">
+                @if(setImageUploadDisplay){
+                <mat-label>Upload a Resume Photo</mat-label>
                 <app-upload-image></app-upload-image>
-            </mat-expansion-panel>
-            }
-            <mat-expansion-panel>
+                <mat-divider></mat-divider>
+                <br>
+                }
                 <mat-expansion-panel-header>
                     <mat-panel-title> Contact Information and Summary </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -102,8 +103,12 @@
                     <mat-error *ngIf="resumeForm.get('summary')?.hasError('required')">Summary is required</mat-error>
                 </mat-form-field>
                 <br>
+                <mat-action-row>
+                    <button type="button" mat-button (click)="prevStep()">Previous</button>
+                    <button type="button" mat-button (click)="nextStep()">Next</button>
+                </mat-action-row>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step() === 2" (opened)="setStep(2)">
                 <mat-expansion-panel-header>
                     <mat-panel-title> Employment History / Job Experience </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -198,8 +203,12 @@
                     </div>
                 </div>
                 <button mat-flat-button type="button" (click)="addExperience()">Add Experience</button>
+                <mat-action-row>
+                    <button type="button" mat-button (click)="prevStep()">Previous</button>
+                    <button type="button" mat-button (click)="nextStep()">Next</button>
+                </mat-action-row>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step() === 3" (opened)="setStep(3)">
                 <mat-expansion-panel-header>
                     <mat-panel-title> Education </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -290,8 +299,12 @@
                     </div>
                 </div>
                 <button mat-flat-button type="button" (click)="addEducation()">Add Education</button>
+                <mat-action-row>
+                    <button type="button" mat-button (click)="prevStep()">Previous</button>
+                    <button type="button" mat-button (click)="nextStep()">Next</button>
+                </mat-action-row>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step() === 4" (opened)="setStep(4)">
                 <mat-expansion-panel-header>
                     <mat-panel-title> Skills and Additional Information </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -379,6 +392,9 @@
                     <mat-label>Share resume with other users</mat-label>
                 </mat-checkbox>
                 <br>
+                <mat-action-row>
+                    <button type="button" mat-button (click)="prevStep()">Previous</button>
+                </mat-action-row>
             </mat-expansion-panel>
             <br>
             <button mat-raised-button color="primary" type="submit" [disabled]="resumeForm.invalid">Submit</button>

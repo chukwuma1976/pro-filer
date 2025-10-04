@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormGroupDirective, FormControl, AbstractControl } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -77,6 +77,7 @@ export class ResumeFormComponent {
   filteredDegreeOptions!: Observable<any[]>;
   filteredTemplateOptions!: Observable<any[]>;
   isPreviewMode = false;
+  step = signal(0);
 
   constructor(protected fb: FormBuilder, protected resumeService: ResumeService, protected router: Router) {
     this.resumeForm = this.fb.group({
@@ -119,6 +120,18 @@ export class ResumeFormComponent {
     this.formGroupDirective.resetForm();
     this.util.openSnackBar('Resume submitted successfully!', 'Close');
     this.router.navigate(['/pro-filer/resume-details']);
+  }
+
+  setStep(index: number) {
+    this.step.set(index);
+  }
+
+  nextStep() {
+    this.step.update(i => i + 1);
+  }
+
+  prevStep() {
+    this.step.update(i => i - 1);
   }
 
   manageStateFilter() {
