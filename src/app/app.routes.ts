@@ -17,11 +17,13 @@ import { EducationFormComponent } from './component/education-form/education-for
 import { EducationEditFormComponent } from './component/education-edit-form/education-edit-form.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { GuestGuard } from './guards/guest.guard';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
-    { path: 'signup', component: SignupComponent, canActivate: [GuestGuard] },
-    { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [GuestGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'reset-password', component: ResetPasswordComponent },
     {
         path: 'pro-filer',
         component: NavContainerComponent,

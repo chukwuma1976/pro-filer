@@ -103,3 +103,17 @@ body {
     border: 1px solid var(--mat-sys-outline);
     border-radius: 0.5em;
 }
+
+#login-container,
+#signup-container,
+#forgot-password-container,
+#reset-password-container {
+    width: 20vw;
+    margin: auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 10em;
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container)
+}

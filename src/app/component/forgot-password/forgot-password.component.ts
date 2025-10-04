@@ -14,30 +14,27 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [ReactiveFormsModule, NgIf, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule]
 })
 export class ForgotPasswordComponent {
-  forgotPasswordForm: FormGroup;
-  submitted = false;
-  resetError: string = '';
-  resetSuccess: string = '';
+  forgotForm: FormGroup;
+  message = '';
+  error = '';
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.forgotPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
+    this.forgotForm = this.fb.group({
+      username: ['', Validators.required]
     });
   }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.forgotPasswordForm.valid) {
-      const { email } = this.forgotPasswordForm.value;
-      this.authService.resetPassword(email).subscribe({
-        next: () => {
-          this.resetSuccess = 'A password reset link has been sent to your email.';
-          this.resetError = '';
+    if (this.forgotForm.valid) {
+      this.authService.forgotPassword(this.forgotForm.value.username).subscribe({
+        next: (res: any) => {
+          if (res.status === 'success') {
+            this.message = res.message;
+          } else {
+            this.error = res.message;
+          }
         },
-        error: () => {
-          this.resetError = 'Failed to send reset link. Please try again.';
-          this.resetSuccess = '';
-        }
+        error: () => this.error = 'Something went wrong. Please try again later.'
       });
     }
   }

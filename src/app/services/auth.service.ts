@@ -35,14 +35,12 @@ export class AuthService {
     return this.http.post(this.domain + '/register', user, { withCredentials: true });
   }
 
-  resetPassword(email: string): Observable<boolean> {
-    // Implement the logic to send a password reset email
-    // For example, make an HTTP request to your backend API
-    // return this.http.post('/api/reset-password', { email }).pipe(
-    //   map(() => true),
-    //   catchError(() => throwError(() => new Error('Reset password failed')))
-    // );
-    return of(true); // Simulate successful password reset
+  forgotPassword(username: string): Observable<any> {
+    return this.http.post(`${this.domain}/forgot-password`, { username });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.domain}/reset-password`, { token, newPassword });
   }
 
 }

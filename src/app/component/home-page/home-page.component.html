@@ -8,7 +8,7 @@
             Select a template below
             {{ buttonsDisabled ? 'once buttons are enabled' : '' }}.
         </p>
-        <mat-form-field appearance="fill" class="template-dropdown">
+        <mat-form-field appearance="outline" class="template-dropdown">
             <mat-select [formControl]="templateControl" [disabled]="buttonsDisabled">
                 @for (template of templates; track $index){
                 <mat-option [value]="template">{{ template.name }}</mat-option>
