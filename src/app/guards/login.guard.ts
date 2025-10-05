@@ -9,22 +9,29 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class LoginGuard implements CanActivate {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   canActivate(): Observable<boolean> {
+    console.log("LoginGuard fired");
     return this.authService.checkIsInSession().pipe(
-      map(response => {
-        if (response.loggedIn) {
+      map(res => {
+        console.log("Check session result:", res);
+        if (res && res.loggedIn) {
           return true;
         } else {
           this.router.navigate(['/login']);
           return false;
         }
       }),
-      catchError(() => {
+      catchError(err => {
+        console.error('Guard error:', err);
         this.router.navigate(['/login']);
         return of(false);
       })
     );
   }
+
 }

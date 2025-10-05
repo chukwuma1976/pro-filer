@@ -1,45 +1,47 @@
-<div id="signup-container">
-    <h2>Sign Up</h2>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-            <mat-label>Your email</mat-label>
-            <input matInput type="email" formControlName="email" />
-            @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['required']) {
-            <mat-error>Email is required.</mat-error>
-            }
-            @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['email']) {
-            <mat-error>Invalid email format.</mat-error>
-            }
-        </mat-form-field>
+<div class="form-centering-container">
+    <div id="signup-container">
+        <h2>Sign Up</h2>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Your email</mat-label>
+                <input matInput type="email" formControlName="email" />
+                @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['required']) {
+                <mat-error>Email is required.</mat-error>
+                }
+                @if(signupForm.controls['email'].errors && signupForm.controls['email'].errors['email']) {
+                <mat-error>Invalid email format.</mat-error>
+                }
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input matInput type="username" formControlName="username" />
-            @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['required']) {
-            <mat-error>Username is required.</mat-error>
-            }
-            @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['username']) {
-            <mat-error>Invalid username format.</mat-error>
-            }
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput type="username" formControlName="username" />
+                @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['required']) {
+                <mat-error>Username is required.</mat-error>
+                }
+                @if(signupForm.controls['username'].errors && signupForm.controls['username'].errors['username']) {
+                <mat-error>Invalid username format.</mat-error>
+                }
+            </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" />
-            <mat-icon matSuffix (click)="togglePasswordVisibility()">
-                {{showPassword ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
-            @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['required']) {
-            <mat-error>Password is required.</mat-error>
-            }
-            @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['minlength']) {
-            <mat-error>Password must be at least 6 characters.</mat-error>
-            }
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password" />
+                <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+                @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['required']) {
+                <mat-error>Password is required.</mat-error>
+                }
+                @if(signupForm.controls['password'].errors && signupForm.controls['password'].errors['minlength']) {
+                <mat-error>Password must be at least 6 characters.</mat-error>
+                }
+            </mat-form-field>
 
-        <button mat-flat-button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
-        @if(signupError) {
-        <mat-error>{{ signupError }}</mat-error>
-        }
-    </form>
+            <button mat-flat-button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+            @if(signupError) {
+            <mat-error>{{ signupError }}</mat-error>
+            }
+        </form>
+    </div>
 </div>

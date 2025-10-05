@@ -113,7 +113,13 @@ body {
     padding: 2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
-    margin-top: 10em;
     background-color: var(--mat-sys-primary-container);
     color: var(--mat-sys-on-primary-container)
+}
+
+.form-centering-container {
+    display: grid;
+    place-items: center;
+    /* centers both ways */
+    height: 100vh;
 }
