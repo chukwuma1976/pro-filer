@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,25 @@ export class LoginGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) { }
 
-  canActivate(): Observable<boolean> {
-    console.log("LoginGuard fired");
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    console.log("LoginGuard fired for:", state.url);
     return this.authService.checkIsInSession().pipe(
-      map(res => {
+      switchMap(res => {
         console.log("Check session result:", res);
-        if (res && res.loggedIn) {
-          return true;
+        if (res && res.loggedIn && res.username) {
+          return this.userService.getAndCacheByUsername(res.username).pipe(
+            map(() => {
+              console.log("User info cached, allowing navigation to:", state.url);
+              return true;
+            })
+          );
         } else {
           this.router.navigate(['/login']);
-          return false;
+          return of(false);
         }
       }),
       catchError(err => {

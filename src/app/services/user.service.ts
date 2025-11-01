@@ -4,6 +4,7 @@ import { User } from '../shared/models/user';
 import { HttpClient } from '@angular/common/http';
 import { URL } from '../shared/constants';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,15 @@ export class UserService {
   setUserInfo(username: string) {
     UserService.userName = username;
     this.http.get<User>(this.domain + '/username/' + username).subscribe(user => UserService.userId = user.id);
+  }
+
+  getAndCacheByUsername(username: string): Observable<User> {
+    return this.http.get<User>(this.domain + '/username/' + username).pipe(
+      tap(user => {
+        UserService.userName = username;
+        UserService.userId = user.id;
+      })
+    );
   }
 
   // Upload or replace profile image
