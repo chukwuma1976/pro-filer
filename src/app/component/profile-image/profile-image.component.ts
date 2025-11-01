@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ProfileImageComponent {
   @Input() userId: number | string | undefined;
   profileImageUrl: any;
-  defaultImageUrl = 'assets/images/placeholder_headshot_coming_soon.png';
+  defaultImageUrl = 'assets/images/placeholder_headshot_2.jpg';
 
   constructor(
     private userService: UserService,
