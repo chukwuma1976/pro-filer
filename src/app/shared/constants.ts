@@ -108,7 +108,7 @@ export const templatesWithImage = ['visual professional', 'clean chromatic'];
 
 
 export const URL = {
-    serverPort: "http://localhost:8080/",
+    serverPort: "/",
     Auth: "api/v1/profiler/auth",
     Resume: "api/v1/profiler/resumes",
     User: "api/v1/profiler/users",
