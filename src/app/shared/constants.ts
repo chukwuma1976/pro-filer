@@ -108,7 +108,7 @@ export const templatesWithImage = ['visual professional', 'clean chromatic'];
 
 
 export const URL = {
-    serverPort: "/",
+    serverPort: "https://profiler-api-prga.onrender.com/",
     Auth: "api/v1/profiler/auth",
     Resume: "api/v1/profiler/resumes",
     User: "api/v1/profiler/users",
